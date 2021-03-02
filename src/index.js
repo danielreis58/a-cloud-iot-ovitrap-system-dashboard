@@ -1,17 +1,54 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter } from "react-router-dom";
+import "./i18n";
+import { Provider } from "react-redux";
+
+import { store } from "./store";
+
+// actions
+import { loginSuccess, logoutUser } from "./store/auth/login/actions";
+
+import axios from "axios";
+
+import jwtDecode from "jwt-decode";
+
+const localAuthUser = localStorage.authUser;
+
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+let isExpired = false;
+let authUser = {};
+
+if (localAuthUser) {
+  authUser = JSON.parse(localAuthUser);
+
+  if (authUser.Authorization) {
+    const decodedToken = jwtDecode(authUser.Authorization);
+    if (decodedToken.exp * 1000 <= Date.now()) {
+      isExpired = true;
+    }
+  }
+  if (authUser && !isExpired) {
+    store.dispatch(loginSuccess(authUser));
+    axios.defaults.headers.common["Authorization"] = authUser.Authorization;
+  } else {
+    if (authUser.Authorization) {
+      store.dispatch(logoutUser(null, isExpired));
+    }
+    delete axios.defaults.headers.common["Authorization"];
+  }
+}
+
+const app = (
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDOM.render(app, document.getElementById("root"));
+serviceWorker.unregister();
