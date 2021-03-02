@@ -1,0 +1,7 @@
+export const RESET_DASHBOARDS = "RESET_DASHBOARDS";
+export const RESET_ERROR = "RESET_ERROR";
+
+export const GET_DASHBOARDS = "GET_DASHBOARDS";
+export const SET_DASHBOARDS = "SET_DASHBOARDS";
+
+export const API_ERROR = "DASHBOARDS_API_ERROR";
