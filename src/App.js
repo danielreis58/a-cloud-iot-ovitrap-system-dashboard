@@ -25,7 +25,8 @@ const App = () => {
               path={route.path}
               component={route.component}
               key={idx}
-              isAuthProtected={true}
+              // TODO: Desmomment this line
+              // isAuthProtected={true}
               isPermissionProtected={route.isPermissionProtected}
               permissionName={route.permissionName}
             />
