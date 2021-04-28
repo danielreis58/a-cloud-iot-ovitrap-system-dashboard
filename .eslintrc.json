@@ -19,14 +19,13 @@
         "semi": false
       }
     ],
-    "no-throw-literal": "off",
-    "import/extensions": "off",
-    "object-curly-newline": "off",
     "react/jsx-filename-extension": [
       1,
       {
         "extensions": [".js", ".jsx"]
       }
-    ]
+    ],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }

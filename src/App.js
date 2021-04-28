@@ -4,7 +4,7 @@ import { Switch, BrowserRouter as Router } from 'react-router-dom'
 import AppRoute from './routes/route'
 
 // Import Routes
-import { authProtectedRoutes, publicRoutes } from './routes/index.js'
+import { authProtectedRoutes, publicRoutes } from './routes/index'
 
 const App = () => (
   <React.Fragment>

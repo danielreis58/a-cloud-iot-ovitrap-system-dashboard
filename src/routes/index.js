@@ -2,10 +2,10 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 
 // Authentication related pages
-import Login from '../pages/Authentication/Login.js'
-import Logout from '../pages/Authentication/Logout.js'
-import ForgetPassword from '../pages/Authentication/ForgetPassword.js'
-import ResetPassword from '../pages/Authentication/ResetPassword.js'
+import Login from '../pages/Authentication/Login'
+import Logout from '../pages/Authentication/Logout'
+import ForgetPassword from '../pages/Authentication/ForgetPassword'
+import ResetPassword from '../pages/Authentication/ResetPassword'
 
 // Dashboard
 import Dashboard from '../pages/Dashboard/index'
