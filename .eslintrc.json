@@ -1,24 +1,32 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
-    "extends": [
-        "plugin:prettier/recommended"
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "extends": ["airbnb-base", "prettier"],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "trailingComma": "none",
+        "semi": false
+      }
     ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "prettier",
-        "react-hooks"
-    ],
-    "rules": {
-        "prettier/prettier": "error"
-    }
+    "no-throw-literal": "off",
+    "import/extensions": "off",
+    "object-curly-newline": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ]
+  }
 }

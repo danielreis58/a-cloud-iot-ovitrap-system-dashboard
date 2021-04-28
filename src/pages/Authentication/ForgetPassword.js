@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react'
 
-import { withTranslation } from "react-i18next";
+import { withTranslation } from 'react-i18next'
 
-const ForgetPassword = ({ t }) => {
-  return (
-    <React.Fragment>
-      <div className="forget-password-page">FORGET PASSWORD</div>
-    </React.Fragment>
-  );
-};
+const ForgetPassword = ({ t }) => (
+  <React.Fragment>
+    <div className="forget-password-page">FORGET PASSWORD</div>
+  </React.Fragment>
+)
 
-export default withTranslation()(ForgetPassword);
+export default withTranslation()(ForgetPassword)

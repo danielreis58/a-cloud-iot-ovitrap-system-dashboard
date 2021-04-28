@@ -3,14 +3,14 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
-  LOGIN_API_ERROR,
-} from "./actionTypes";
+  LOGIN_API_ERROR
+} from './actionTypes'
 
 const initialState = {
   error: false,
   loading: false,
-  data: null,
-};
+  data: null
+}
 
 const login = (state = initialState, action) => {
   switch (action.type) {
@@ -18,40 +18,40 @@ const login = (state = initialState, action) => {
       state = {
         error: false,
         loading: true,
-        data: null,
-      };
-      break;
+        data: null
+      }
+      break
     case LOGIN_SUCCESS:
       state = {
         error: false,
         loading: false,
-        data: action.payload,
-      };
-      break;
+        data: action.payload
+      }
+      break
     case LOGOUT_USER:
-      state = { ...state, error: false, loadingLogout: true, success: false };
-      break;
+      state = { ...state, error: false, loadingLogout: true, success: false }
+      break
     case LOGOUT_USER_SUCCESS:
       state = {
         ...state,
         error: false,
         loadingLogout: false,
         success: true,
-        data: null,
-      };
-      break;
+        data: null
+      }
+      break
     case LOGIN_API_ERROR:
       state = {
         ...state,
         error: action.payload,
         loading: false,
-        success: false,
-      };
-      break;
+        success: false
+      }
+      break
     default:
-      break;
+      break
   }
-  return state;
-};
+  return state
+}
 
-export default login;
+export default login

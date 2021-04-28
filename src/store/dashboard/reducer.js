@@ -3,15 +3,15 @@ import {
   RESET_ERROR,
   GET_DASHBOARDS,
   SET_DASHBOARDS,
-  API_ERROR,
-} from "./actionTypes";
+  API_ERROR
+} from './actionTypes'
 
 const initialState = {
   errorDashboard: false,
   loadingDashboard: false,
   dataDashboard: null,
-  successDashboard: false,
-};
+  successDashboard: false
+}
 
 const Dashboards = (state = initialState, action) => {
   switch (action.type) {
@@ -20,88 +20,88 @@ const Dashboards = (state = initialState, action) => {
         ...state,
         dataDashboard: {
           ...state.dataDashboard,
-          [action.payload.target]: null,
-        },
-      };
-      break;
+          [action.payload.target]: null
+        }
+      }
+      break
     case RESET_ERROR:
       state = {
         ...state,
         errorDashboard: {
           ...state.errorDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         loadingDashboard: {
           ...state.loadingDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         successDashboard: {
           ...state.successDashboard,
-          [action.payload.target]: false,
-        },
-      };
-      break;
+          [action.payload.target]: false
+        }
+      }
+      break
     case GET_DASHBOARDS:
       state = {
         ...state,
         errorDashboard: {
           ...state.errorDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         loadingDashboard: {
           ...state.loadingDashboard,
-          [action.payload.target]: true,
+          [action.payload.target]: true
         },
         successDashboard: {
           ...state.successDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         dataDashboard: {
           ...state.dataDashboard,
-          [action.payload.target]: null,
-        },
-      };
-      break;
+          [action.payload.target]: null
+        }
+      }
+      break
     case SET_DASHBOARDS:
       state = {
         ...state,
         errorDashboard: {
           ...state.errorDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         loadingDashboard: {
           ...state.loadingDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         successDashboard: {
           ...state.successDashboard,
-          [action.payload.target]: true,
+          [action.payload.target]: true
         },
         dataDashboard: {
           ...state.dataDashboard,
-          [action.payload.target]: action.payload.data,
-        },
-      };
-      break;
+          [action.payload.target]: action.payload.data
+        }
+      }
+      break
     case API_ERROR:
       state = {
         ...state,
         errorDashboard: {
           ...state.errorDashboard,
-          [action.payload.target]: action.payload.error,
+          [action.payload.target]: action.payload.error
         },
         loadingDashboard: {
           ...state.loadingDashboard,
-          [action.payload.target]: false,
+          [action.payload.target]: false
         },
         successDashboard: {
           ...state.successDashboard,
-          [action.payload.target]: false,
-        },
-      };
-      break;
+          [action.payload.target]: false
+        }
+      }
+      break
   }
-  return state;
-};
+  return state
+}
 
-export default Dashboards;
+export default Dashboards

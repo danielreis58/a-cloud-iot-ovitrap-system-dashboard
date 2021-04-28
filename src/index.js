@@ -1,44 +1,42 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
+import axios from 'axios'
+import App from './App'
 
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
-import "./i18n";
-import { Provider } from "react-redux";
+import * as serviceWorker from './serviceWorker'
+import './i18n'
+import { Provider } from 'react-redux'
 
-import { store } from "./store";
+import { store } from './store'
 
 // actions
-import { loginSuccess, logoutUser } from "./store/auth/login/actions";
+import { loginSuccess, logoutUser } from './store/auth/login/actions'
 
-import axios from "axios";
+const localAuthUser = localStorage.authUser
 
-import jwtDecode from "jwt-decode";
-
-const localAuthUser = localStorage.authUser;
-
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-let isExpired = false;
-let authUser = {};
+axios.defaults.baseURL = process.env.REACT_APP_API_URL
+let isExpired = false
+let authUser = {}
 
 if (localAuthUser) {
-  authUser = JSON.parse(localAuthUser);
+  authUser = JSON.parse(localAuthUser)
 
   if (authUser.Authorization) {
-    const decodedToken = jwtDecode(authUser.Authorization);
+    const decodedToken = jwtDecode(authUser.Authorization)
     if (decodedToken.exp * 1000 <= Date.now()) {
-      isExpired = true;
+      isExpired = true
     }
   }
   if (authUser && !isExpired) {
-    store.dispatch(loginSuccess(authUser));
-    axios.defaults.headers.common["Authorization"] = authUser.Authorization;
+    store.dispatch(loginSuccess(authUser))
+    axios.defaults.headers.common.Authorization = authUser.Authorization
   } else {
     if (authUser.Authorization) {
-      store.dispatch(logoutUser(null, isExpired));
+      store.dispatch(logoutUser(null, isExpired))
     }
-    delete axios.defaults.headers.common["Authorization"];
+    delete axios.defaults.headers.common.Authorization
   }
 }
 
@@ -48,7 +46,7 @@ const app = (
       <App />
     </BrowserRouter>
   </Provider>
-);
+)
 
-ReactDOM.render(app, document.getElementById("root"));
-serviceWorker.unregister();
+ReactDOM.render(app, document.getElementById('root'))
+serviceWorker.unregister()
