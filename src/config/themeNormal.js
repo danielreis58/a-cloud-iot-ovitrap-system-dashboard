@@ -206,7 +206,7 @@ const shadows = [
   '0 12px 19px 0 rgba(0,0,0,.05), 0 24px 38px 3px rgba(0,0,0,.05)'
 ]
 
-export const normal = createMuiTheme({
+const normal = createMuiTheme({
   shape,
   typography,
   palette,
@@ -379,3 +379,5 @@ export const normal = createMuiTheme({
     }
   }
 })
+
+export default normal

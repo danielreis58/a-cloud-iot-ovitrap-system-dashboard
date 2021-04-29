@@ -1,1 +1,101 @@
-{ "Accounts": "ACCOUNTS" }
+{
+  "app": {
+    "name": "Ovitrap",
+    "copyright": "Ovitrap dashboard"
+  },
+  "translations": {
+    "changeLanguage": "Change language",
+    "english": "English",
+    "portuguese": "Portuguese",
+    "locale": "en-US"
+  },
+  "themes": {
+    "changeTheme": "Alterar tema",
+    "dark": "Dark theme",
+    "light": "Light theme"
+  },
+  "buttons": {
+    "tryAgain": "Try again",
+    "save": "Save",
+    "clean": "Clean",
+    "search": "Search",
+    "add": "Add",
+    "saveAndClose": "Save and close",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "send": "Send",
+    "yes": "Yes",
+    "no": "No",
+    "settings": "Settings",
+    "theme": "Theme",
+    "language": "Language",
+    "login":" Login",
+    "signout": "Sign out",
+    "back": "Back",
+    "forgotYourPassword": "Forgot your password?",
+    "passwordRecover": "Password recover",
+    "changePassword": "Change password",
+    "changePicture": "Change picture",
+    "savePicture": "Save picture",
+    "saveEditions": "Save editions",
+    "text": "Text",
+    "data": "Data",
+    "wait": "Wait"
+  },
+  "fields": {
+    "type": {
+      "label": "Type",
+      "placeHolder": "Enter the type"
+    },
+    "name": {
+      "label": "Name",
+      "placeHolder": "Enter name"
+    },
+    "search": {
+      "label": "Search",
+      "placeHolder": "Search"
+    },
+    "email": {
+      "label": "Email",
+      "placeHolder": "Enter your e-mail",
+      "errors": {
+        "email is required": "E-mail is required",
+        "email must be a valid email": "E-mail is invalid"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeHolder": "Enter your password",
+      "errors": {
+        "password is required": "Password is required"
+      }
+    },
+    "currentPassword": {
+      "label": "Current password",
+      "placeHolder": "Enter your current password",
+      "errors": {
+        "password is required": "Current password is required"
+      }
+    },
+    "newPassword": {
+      "label": "New password",
+      "placeHolder": "Enter your new password",
+      "errors": {
+        "password": "Password must have 8 to 30 characters with 1 number, 1 lowercase letter and 1 uppercase letter.",
+        "password is required": "Password is required",
+        "passwordsAreNotTheSame": "Passwords are not the same"
+      }
+    },
+    "passwordRepeat": {
+      "label": "Confirm your password",
+      "placeHolder": "Retype your password",
+      "errors": {
+        "password is required": "Password is required",
+        "passwordsAreNotTheSame": "Passwords are not the same"
+      }
+    },
+    "rememberMe": {
+      "label": "Remember me"
+    }
+  }
+}

@@ -1,15 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
 import App from './App'
 
 import * as serviceWorker from './serviceWorker'
 import './i18n'
-import { Provider } from 'react-redux'
 
-import { store } from './store'
+import store from './store'
 
 // actions
 import { loginSuccess, logoutUser } from './store/auth/login/actions'

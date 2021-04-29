@@ -47,6 +47,8 @@ const forgetPassword = (state = initialState, action) => {
         error: action.payload
       }
       break
+    default:
+      break
   }
   return state
 }

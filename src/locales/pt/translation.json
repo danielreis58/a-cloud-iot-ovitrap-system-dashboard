@@ -1,1 +1,101 @@
-{ "Accounts": "ACCOUNTS" }
+{
+  "app": {
+    "name": "Ovitrap",
+    "copyright": "Ovitrap dashboard"
+  },
+  "translations": {
+    "changeLanguage": "Alterar idioma",
+    "english": "Inglês",
+    "portuguese": "Português",
+    "locale": "pt-BR"
+  },
+  "themes": {
+    "changeTheme": "Alterar tema",
+    "dark": "Tema escuro",
+    "light": "Tema claro"
+  },
+  "buttons": {
+    "tryAgain": "Tentar novamente",
+    "save": "Salvar",
+    "clean": "Limpar",
+    "search": "Buscar",
+    "add": "Adicionar",
+    "saveAndClose": "Salvar e encerrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "send": "Enviar",
+    "yes": "Sim",
+    "no": "Não",
+    "settings": "Configurações",
+    "theme": "Tema",
+    "language": "Idioma",
+    "login": " Login",
+    "signout": "Sair da conta",
+    "back": "Voltar",
+    "forgotYourPassword": "Esqueceu sua senha?",
+    "passwordRecover": "Recuperar senha",
+    "changePassword": "Alterar senha",
+    "changePicture": "Alterar foto",
+    "savePicture": "Salvar foto",
+    "saveEditions": "Salvar alterações",
+    "text": "Texto",
+    "data": "Dados",
+    "wait": "Aguarde"
+  },
+  "fields": {
+    "type": {
+      "label": "Tipo",
+      "placeHolder": "Informe o tipo"
+    },
+    "name": {
+      "label": "Nome",
+      "placeHolder": "Escreva o nome"
+    },
+    "search": {
+      "label": "Busca",
+      "placeHolder": "Buscar"
+    },
+    "email": {
+      "label": "E-mail",
+      "placeHolder": "Insira seu e-mail",
+      "errors": {
+        "email is required": "E-mail é obrigatório",
+        "email must be a valid email": "E-mail inválido"
+      }
+    },
+    "password": {
+      "label": "Senha",
+      "placeHolder": "Insira sua senha",
+      "errors": {
+        "password is required": "Senha é obrigatório"
+      }
+    },
+    "currentPassword": {
+      "label": "Senha atual",
+      "placeHolder": "Insira sua senha atual",
+      "errors": {
+        "password is required": "Senha é obrigatório"
+      }
+    },
+    "newPassword": {
+      "label": "Nova senha",
+      "placeHolder": "Insira sua nova senha",
+      "errors": {
+        "password": "A senha deve ter de 8 a 30 caracteres com 1 número, 1 letra minúscula e 1 letra maiúscula.",
+        "password is required": "Senha é obrigatório",
+        "passwordsAreNotTheSame": "As senhas não são iguais"
+      }
+    },
+    "passwordRepeat": {
+      "label": "Confirmação de senha",
+      "placeHolder": "Repita sua nova senha",
+      "errors": {
+        "password is required": "Senha é obrigatório",
+        "passwordsAreNotTheSame": "As senhas não são iguais"
+      }
+    },
+    "rememberMe": {
+      "label": "Lembrar-me"
+    }
+  }
+}

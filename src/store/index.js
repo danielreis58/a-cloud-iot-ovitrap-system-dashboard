@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 
@@ -13,4 +14,4 @@ const store = createStore(
 )
 sagaMiddleware.run(rootSaga)
 
-export { store }
+export default store

@@ -8,7 +8,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import BarChartIcon from '@material-ui/icons/BarChart'
 import LayersIcon from '@material-ui/icons/Layers'
 
-export const mainListItems = (
+const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
@@ -42,3 +42,5 @@ export const mainListItems = (
     </ListItem>
   </div>
 )
+
+export default mainListItems

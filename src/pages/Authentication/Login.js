@@ -1,11 +1,21 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-
 import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { Container, Grid, Paper } from '@material-ui/core'
+import { LockRounded as LockIcon } from '@material-ui/icons'
 
-import { withTranslation } from 'react-i18next'
+import TextField from '../../components/atoms/inputs/textfield'
+import CheckBox from '../../components/atoms/inputs/checkbox'
+import Button from '../../components/atoms/inputs/button'
+import Typography from '../../components/atoms/display/typography'
+import CircularProgress from '../../components/atoms/feedback/circularProgress'
+import Snackbar from '../../components/atoms/feedback/snackbar'
+import SwitchLanguage from '../../components/molecules/switchs/language'
+import SwitchTheme from '../../components/molecules/switchs/theme'
 
-const Login = ({ t }) => {
+const Login = () => {
+  const { t } = useTranslation()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [form, setForm] = useState({})
@@ -54,11 +64,10 @@ const Login = ({ t }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: 120,
-                  backgroundColor: '#f6f6f6'
+                  height: 120
                 }}
               >
-                <img src="/logo.png" alt="Porto" width="180" height="56" />
+                <img src="/logo.svg" alt="Porto" width="180" height="56" />
               </div>
               <div style={{ padding: 50 }}>
                 <Grid container direction="row" spacing={2}>
@@ -123,7 +132,7 @@ const Login = ({ t }) => {
                       {loading ? (
                         <CircularProgress size={25} color="inherit" />
                       ) : (
-                        t('buttons.accessService')
+                        t('buttons.login')
                       )}
                     </Button>
                   </Grid>
@@ -183,4 +192,4 @@ const Login = ({ t }) => {
   )
 }
 
-export default withTranslation()(Login)
+export default Login
