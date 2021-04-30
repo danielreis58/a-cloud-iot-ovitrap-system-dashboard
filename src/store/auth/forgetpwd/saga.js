@@ -5,7 +5,7 @@ import axios from 'axios'
 import { FORGET_PASSWORD, SET_NEW_PASSWORD } from './actionTypes'
 import {
   userForgetPasswordSuccess,
-  apiError,
+  apiErrorForgetPassword,
   userSetNewPasswordSuccess
 } from './actions'
 
@@ -35,7 +35,7 @@ function* userForgetPassword({ payload: { user } }) {
     } else {
       message = error.message
     }
-    yield put(apiError(message))
+    yield put(apiErrorForgetPassword(message))
   }
 }
 
@@ -69,7 +69,7 @@ function* userSetNewPassword({ payload: { user, history, pswToken } }) {
     } else {
       message = error.message
     }
-    yield put(apiError(message))
+    yield put(apiErrorForgetPassword(message))
   }
 }
 export function* watchUserPasswordForget() {

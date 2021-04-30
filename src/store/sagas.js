@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
 
-// public
+// Auth
 import AuthSaga from './auth/login/saga'
 import ForgetSaga from './auth/forgetpwd/saga'
 

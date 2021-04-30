@@ -5,6 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { Container, Grid, Paper } from '@material-ui/core'
 import { LockRounded as LockIcon } from '@material-ui/icons'
 
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { schema } from './LoginSchema'
+
 import TextField from '../../components/atoms/inputs/textfield'
 import CheckBox from '../../components/atoms/inputs/checkbox'
 import Button from '../../components/atoms/inputs/button'
@@ -17,37 +21,27 @@ import SwitchTheme from '../../components/molecules/switchs/theme'
 const Login = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  const { register, handleSubmit, setValue, errors } = useForm({
+    resolver: yupResolver(schema)
+  })
   const [loading, setLoading] = useState(false)
-  const [form, setForm] = useState({})
+  const [rememberMe, setRememberMe] = useState(
+    localStorage.getItem('rememberMe') ?? false
+  )
   const [formError, setFormError] = useState({})
   const [snackbar, setSnackbar] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
-  useEffect(() => {
-    if (localStorage.getItem('rememberMe')) {
-      setForm((prev) => ({
-        ...prev,
-        email: localStorage.getItem('rememberMe'),
-        rememberMe: 'checked'
-      }))
-    }
-  }, [])
-
-  const inputHandle = (event) => {
-    event.persist()
-    setForm((prev) => ({
-      ...prev,
-      [event?.target?.name]: event?.target?.value
-    }))
+  const handleLogin = (event) => {
+    console.log(event.target.value)
   }
 
   const handleRememberMeChange = (event) => {
-    event.persist()
-    setForm((prev) => ({ ...prev, rememberMe: event?.target?.checked }))
+    setRememberMe(event.target.checked)
+    console.log(event.target.checked)
   }
 
   const submit = () => {
-    setFormError({})
     setLoading(true)
     console.log('LOGIN')
   }
@@ -71,71 +65,70 @@ const Login = () => {
               </div>
               <div style={{ padding: 50 }}>
                 <Grid container direction="row" spacing={2}>
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <TextField
-                      id="field-email"
-                      label={t('fields.email.label')}
-                      placeholder={t('fields.email.placeHolder')}
-                      type="email"
-                      color="primary"
-                      variant="outlined"
-                      name="email"
-                      value={form.email ? form.email : ''}
-                      onChange={inputHandle}
-                      error={!!formError?.email}
-                      helperText={
-                        formError?.email &&
-                        t(`fields.email.errors.${formError.email}`)
-                      }
-                      shrink={true}
-                      fullWidth={true}
-                    />
-                  </Grid>
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <TextField
-                      id="field-password"
-                      label={t('fields.password.label')}
-                      placeholder={t('fields.password.placeHolder')}
-                      type="password"
-                      color="primary"
-                      variant="outlined"
-                      name="password"
-                      value={form.password ? form.password : ''}
-                      onChange={inputHandle}
-                      error={!!formError?.password}
-                      helperText={
-                        formError?.password &&
-                        t(`fields.password.errors.${formError.password}`)
-                      }
-                      shrink={true}
-                      fullWidth={true}
-                    />
-                  </Grid>
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <CheckBox
-                      checked={form.rememberMe ? form.rememberMe : false}
-                      onChange={handleRememberMeChange}
-                      name="rememberMe"
-                      color="primary"
-                      label={t('fields.rememberMe.label')}
-                    />
-                  </Grid>
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Button
-                      size="large"
-                      variant="contained"
-                      color="primary"
-                      fullWidth={true}
-                      onClick={() => submit()}
-                      disabled={loading}
-                    >
-                      {loading ? (
-                        <CircularProgress size={25} color="inherit" />
-                      ) : (
-                        t('buttons.login')
-                      )}
-                    </Button>
-                  </Grid>
+                  <form onSubmit={handleSubmit(handleLogin)}>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <TextField
+                        id="field-email"
+                        label={t('fields.email.label')}
+                        placeholder={t('fields.email.placeHolder')}
+                        type="email"
+                        color="primary"
+                        variant="outlined"
+                        name="email"
+                        error={!!formError?.email}
+                        helperText={
+                          formError?.email &&
+                          t(`fields.email.errors.${formError.email}`)
+                        }
+                        shrink={true}
+                        fullWidth={true}
+                      />
+                    </Grid>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <TextField
+                        id="field-password"
+                        label={t('fields.password.label')}
+                        placeholder={t('fields.password.placeHolder')}
+                        type="password"
+                        color="primary"
+                        variant="outlined"
+                        name="password"
+                        error={!!formError?.password}
+                        helperText={
+                          formError?.password &&
+                          t(`fields.password.errors.${formError.password}`)
+                        }
+                        shrink={true}
+                        fullWidth={true}
+                      />
+                    </Grid>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <CheckBox
+                        checked={rememberMe ?? false}
+                        onChange={handleRememberMeChange}
+                        name="rememberMe"
+                        color="primary"
+                        label={t('fields.rememberMe.label')}
+                      />
+                    </Grid>
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Button
+                        type="submit"
+                        size="large"
+                        variant="contained"
+                        color="primary"
+                        fullWidth={true}
+                        onClick={() => submit()}
+                        disabled={loading}
+                      >
+                        {loading ? (
+                          <CircularProgress size={25} color="inherit" />
+                        ) : (
+                          t('buttons.login')
+                        )}
+                      </Button>
+                    </Grid>
+                  </form>
                   <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                     <Button
                       size="large"

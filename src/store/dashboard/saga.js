@@ -3,7 +3,7 @@ import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 // Dashboards Redux States
 import axios from 'axios'
 import { GET_DASHBOARDS } from './actionTypes'
-import { setDashboards, apiError } from './actions'
+import { setDashboards, apiErrorDashboard } from './actions'
 
 // Include Both Helper File with needed methods
 
@@ -24,12 +24,7 @@ function* getDashboards({ payload: { target } }) {
           message = 'Invalid credentials'
           break
         case 404:
-          // TODO: remover esta verificação quando o backend enviar array vazio com status 200 quando nao ha objetos
-          if (error.response.data && typeof error.response.data === 'object') {
-            message = error.response.data.message
-          } else {
-            message = 'Sorry! the page you are looking for could not be found'
-          }
+          message = 'Sorry! the page you are looking for could not be found'
           break
         case 500:
           message =
@@ -42,7 +37,7 @@ function* getDashboards({ payload: { target } }) {
           break
       }
     }
-    yield put(apiError(target, message))
+    yield put(apiErrorDashboard(target, message))
   }
 }
 
@@ -50,8 +45,8 @@ export function* watchDashboard() {
   yield takeEvery(GET_DASHBOARDS, getDashboards)
 }
 
-function* authSaga() {
+function* dashboardSaga() {
   yield all([fork(watchDashboard)])
 }
 
-export default authSaga
+export default dashboardSaga

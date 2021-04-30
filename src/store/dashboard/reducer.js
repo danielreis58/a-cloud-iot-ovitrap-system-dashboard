@@ -1,9 +1,9 @@
 import {
   RESET_DASHBOARDS,
-  RESET_ERROR,
+  RESET_ERROR_DASHBOARDS,
   GET_DASHBOARDS,
   SET_DASHBOARDS,
-  API_ERROR
+  API_ERROR_DASHBOARD
 } from './actionTypes'
 
 const initialState = {
@@ -24,7 +24,7 @@ const Dashboards = (state = initialState, action) => {
         }
       }
       break
-    case RESET_ERROR:
+    case RESET_ERROR_DASHBOARDS:
       state = {
         ...state,
         errorDashboard: {
@@ -83,7 +83,7 @@ const Dashboards = (state = initialState, action) => {
         }
       }
       break
-    case API_ERROR:
+    case API_ERROR_DASHBOARD:
       state = {
         ...state,
         errorDashboard: {

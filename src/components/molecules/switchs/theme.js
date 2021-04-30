@@ -1,17 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 
 import { Menu, MenuItem } from '@material-ui/core'
 
 import { Brightness4 as DarkLightModeIcon } from '@material-ui/icons'
-import { CustomThemeContext } from '../../../store/Theme'
 
 import IconButton from '../../atoms/inputs/iconButton'
 
+import setTheme from '../../../store/theme/actions'
+
 const Signin = ({ t }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const [menuTheme, setMenuTheme] = React.useState(false)
-  const { setTheme } = useContext(CustomThemeContext)
+  const dispatch = useDispatch()
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [menuTheme, setMenuTheme] = useState(false)
 
   const handleOpenMenuTheme = (event) => {
     setAnchorEl(event.currentTarget)
@@ -32,7 +34,7 @@ const Signin = ({ t }) => {
       >
         <MenuItem
           onClick={() => {
-            setTheme('dark')
+            dispatch(setTheme('dark'))
             setMenuTheme(false)
           }}
         >
@@ -40,7 +42,7 @@ const Signin = ({ t }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            setTheme('normal')
+            dispatch(setTheme('light'))
             setMenuTheme(false)
           }}
         >

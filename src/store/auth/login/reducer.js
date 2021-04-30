@@ -3,7 +3,7 @@ import {
   LOGIN_SUCCESS,
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
-  LOGIN_API_ERROR
+  API_ERROR_LOGIN
 } from './actionTypes'
 
 const initialState = {
@@ -40,7 +40,7 @@ const login = (state = initialState, action) => {
         data: null
       }
       break
-    case LOGIN_API_ERROR:
+    case API_ERROR_LOGIN:
       state = {
         ...state,
         error: action.payload,

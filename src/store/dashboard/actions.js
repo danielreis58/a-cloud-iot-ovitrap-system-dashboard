@@ -1,9 +1,9 @@
 import {
   RESET_DASHBOARDS,
-  RESET_ERROR,
+  RESET_ERROR_DASHBOARDS,
   GET_DASHBOARDS,
   SET_DASHBOARDS,
-  API_ERROR
+  API_ERROR_DASHBOARD
 } from './actionTypes'
 
 export const resetDashboards = (target) => ({
@@ -12,7 +12,7 @@ export const resetDashboards = (target) => ({
 })
 
 export const resetError = (target) => ({
-  type: RESET_ERROR,
+  type: RESET_ERROR_DASHBOARDS,
   payload: { target }
 })
 
@@ -26,7 +26,7 @@ export const setDashboards = (target, data) => ({
   payload: { target, data }
 })
 
-export const apiError = (target, error) => ({
-  type: API_ERROR,
+export const apiErrorDashboard = (target, error) => ({
+  type: API_ERROR_DASHBOARD,
   payload: { target, error }
 })

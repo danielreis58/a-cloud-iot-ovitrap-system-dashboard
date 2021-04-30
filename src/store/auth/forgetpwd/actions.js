@@ -1,9 +1,9 @@
 import {
   FORGET_PASSWORD,
   FORGET_PASSWORD_SUCCESS,
-  FORGET_PASSWORD_ERROR,
   SET_NEW_PASSWORD,
-  SET_NEW_PASSWORD_SUCCESS
+  SET_NEW_PASSWORD_SUCCESS,
+  API_ERROR_FORGET_PASSWORD
 } from './actionTypes'
 
 export const userForgetPassword = (user, history) => ({
@@ -26,7 +26,7 @@ export const userSetNewPasswordSuccess = (message) => ({
   payload: message
 })
 
-export const apiError = (error) => ({
-  type: FORGET_PASSWORD_ERROR,
+export const apiErrorForgetPassword = (error) => ({
+  type: API_ERROR_FORGET_PASSWORD,
   payload: error
 })

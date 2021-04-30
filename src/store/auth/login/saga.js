@@ -3,7 +3,7 @@ import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 // Login Redux States
 import axios from 'axios'
 import { LOGIN_USER, LOGOUT_USER } from './actionTypes'
-import { loginSuccess, apiError, logoutUserSuccess } from './actions'
+import { loginSuccess, apiErrorLogin, logoutUserSuccess } from './actions'
 
 // Include Both Helper File with needed methods
 
@@ -38,7 +38,7 @@ function* loginUser({ payload: { user, history } }) {
     } else {
       message = error.message
     }
-    yield put(apiError(message))
+    yield put(apiErrorLogin(message))
   }
 }
 
@@ -62,7 +62,7 @@ function* logoutUser({ payload: { history, isExpired = false } }) {
       } else {
         message = error.message
       }
-      yield put(apiError(message))
+      yield put(apiErrorLogin(message))
     } finally {
       yield put(logoutUserSuccess())
       if (history) {

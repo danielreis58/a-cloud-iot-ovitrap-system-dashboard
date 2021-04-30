@@ -1,9 +1,9 @@
 import {
   FORGET_PASSWORD,
   FORGET_PASSWORD_SUCCESS,
-  FORGET_PASSWORD_ERROR,
   SET_NEW_PASSWORD,
-  SET_NEW_PASSWORD_SUCCESS
+  SET_NEW_PASSWORD_SUCCESS,
+  API_ERROR_FORGET_PASSWORD
 } from './actionTypes'
 
 const initialState = {
@@ -41,7 +41,7 @@ const forgetPassword = (state = initialState, action) => {
         message: action.payload
       }
       break
-    case FORGET_PASSWORD_ERROR:
+    case API_ERROR_FORGET_PASSWORD:
       state = {
         loading: false,
         error: action.payload
