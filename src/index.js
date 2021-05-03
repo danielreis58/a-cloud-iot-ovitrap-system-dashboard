@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
 import axios from 'axios'
+import CustomThemeProvider from './config/CutomThemeProvider'
 import App from './App'
 
 import * as serviceWorker from './serviceWorker'
@@ -42,9 +44,12 @@ if (localAuthUser) {
 
 const app = (
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CustomThemeProvider>
+      <CssBaseline />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CustomThemeProvider>
   </Provider>
 )
 

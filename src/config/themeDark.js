@@ -3,8 +3,8 @@ import { createMuiTheme } from '@material-ui/core/styles'
 const palette = {
   type: 'dark',
   primary: {
-    main: '#009EE2',
-    secondary: '#1C3059'
+    main: '#00766c',
+    secondary: '#338a3e'
   },
   secondary: {
     main: '#F46A6A'
@@ -16,8 +16,8 @@ const palette = {
     main: '#4dbf7e'
   },
   background: {
-    default: '#0f1a2d',
-    paper: '#172746',
+    default: '#303030',
+    paper: '#333333',
     paper2: '#132039'
   },
   text: {

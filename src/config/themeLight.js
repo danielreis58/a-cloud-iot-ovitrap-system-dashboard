@@ -3,8 +3,8 @@ import { createMuiTheme } from '@material-ui/core/styles'
 const palette = {
   type: 'light',
   primary: {
-    main: '#009EE2',
-    secondary: '#1C3059'
+    main: '#26a69a',
+    secondary: '#66bb6a'
   },
   secondary: {
     main: '#F46A6A'
@@ -16,8 +16,8 @@ const palette = {
     main: '#4dbf7e'
   },
   background: {
-    default: '#e9e9e9',
-    paper: '#fff',
+    default: '#f0f0f0',
+    paper: '#ffffff',
     paper2: '#f9f9f9'
   },
   text: {
@@ -206,7 +206,7 @@ const shadows = [
   '0 12px 19px 0 rgba(0,0,0,.05), 0 24px 38px 3px rgba(0,0,0,.05)'
 ]
 
-const normal = createMuiTheme({
+const light = createMuiTheme({
   shape,
   typography,
   palette,
@@ -380,4 +380,4 @@ const normal = createMuiTheme({
   }
 })
 
-export default normal
+export default light

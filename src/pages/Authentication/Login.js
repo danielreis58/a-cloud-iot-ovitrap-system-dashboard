@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { Container, Grid, Paper } from '@material-ui/core'
 import { LockRounded as LockIcon } from '@material-ui/icons'
 
@@ -18,8 +18,7 @@ import Snackbar from '../../components/atoms/feedback/snackbar'
 import SwitchLanguage from '../../components/molecules/switchs/language'
 import SwitchTheme from '../../components/molecules/switchs/theme'
 
-const Login = () => {
-  const { t } = useTranslation()
+const Login = ({ t }) => {
   const dispatch = useDispatch()
   const { register, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(schema)
@@ -33,17 +32,8 @@ const Login = () => {
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleLogin = (event) => {
-    console.log(event.target.value)
-  }
-
-  const handleRememberMeChange = (event) => {
-    setRememberMe(event.target.checked)
-    console.log(event.target.checked)
-  }
-
-  const submit = () => {
     setLoading(true)
-    console.log('LOGIN')
+    console.log(event)
   }
 
   return (
@@ -104,8 +94,6 @@ const Login = () => {
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <CheckBox
-                        checked={rememberMe ?? false}
-                        onChange={handleRememberMeChange}
                         name="rememberMe"
                         color="primary"
                         label={t('fields.rememberMe.label')}
@@ -118,7 +106,6 @@ const Login = () => {
                         variant="contained"
                         color="primary"
                         fullWidth={true}
-                        onClick={() => submit()}
                         disabled={loading}
                       >
                         {loading ? (
@@ -185,4 +172,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default withTranslation()(Login)
