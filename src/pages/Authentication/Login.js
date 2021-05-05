@@ -7,7 +7,7 @@ import { LockRounded as LockIcon } from '@material-ui/icons'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { schema } from './LoginSchema'
+import schema from './LoginSchema'
 
 import TextField from '../../components/atoms/inputs/textfield'
 import CheckBox from '../../components/atoms/inputs/checkbox'
@@ -51,11 +51,11 @@ const Login = ({ t }) => {
                   height: 120
                 }}
               >
-                <img src="/logo.svg" alt="Porto" width="180" height="56" />
+                <img src="/logo.svg" alt="Ovitrap" width="180" height="56" />
               </div>
               <div style={{ padding: 50 }}>
-                <Grid container direction="row" spacing={2}>
-                  <form onSubmit={handleSubmit(handleLogin)}>
+                <form onSubmit={handleSubmit(handleLogin)}>
+                  <Grid container direction="row" spacing={2}>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <TextField
                         id="field-email"
@@ -115,20 +115,21 @@ const Login = ({ t }) => {
                         )}
                       </Button>
                     </Grid>
-                  </form>
-                  <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
-                    <Button
-                      size="large"
-                      color="primary"
-                      fullWidth={true}
-                      startIcon={<LockIcon color="primary" />}
-                      component={RouterLink}
-                      to="/password-recover"
-                    >
-                      {t('buttons.forgotYourPassword')}
-                    </Button>
+
+                    <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
+                      <Button
+                        size="large"
+                        color="primary"
+                        fullWidth={true}
+                        startIcon={<LockIcon color="primary" />}
+                        component={RouterLink}
+                        to="/password-recover"
+                      >
+                        {t('buttons.forgotYourPassword')}
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </form>
               </div>
             </Paper>
             <div

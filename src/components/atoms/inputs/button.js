@@ -41,6 +41,7 @@ const Button = (props) => {
         className={classes.root}
         style={props.style && props.style}
         onClick={props.onClick}
+        type={props.type}
       >
         {props.children}
       </MaterialButton>
