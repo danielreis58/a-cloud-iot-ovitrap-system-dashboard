@@ -59,7 +59,7 @@
       "label": "E-mail",
       "placeHolder": "Insira seu e-mail",
       "errors": {
-        "email is required": "E-mail é obrigatório",
+        "email is a required field": "E-mail é obrigatório",
         "email must be a valid email": "E-mail inválido"
       }
     },
@@ -67,7 +67,7 @@
       "label": "Senha",
       "placeHolder": "Insira sua senha",
       "errors": {
-        "password is required": "Senha é obrigatório"
+        "password is a required field": "Senha é obrigatório"
       }
     },
     "currentPassword": {

@@ -1,3 +1,5 @@
+/* eslint-disable valid-typeof */
+/* eslint-disable no-plusplus */
 import jwt from 'jwt-decode'
 
 /*
@@ -17,9 +19,9 @@ export const or = (a, b) => a || b
 export const xor = (a, b) => or(a, b) && nand(a, b)
 
 // Bitwise
-export const andB = (a, b) => a & b
-export const nandB = (a, b) => !(a & b)
-export const orB = (a, b) => a | b
+export const andB = (a, b) => a && b
+export const nandB = (a, b) => !(a && b)
+export const orB = (a, b) => a || b
 export const xorB = (a, b) => orB(a, b) && nandB(a, b)
 
 /* ----------------------------------------
@@ -32,6 +34,31 @@ export const isArray = (array) => array && Array.isArray(array)
 export const isFunction = (func) => typeOf(func, 'function')
 export const isObject = (obj) => typeOf(obj, 'object') && !isArray(obj)
 export const isNumber = (num) => typeOf(num, 'number')
+
+export function isUndefined(o) {
+  return typeof o === 'undefined'
+}
+
+// Include NaN
+// export function isNumber(o) {
+//   return typeof o === "number";
+// }
+
+export function isInteger(o) {
+  return typeof o === 'number' && o % 1 === 0
+}
+
+export function isString(o) {
+  return typeof o === 'string'
+}
+
+export function isDate(o) {
+  return Object.prototype.toString.call(o) === '[object Date]'
+}
+
+export function integerBetween(thing, bottom, top) {
+  return isInteger(thing) && thing >= bottom && thing <= top
+}
 
 /* ----------------------------------------
    Short version

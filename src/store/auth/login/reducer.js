@@ -7,8 +7,9 @@ import {
 } from './actionTypes'
 
 const initialState = {
-  error: false,
+  success: false,
   loading: false,
+  error: false,
   data: null
 }
 
@@ -16,36 +17,40 @@ const login = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_USER:
       state = {
-        error: false,
-        loading: true,
-        data: null
+        ...state,
+        loading: true
       }
       break
     case LOGIN_SUCCESS:
       state = {
-        error: false,
+        ...state,
+        success: true,
         loading: false,
+        error: false,
         data: action.payload
       }
       break
     case LOGOUT_USER:
-      state = { ...state, error: false, loadingLogout: true, success: false }
+      state = {
+        ...state,
+        loading: true
+      }
       break
     case LOGOUT_USER_SUCCESS:
       state = {
         ...state,
-        error: false,
-        loadingLogout: false,
         success: true,
-        data: null
+        loading: false,
+        error: false,
+        data: action.payload
       }
       break
     case API_ERROR_LOGIN:
       state = {
         ...state,
-        error: action.payload,
+        success: false,
         loading: false,
-        success: false
+        error: action.payload
       }
       break
     default:

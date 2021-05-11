@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { withTranslation } from 'react-i18next'
@@ -20,20 +20,27 @@ import SwitchTheme from '../../components/molecules/switchs/theme'
 
 const Login = ({ t }) => {
   const dispatch = useDispatch()
-  const { register, handleSubmit, setValue, errors } = useForm({
+  const {
+    register,
+    handleSubmit: onSubmit,
+    formState: { errors },
+    setValue
+  } = useForm({
     resolver: yupResolver(schema)
   })
   const [loading, setLoading] = useState(false)
-  const [rememberMe, setRememberMe] = useState(
-    localStorage.getItem('rememberMe') ?? false
-  )
-  const [formError, setFormError] = useState({})
   const [snackbar, setSnackbar] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
-  const handleLogin = (event) => {
-    setLoading(true)
-    console.log(event)
+  const handleSubmit = (e) => {
+    console.log(e)
+    localStorage.setItem('rememberMe', e.rememberMe ?? false)
+  }
+
+  const handleForm = (target, value) => {
+    setValue(target, value, {
+      shouldValidate: !!value
+    })
   }
 
   return (
@@ -54,49 +61,50 @@ const Login = ({ t }) => {
                 <img src="/logo.svg" alt="Ovitrap" width="180" height="56" />
               </div>
               <div style={{ padding: 50 }}>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <form onSubmit={onSubmit(handleSubmit)}>
                   <Grid container direction="row" spacing={2}>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <TextField
-                        id="field-email"
+                        {...register('email')}
                         label={t('fields.email.label')}
                         placeholder={t('fields.email.placeHolder')}
-                        type="email"
                         color="primary"
                         variant="outlined"
-                        name="email"
-                        error={!!formError?.email}
-                        helperText={
-                          formError?.email &&
-                          t(`fields.email.errors.${formError.email}`)
-                        }
                         shrink={true}
                         fullWidth={true}
+                        error={!!errors?.email?.message}
+                        helperText={
+                          errors?.email?.message &&
+                          t(`fields.email.errors.${errors.email.message}`)
+                        }
+                        onChange={(e) => handleForm('email', e.target.value)}
                       />
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <TextField
-                        id="field-password"
+                        {...register('password')}
                         label={t('fields.password.label')}
                         placeholder={t('fields.password.placeHolder')}
-                        type="password"
                         color="primary"
                         variant="outlined"
-                        name="password"
-                        error={!!formError?.password}
-                        helperText={
-                          formError?.password &&
-                          t(`fields.password.errors.${formError.password}`)
-                        }
                         shrink={true}
                         fullWidth={true}
+                        type="password"
+                        error={!!errors?.password?.message}
+                        helperText={
+                          errors?.password?.message &&
+                          t(`fields.password.errors.${errors.password.message}`)
+                        }
+                        onChange={(e) => handleForm('password', e.target.value)}
                       />
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>
                       <CheckBox
-                        name="rememberMe"
                         color="primary"
                         label={t('fields.rememberMe.label')}
+                        onChange={(e) => {
+                          handleForm('rememberMe', e.target.checked)
+                        }}
                       />
                     </Grid>
                     <Grid item xl={12} lg={12} md={12} sm={12} xs={12}>

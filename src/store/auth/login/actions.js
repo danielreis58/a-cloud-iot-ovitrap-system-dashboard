@@ -6,27 +6,27 @@ import {
   API_ERROR_LOGIN
 } from './actionTypes'
 
-export const loginUser = (user, history) => ({
+export const loginUser = (user) => ({
   type: LOGIN_USER,
-  payload: { user, history }
-})
-
-export const loginSuccess = (user) => ({
-  type: LOGIN_SUCCESS,
   payload: user
 })
 
-export const logoutUser = (history, isExpired) => ({
-  type: LOGOUT_USER,
-  payload: { history, isExpired }
+export const loginSuccess = (data) => ({
+  type: LOGIN_SUCCESS,
+  payload: data
 })
 
-export const logoutUserSuccess = () => ({
-  type: LOGOUT_USER_SUCCESS,
+export const logoutUser = () => ({
+  type: LOGOUT_USER,
   payload: {}
 })
 
-export const apiErrorLogin = (error) => ({
+export const logoutUserSuccess = (message) => ({
+  type: LOGOUT_USER_SUCCESS,
+  payload: message
+})
+
+export const apiErrorLogin = (message) => ({
   type: API_ERROR_LOGIN,
-  payload: error
+  payload: message
 })

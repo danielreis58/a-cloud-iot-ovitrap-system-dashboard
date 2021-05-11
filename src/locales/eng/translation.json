@@ -59,7 +59,7 @@
       "label": "Email",
       "placeHolder": "Enter your e-mail",
       "errors": {
-        "email is required": "E-mail is required",
+        "email is a required field": "E-mail is required",
         "email must be a valid email": "E-mail is invalid"
       }
     },
@@ -67,7 +67,7 @@
       "label": "Password",
       "placeHolder": "Enter your password",
       "errors": {
-        "password is required": "Password is required"
+        "password is a required field": "Password is required"
       }
     },
     "currentPassword": {

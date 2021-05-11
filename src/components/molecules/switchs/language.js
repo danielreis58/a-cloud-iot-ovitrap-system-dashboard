@@ -32,14 +32,14 @@ const Language = ({ t }) => {
       >
         <MenuItem
           onClick={() => {
-            i18n.changeLanguage('eng', () => setMenuLanguage(false))
+            i18n.changeLanguage('en-US', () => setMenuLanguage(false))
           }}
         >
           {t('translations.english')}
         </MenuItem>
         <MenuItem
           onClick={() => {
-            i18n.changeLanguage('pt', () => setMenuLanguage(false))
+            i18n.changeLanguage('pt-BR', () => setMenuLanguage(false))
           }}
         >
           {t('translations.portuguese')}
