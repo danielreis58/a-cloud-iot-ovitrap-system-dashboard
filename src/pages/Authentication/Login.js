@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link as RouterLink } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { withTranslation } from 'react-i18next'
 import { Container, Grid, Paper } from '@material-ui/core'
 import { LockRounded as LockIcon } from '@material-ui/icons'
@@ -17,9 +17,12 @@ import CircularProgress from '../../components/atoms/feedback/circularProgress'
 import Snackbar from '../../components/atoms/feedback/snackbar'
 import SwitchLanguage from '../../components/molecules/switchs/language'
 import SwitchTheme from '../../components/molecules/switchs/theme'
+import { apiResetLogin, loginUser } from '../../store/auth/login/actions'
 
 const Login = ({ t }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
+  const { error, success, loading } = useSelector((state) => state.Login)
   const {
     register,
     handleSubmit: onSubmit,
@@ -28,12 +31,11 @@ const Login = ({ t }) => {
   } = useForm({
     resolver: yupResolver(schema)
   })
-  const [loading, setLoading] = useState(false)
   const [snackbar, setSnackbar] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleSubmit = (e) => {
-    console.log(e)
+    dispatch(loginUser(e))
     localStorage.setItem('rememberMe', e.rememberMe ?? false)
   }
 
@@ -42,6 +44,19 @@ const Login = ({ t }) => {
       shouldValidate: !!value
     })
   }
+
+  useEffect(() => {
+    if (error) {
+      setSnackbar(true)
+      setSnackbarMessage(error)
+    }
+  }, [error])
+
+  useEffect(() => {
+    if (success) {
+      history.push('/dashboard')
+    }
+  }, [success])
 
   return (
     <div>
@@ -130,7 +145,7 @@ const Login = ({ t }) => {
                         color="primary"
                         fullWidth={true}
                         startIcon={<LockIcon color="primary" />}
-                        component={RouterLink}
+                        component={Link}
                         to="/password-recover"
                       >
                         {t('buttons.forgotYourPassword')}
@@ -173,9 +188,12 @@ const Login = ({ t }) => {
           horizontal: 'center'
         }}
         open={snackbar}
-        onClose={() => setSnackbar(false)}
+        onClose={() => {
+          setSnackbar(false)
+          dispatch(apiResetLogin())
+        }}
         autoHideDuration={3000}
-        message={snackbarMessage}
+        message={t(`toasts.login.${snackbarMessage}`)}
       />
     </div>
   )

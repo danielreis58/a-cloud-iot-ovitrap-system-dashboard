@@ -18,7 +18,9 @@ import { loginSuccess, logoutUser } from './store/auth/login/actions'
 
 const localAuthUser = localStorage.authUser
 
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 axios.defaults.baseURL = process.env.REACT_APP_API_URL
+
 let isExpired = false
 let authUser = {}
 

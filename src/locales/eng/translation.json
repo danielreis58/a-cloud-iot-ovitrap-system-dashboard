@@ -96,6 +96,12 @@
     },
     "rememberMe": {
       "label": "Remember me"
+    },
+    "toasts": {
+      "login": {
+        "User not found": "User not found",
+        "Invalid email/password": "Invalid email/password"
+      }
     }
   }
 }

@@ -1,6 +1,7 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 import { LOGIN_USER, LOGOUT_USER } from './actionTypes'
 import { loginSuccess, apiErrorLogin, logoutUserSuccess } from './actions'
 
@@ -19,7 +20,7 @@ const setLocalStorage = (data) => {
   }
 }
 
-function* loginUser({ payload: { user, history } }) {
+function* loginUser({ payload: user }) {
   try {
     const response = yield call(axios.post, '/login', {
       email: user.email,
@@ -27,44 +28,34 @@ function* loginUser({ payload: { user, history } }) {
     })
     const status = response?.status
     const data = response?.data?.body?.data
-    const message = response?.data?.body?.message
     if (integerBetween(status, 200, 299) && data) {
       setLocalStorage(data)
       setDefaultAxiosHeader(data?.Authorization)
       yield put(loginSuccess(data))
-    } else throw message
+    } else throw response
   } catch (error) {
     const message = getErrorMessage(error)
     yield put(apiErrorLogin(message))
   }
 }
 
-function* logoutUser({ payload: { history, isExpired = false } }) {
-  localStorage.removeItem('authUser')
-  if (isExpired === false) {
-    try {
-      const response = yield call(axios.post, '/user/logout')
-      if (
-        !(
-          (response.status >= 200 || response.status <= 299) &&
-          response?.data?.data
-        )
-      ) {
-        throw response.data
-      }
-    } catch (error) {
-      let message = ''
-      if (error?.message || error?.response?.data?.message) {
-        message = error.response.data.message
-      } else {
-        message = error.message
-      }
-      yield put(apiErrorLogin(message))
-    } finally {
-      yield put(logoutUserSuccess())
-      if (history) {
-        history.push('/login')
-      }
+function* logoutUser() {
+  const history = useHistory()
+  try {
+    const response = yield call(axios.post, '/logout')
+    const status = response?.status
+    const data = response?.data?.body?.data
+    if (integerBetween(status, 200, 299) && data) {
+      delete axios.defaults.headers.common.Authorization
+      yield put(logoutUserSuccess(data))
+    } else throw response
+  } catch (error) {
+    const message = getErrorMessage(error)
+    yield put(apiErrorLogin(message))
+  } finally {
+    localStorage.removeItem('authUser')
+    if (history) {
+      history.push('/login')
     }
   }
 }
