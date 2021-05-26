@@ -13,24 +13,12 @@ import Badge from '@material-ui/core/Badge'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import { withTranslation } from 'react-i18next'
 import mainListItems from './listItems'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Smart Ovitraps
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  )
-}
+import Copyright from '../../components/atoms/display/copyright'
 
 const drawerWidth = 240
 
@@ -49,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar
   },
   appBar: {
-    backgroundColor: '#26A69A',
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
@@ -114,14 +101,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Dashboard() {
+const Dashboard = () => {
   const classes = useStyles()
   const [open, setOpen] = React.useState(true)
-  const handleDrawerOpen = () => {
-    setOpen(true)
-  }
-  const handleDrawerClose = () => {
-    setOpen(false)
+  const toggleDrawer = () => {
+    setOpen(!open)
   }
 
   return (
@@ -129,15 +113,17 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar
         position="absolute"
-        className={(classes.appBar, open && classes.appBarShift)}
+        className={`${classes.appBar} ${open ? classes.appBarShift : ''}`}
       >
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={(classes.menuButton, open && classes.menuButtonHidden)}
+            onClick={toggleDrawer}
+            className={`${classes.menuButton} ${
+              open ? classes.menuButtonHidden : ''
+            }`}
           >
             <MenuIcon />
           </IconButton>
@@ -159,38 +145,54 @@ export default function Dashboard() {
       </AppBar>
       <Drawer
         variant="permanent"
-        className={(classes.drawerPaper, !open && classes.drawerPaperClose)}
+        classes={{
+          paper: `${classes.drawerPaper} ${
+            !open ? classes.drawerPaperClose : ''
+          }`
+        }}
         open={open}
       >
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={(classes.paper, classes.fixedHeight)}>
-                {/* <Chart /> */}
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240
+                }}
+              >
+                AAAAAA
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={(classes.paper, classes.fixedHeight)}>
-                {/* <Deposits /> */}
+              <Paper
+                sx={{
+                  p: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: 240
+                }}
+              >
+                BBBB
               </Paper>
             </Grid>
-            {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                CCCCC
+              </Paper>
             </Grid>
           </Grid>
           <Box pt={4}>
@@ -201,3 +203,5 @@ export default function Dashboard() {
     </div>
   )
 }
+
+export default withTranslation()(Dashboard)
