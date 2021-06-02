@@ -18,6 +18,12 @@
     "profile": "Profile",
     "logout": "Logout"
   },
+  "leftMenuList":{
+    "dashboard": "Dashboard",
+    "companies": "Companies",
+    "users": "Users",
+    "ovitraps": "Ovitraps"
+  },
   "buttons": {
     "tryAgain": "Try again",
     "save": "Save",

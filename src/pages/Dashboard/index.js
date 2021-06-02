@@ -9,7 +9,6 @@ import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
-import Badge from '@material-ui/core/Badge'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
@@ -18,6 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import { withTranslation } from 'react-i18next'
 import MainListItems from './listItems'
 import Copyright from '../../components/atoms/display/copyright'
+import SwitchLanguage from '../../components/molecules/switchs/language'
 import SwitchTheme from '../../components/molecules/switchs/theme'
 import RightProfileMenu from '../../components/organism/panels/rightProfileMenu'
 
@@ -140,6 +140,7 @@ const Dashboard = () => {
           >
             Dashboard
           </Typography>
+          <SwitchLanguage />
           <SwitchTheme />
           <RightProfileMenu />
         </Toolbar>

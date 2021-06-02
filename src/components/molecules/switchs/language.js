@@ -21,7 +21,7 @@ const Language = ({ t }) => {
         size="medium"
         onClick={(event) => handleOpenMenuLanguage(event)}
       >
-        <LanguageIcon fontSize="inherit" color="primary" />
+        <LanguageIcon fontSize="inherit" />
       </IconButton>
       <Menu
         id="language-menu"

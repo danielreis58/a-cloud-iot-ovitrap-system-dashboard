@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
 import ListItem from '@material-ui/core/ListItem'
+import SvgIcon from '@material-ui/core/SvgIcon'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import DashboardIcon from '@material-ui/icons/Dashboard'
@@ -23,25 +24,27 @@ const MainListItems = ({ t }) => {
         <ListItemIcon className={classes.leftSibarIcon}>
           <DashboardIcon />
         </ListItemIcon>
-        <ListItemText primary={t('Dashboard')} />
+        <ListItemText primary={t('leftMenuList.dashboard')} />
       </ListItem>
       <ListItem button>
         <ListItemIcon className={classes.leftSibarIcon}>
           <Domain />
         </ListItemIcon>
-        <ListItemText primary={t('Company')} />
+        <ListItemText primary={t('leftMenuList.companies')} />
       </ListItem>
       <ListItem button>
         <ListItemIcon className={classes.leftSibarIcon}>
           <People />
         </ListItemIcon>
-        <ListItemText primary={t('Users')} />
+        <ListItemText primary={t('leftMenuList.users')} />
       </ListItem>
       <ListItem button>
         <ListItemIcon className={classes.leftSibarIcon}>
-          <MosquitoIcon />
+          <SvgIcon>
+            <MosquitoIcon />
+          </SvgIcon>
         </ListItemIcon>
-        <ListItemText primary={t('Ovitraps')} />
+        <ListItemText primary={t('leftMenuList.ovitraps')} />
       </ListItem>
     </>
   )
