@@ -9,6 +9,7 @@ import {
 
 const initialState = {
   success: false,
+  successLogout: false,
   loading: false,
   error: false,
   data: null
@@ -40,7 +41,7 @@ const login = (state = initialState, action) => {
     case LOGOUT_USER_SUCCESS:
       state = {
         ...state,
-        success: true,
+        successLogout: true,
         loading: false,
         error: false,
         data: action.payload
@@ -50,6 +51,7 @@ const login = (state = initialState, action) => {
       state = {
         ...state,
         success: false,
+        successLogout: false,
         loading: false,
         error: action.payload
       }

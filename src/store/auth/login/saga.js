@@ -1,7 +1,6 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 
 import axios from 'axios'
-import { useHistory } from 'react-router-dom'
 import { LOGIN_USER, LOGOUT_USER } from './actionTypes'
 import { loginSuccess, apiErrorLogin, logoutUserSuccess } from './actions'
 
@@ -40,11 +39,10 @@ function* loginUser({ payload: user }) {
 }
 
 function* logoutUser() {
-  const history = useHistory()
   try {
     const response = yield call(axios.post, '/logout')
     const status = response?.status
-    const data = response?.data?.body?.data
+    const data = response?.data?.body
     if (integerBetween(status, 200, 299) && data) {
       delete axios.defaults.headers.common.Authorization
       yield put(logoutUserSuccess(data))
@@ -52,11 +50,6 @@ function* logoutUser() {
   } catch (error) {
     const message = getErrorMessage(error)
     yield put(apiErrorLogin(message))
-  } finally {
-    localStorage.removeItem('authUser')
-    if (history) {
-      history.push('/login')
-    }
   }
 }
 

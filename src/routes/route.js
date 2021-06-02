@@ -23,11 +23,11 @@ const AppRoute = ({
         }
         if (
           isPermissionProtected &&
-          !data?.userPermissions.some((e) => e.name === permissionName)
+          !data?.userPermissions?.some((e) => e.name === permissionName)
         ) {
           return <Redirect to={{ pathname: '/dashboard' }} />
         }
-        if (data?.userPermissions.some((e) => e.name === permissionName)) {
+        if (data?.userPermissions?.some((e) => e.name === permissionName)) {
           // HAVE PERMISSION
           // TODO: GET POST PUT DELETE Validations
         } else {

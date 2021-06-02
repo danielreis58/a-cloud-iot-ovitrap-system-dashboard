@@ -10,7 +10,7 @@ import IconButton from '../../atoms/inputs/iconButton'
 
 import setTheme from '../../../store/theme/actions'
 
-const Signin = ({ t }) => {
+const SwitchTheme = ({ t }) => {
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null)
   const [menuTheme, setMenuTheme] = useState(false)
@@ -23,7 +23,7 @@ const Signin = ({ t }) => {
   return (
     <>
       <IconButton size="medium" onClick={(event) => handleOpenMenuTheme(event)}>
-        <DarkLightModeIcon fontSize="inherit" color="primary" />
+        <DarkLightModeIcon fontSize="inherit" />
       </IconButton>
       <Menu
         id="theme-menu"
@@ -53,4 +53,4 @@ const Signin = ({ t }) => {
   )
 }
 
-export default withTranslation()(Signin)
+export default withTranslation()(SwitchTheme)

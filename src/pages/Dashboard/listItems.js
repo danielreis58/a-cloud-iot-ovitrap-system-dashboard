@@ -1,46 +1,50 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { withTranslation } from 'react-i18next'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import DashboardIcon from '@material-ui/icons/Dashboard'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import PeopleIcon from '@material-ui/icons/People'
-import BarChartIcon from '@material-ui/icons/BarChart'
-import LayersIcon from '@material-ui/icons/Layers'
+import Domain from '@material-ui/icons/Domain'
+import People from '@material-ui/icons/People'
+import MosquitoIcon from '../../assets/icons/mosquitoIcon'
 
-const mainListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
-  </div>
-)
+const useStyles = makeStyles((theme) => ({
+  leftSibarIcon: {
+    marginRight: 6
+  }
+}))
 
-export default mainListItems
+const MainListItems = ({ t }) => {
+  const classes = useStyles()
+  return (
+    <>
+      <ListItem button>
+        <ListItemIcon className={classes.leftSibarIcon}>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary={t('Dashboard')} />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon className={classes.leftSibarIcon}>
+          <Domain />
+        </ListItemIcon>
+        <ListItemText primary={t('Company')} />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon className={classes.leftSibarIcon}>
+          <People />
+        </ListItemIcon>
+        <ListItemText primary={t('Users')} />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon className={classes.leftSibarIcon}>
+          <MosquitoIcon />
+        </ListItemIcon>
+        <ListItemText primary={t('Ovitraps')} />
+      </ListItem>
+    </>
+  )
+}
+
+export default withTranslation()(MainListItems)

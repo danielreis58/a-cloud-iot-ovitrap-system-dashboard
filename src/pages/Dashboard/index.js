@@ -15,10 +15,11 @@ import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import NotificationsIcon from '@material-ui/icons/Notifications'
 import { withTranslation } from 'react-i18next'
-import mainListItems from './listItems'
+import MainListItems from './listItems'
 import Copyright from '../../components/atoms/display/copyright'
+import SwitchTheme from '../../components/molecules/switchs/theme'
+import RightProfileMenu from '../../components/organism/panels/rightProfileMenu'
 
 const drawerWidth = 240
 
@@ -59,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1
+  },
+  leftSidebar: {
+    paddingLeft: 9
   },
   drawerPaper: {
     position: 'relative',
@@ -136,11 +140,8 @@ const Dashboard = () => {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <SwitchTheme />
+          <RightProfileMenu />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -158,7 +159,9 @@ const Dashboard = () => {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List className={classes.leftSidebar}>
+          <MainListItems />
+        </List>
         <Divider />
       </Drawer>
       <main className={classes.content}>
