@@ -146,7 +146,7 @@ const Login = ({ t }) => {
                         fullWidth={true}
                         startIcon={<LockIcon color="primary" />}
                         component={Link}
-                        to="/password-recover"
+                        to="/forgot-password"
                       >
                         {t('buttons.forgotYourPassword')}
                       </Button>

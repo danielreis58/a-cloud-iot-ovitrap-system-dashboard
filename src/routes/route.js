@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 
 const AppRoute = ({
   component: Component,
+  layout: Layout,
   isAuthProtected,
   isPermissionProtected,
   permissionName,
@@ -34,7 +35,11 @@ const AppRoute = ({
           // NO PERMISSION
         }
 
-        return <Component {...props} />
+        return (
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        )
       }}
     />
   )

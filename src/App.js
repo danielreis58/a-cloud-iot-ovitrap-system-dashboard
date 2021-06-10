@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, BrowserRouter as Router } from 'react-router-dom'
 
 import AppRoute from './routes/route'
+import Layout from './components/organism/layout/main'
 
 // Import Routes
 import { authProtectedRoutes, publicRoutes } from './routes/index'
@@ -22,6 +23,7 @@ const App = () => (
         {authProtectedRoutes.map((route, idx) => (
           <AppRoute
             path={route.path}
+            layout={Layout}
             component={route.component}
             key={idx}
             isAuthProtected={true}

@@ -9,9 +9,15 @@ import ResetPassword from '../pages/Authentication/ResetPassword'
 
 // Dashboard
 import Dashboard from '../pages/Dashboard/index'
+import Companies from '../pages/Companies/index'
+import Users from '../pages/Users/index'
+import Traps from '../pages/Traps/index'
 
 const authProtectedRoutes = [
   { path: '/dashboard', component: Dashboard },
+  { path: '/companies', component: Companies },
+  { path: '/users', component: Users },
+  { path: '/traps', component: Traps },
 
   // this route should be at the end of all other routes
   { path: '/', exact: true, component: () => <Redirect to="/dashboard" /> }
