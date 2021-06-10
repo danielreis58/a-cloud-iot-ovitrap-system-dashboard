@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Drawer from '@material-ui/core/Drawer'
@@ -18,6 +19,7 @@ import Copyright from '../../atoms/display/copyright'
 import SwitchLanguage from '../../molecules/switchs/language'
 import SwitchTheme from '../../molecules/switchs/theme'
 import RightProfileMenu from '../panels/rightProfileMenu'
+import setLayout from '../../../store/layout/actions'
 
 const drawerWidth = 240
 
@@ -104,10 +106,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Main = ({ children }) => {
+  const dispatch = useDispatch()
   const classes = useStyles()
-  const [open, setOpen] = React.useState(true)
+  const open = useSelector((state) => state.Layout.layoutOpen)
   const toggleDrawer = () => {
-    setOpen(!open)
+    dispatch(setLayout(!open))
   }
 
   return (

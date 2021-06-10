@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
@@ -46,6 +47,7 @@ if (localAuthUser) {
 const app = (
   <Provider store={store}>
     <CustomThemeProvider>
+      <CssBaseline />
       <BrowserRouter>
         <App />
       </BrowserRouter>

@@ -35,10 +35,12 @@ const AppRoute = ({
           // NO PERMISSION
         }
 
-        return (
+        return Layout ? (
           <Layout>
             <Component {...props} />
           </Layout>
+        ) : (
+          <Component {...props} />
         )
       }}
     />

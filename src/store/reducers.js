@@ -10,11 +10,15 @@ import Dashboards from './dashboard/reducer'
 // Theme
 import Themes from './theme/reducer'
 
+// Layout
+import Layout from './layout/reducer'
+
 const rootReducer = combineReducers({
   Login,
   ForgetPassword,
   Dashboards,
-  Themes
+  Themes,
+  Layout
 })
 
 export default rootReducer
