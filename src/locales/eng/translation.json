@@ -115,7 +115,8 @@
     }
   },
   "commons": {
-    "question": "Question"
+    "question": "Question",
+    "selected": "selected"
   },
   "alerts": {
     "signout": "Are you sure you want to sign out of your account?"

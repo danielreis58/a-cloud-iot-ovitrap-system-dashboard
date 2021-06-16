@@ -14,11 +14,11 @@
     "dark": "Tema escuro",
     "light": "Tema claro"
   },
-  "rightProfileMenu":{
+  "rightProfileMenu": {
     "profile": "Perfil",
     "logout": "Sair"
   },
-  "leftMenuList":{
+  "leftMenuList": {
     "dashboard": "Dashboard",
     "companies": "Empresas",
     "users": "Usuários",
@@ -115,7 +115,8 @@
     }
   },
   "commons": {
-    "question": "Pergunta"
+    "question": "Pergunta",
+    "selected": "selecionados"
   },
   "alerts": {
     "signout": "Você tem certeza que deseja sair da sua conta?"
