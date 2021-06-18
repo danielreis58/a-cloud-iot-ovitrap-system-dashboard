@@ -10,12 +10,16 @@ import { integerBetween } from '../../../utils/customMethods'
 const setDefaultAxiosHeader = (authorization) => {
   if (authorization) {
     axios.defaults.headers.common.Authorization = authorization
+  } else {
+    delete axios.defaults.headers.common.Authorization
   }
 }
 
 const setLocalStorage = (data) => {
   if (data) {
     localStorage.setItem('authUser', JSON.stringify(data))
+  } else {
+    localStorage.removeItem('authUser')
   }
 }
 
@@ -44,7 +48,8 @@ function* logoutUser() {
     const status = response?.status
     const data = response?.data?.body
     if (integerBetween(status, 200, 299) && data) {
-      delete axios.defaults.headers.common.Authorization
+      setLocalStorage()
+      setDefaultAxiosHeader()
       yield put(logoutUserSuccess(data))
     } else throw response
   } catch (error) {

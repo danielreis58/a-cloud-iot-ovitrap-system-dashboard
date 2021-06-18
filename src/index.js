@@ -35,12 +35,8 @@ if (localAuthUser) {
   }
   if (authUser && !isExpired) {
     store.dispatch(loginSuccess(authUser))
-    axios.defaults.headers.common.Authorization = authUser.Authorization
-  } else {
-    if (authUser.Authorization) {
-      store.dispatch(logoutUser(null, isExpired))
-    }
-    delete axios.defaults.headers.common.Authorization
+  } else if (authUser.Authorization) {
+    store.dispatch(logoutUser())
   }
 }
 

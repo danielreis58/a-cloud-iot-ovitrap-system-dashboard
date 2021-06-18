@@ -11,7 +11,7 @@ import Domain from '@material-ui/icons/Domain'
 import People from '@material-ui/icons/People'
 import MosquitoIcon from '../../../assets/icons/mosquitoIcon'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   leftSibarIcon: {
     marginRight: 6
   }

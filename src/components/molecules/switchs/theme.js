@@ -1,8 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { withTranslation } from 'react-i18next'
-
-import { Menu, MenuItem } from '@material-ui/core'
 
 import {
   Brightness4 as DarkModeIcon,
@@ -13,16 +11,9 @@ import IconButton from '../../atoms/inputs/iconButton'
 
 import setTheme from '../../../store/theme/actions'
 
-const SwitchTheme = ({ t }) => {
+const SwitchTheme = () => {
   const dispatch = useDispatch()
   const currentTheme = useSelector((state) => state.Themes.theme)
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [menuTheme, setMenuTheme] = useState(false)
-
-  const handleOpenMenuTheme = (event) => {
-    setAnchorEl(event.currentTarget)
-    setMenuTheme(true)
-  }
 
   return (
     <>
