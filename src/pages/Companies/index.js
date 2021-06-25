@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import Table from '@material-ui/core/Table'
@@ -20,42 +21,7 @@ import Switch from '@material-ui/core/Switch'
 import DeleteIcon from '@material-ui/icons/Delete'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import { useStyles, useToolbarStyles } from './indexStyle'
-
-const createData = (name, email, document, site, cep, city, state) => ({
-  name,
-  email,
-  document,
-  site,
-  cep,
-  city,
-  state
-})
-
-const columns = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Name' },
-  { id: 'email', numeric: false, disablePadding: false, label: 'Email' },
-  { id: 'document', numeric: false, disablePadding: false, label: 'Document' },
-  { id: 'site', numeric: false, disablePadding: false, label: 'Site' },
-  { id: 'cep', numeric: false, disablePadding: false, label: 'Cep' },
-  { id: 'city', numeric: false, disablePadding: false, label: 'City' },
-  { id: 'state', numeric: false, disablePadding: false, label: 'State' }
-]
-
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0)
-]
+import { getData } from '../../store/company/actions'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -83,6 +49,51 @@ const stableSort = (array, comparator) => {
 }
 
 const EnhancedTableHead = (props) => {
+  const { t } = useTranslation()
+  const columns = [
+    {
+      id: 'name',
+      numeric: false,
+      disablePadding: true,
+      label: t('companies.name')
+    },
+    {
+      id: 'email',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.email')
+    },
+    {
+      id: 'document',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.document')
+    },
+    {
+      id: 'site',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.site')
+    },
+    {
+      id: 'cep',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.cep')
+    },
+    {
+      id: 'city',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.city')
+    },
+    {
+      id: 'state',
+      numeric: false,
+      disablePadding: false,
+      label: t('companies.state')
+    }
+  ]
   const {
     classes,
     onSelectAllClick,
@@ -134,8 +145,9 @@ const EnhancedTableHead = (props) => {
 }
 
 const EnhancedTableToolbar = (props) => {
-  const { t } = useTranslation()
   const classes = useToolbarStyles()
+  const { t } = useTranslation()
+
   const { numSelected } = props
 
   return (
@@ -181,6 +193,9 @@ const EnhancedTableToolbar = (props) => {
 
 const Companies = () => {
   const classes = useStyles()
+  const { t } = useTranslation()
+  const dispatch = useDispatch()
+  const { companies: rows = [] } = useSelector((state) => state.Companies)
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('calories')
   const [selected, setSelected] = useState([])
@@ -238,8 +253,9 @@ const Companies = () => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1
 
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+  useEffect(() => {
+    dispatch(getData('companies'))
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -301,16 +317,17 @@ const Companies = () => {
                     </TableRow>
                   )
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
+              {rows.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={20}> {t('commons.notFound')}</TableCell>
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          labelRowsPerPage={t('commons.rowsPerPage')}
+          rowsPerPageOptions={[1, 5, 10, 25]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -321,7 +338,7 @@ const Companies = () => {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label={t('commons.densePadding')}
       />
     </div>
   )

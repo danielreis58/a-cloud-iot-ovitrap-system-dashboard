@@ -18,7 +18,7 @@
     "profile": "Profile",
     "logout": "Logout"
   },
-  "leftMenuList":{
+  "leftMenuList": {
     "dashboard": "Dashboard",
     "companies": "Companies",
     "users": "Users",
@@ -116,9 +116,21 @@
   },
   "commons": {
     "question": "Question",
-    "selected": "selected"
+    "selected": "selected",
+    "notFound": "No matching records found",
+    "rowsPerPage": "Rows per page",
+    "densePadding": "Dense padding"
   },
   "alerts": {
     "signout": "Are you sure you want to sign out of your account?"
+  },
+  "companies": {
+    "name": "Name",
+    "email": "Email",
+    "document": "Document",
+    "site": "Site",
+    "cep": "Zip Code",
+    "city": "City",
+    "state": "State"
   }
 }

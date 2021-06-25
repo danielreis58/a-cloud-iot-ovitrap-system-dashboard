@@ -24,6 +24,22 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL
 let isExpired = false
 let authUser = {}
 
+const setDefaultAxiosHeader = (authorization) => {
+  if (authorization) {
+    axios.defaults.headers.common.Authorization = authorization
+  } else {
+    delete axios.defaults.headers.common.Authorization
+  }
+}
+
+const setLocalStorage = (data) => {
+  if (data) {
+    localStorage.setItem('authUser', JSON.stringify(data))
+  } else {
+    localStorage.removeItem('authUser')
+  }
+}
+
 if (localAuthUser) {
   authUser = JSON.parse(localAuthUser)
 
@@ -34,8 +50,12 @@ if (localAuthUser) {
     }
   }
   if (authUser && !isExpired) {
+    setLocalStorage(authUser)
+    setDefaultAxiosHeader(authUser.Authorization)
     store.dispatch(loginSuccess(authUser))
   } else if (authUser.Authorization) {
+    setLocalStorage()
+    setDefaultAxiosHeader()
     store.dispatch(logoutUser())
   }
 }

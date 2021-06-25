@@ -116,9 +116,21 @@
   },
   "commons": {
     "question": "Pergunta",
-    "selected": "selecionados"
+    "selected": "selecionados",
+    "notFound": "Nenhum registro encontrado",
+    "rowsPerPage": "Linhas por página",
+    "densePadding": "Espaçamento denso"
   },
   "alerts": {
     "signout": "Você tem certeza que deseja sair da sua conta?"
+  },
+  "companies": {
+    "name": "Nome",
+    "email": "Email",
+    "document": "Documento",
+    "site": "Site",
+    "cep": "Cep",
+    "city": "Cidade",
+    "state": "Estado"
   }
 }
