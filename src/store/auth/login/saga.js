@@ -6,6 +6,7 @@ import { loginSuccess, apiErrorLogin, logoutUserSuccess } from './actions'
 
 import { getErrorMessage } from '../../../utils/sagaUtils'
 import { integerBetween } from '../../../utils/customMethods'
+import { setDefaultAxiosHeader, setLocalStorage } from '../../../utils/auth'
 
 function* loginUser({ payload: user }) {
   try {
@@ -14,8 +15,10 @@ function* loginUser({ payload: user }) {
       password: user.password
     })
     const status = response?.status
-    const data = response?.data?.body?.data
+    const data = response?.data?.data?.data
     if (integerBetween(status, 200, 299) && data) {
+      setLocalStorage(data)
+      setDefaultAxiosHeader(data.Authorization)
       yield put(loginSuccess(data))
     } else throw response
   } catch (error) {
@@ -28,7 +31,7 @@ function* logoutUser() {
   try {
     const response = yield call(axios.post, '/logout')
     const status = response?.status
-    const data = response?.data?.body
+    const data = response?.data?.data
     if (integerBetween(status, 200, 299) && data) {
       yield put(logoutUserSuccess(data))
     } else throw response

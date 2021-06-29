@@ -4,7 +4,8 @@ import {
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
   API_ERROR_LOGIN,
-  API_RESET_LOGIN
+  API_RESET_LOGIN,
+  API_RESET_ERROR_LOGIN
 } from './actionTypes'
 
 export const loginUser = (user) => ({
@@ -34,5 +35,10 @@ export const apiErrorLogin = (message) => ({
 
 export const apiResetLogin = () => ({
   type: API_RESET_LOGIN,
+  payload: {}
+})
+
+export const resetErrorLogin = () => ({
+  type: API_RESET_ERROR_LOGIN,
   payload: {}
 })

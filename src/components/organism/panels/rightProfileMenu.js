@@ -27,7 +27,6 @@ const RightProfileMenu = ({ t }) => {
   }
 
   const signOut = () => {
-    dispatch(apiResetLogin())
     dispatch(logoutUser())
   }
 

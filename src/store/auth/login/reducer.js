@@ -4,7 +4,8 @@ import {
   LOGOUT_USER,
   LOGOUT_USER_SUCCESS,
   API_ERROR_LOGIN,
-  API_RESET_LOGIN
+  API_RESET_LOGIN,
+  API_RESET_ERROR_LOGIN
 } from './actionTypes'
 
 const initialState = {
@@ -58,6 +59,15 @@ const login = (state = initialState, action) => {
       break
     case API_RESET_LOGIN:
       state = initialState
+      break
+    case API_RESET_ERROR_LOGIN:
+      state = {
+        ...state,
+        success: false,
+        successLogout: false,
+        loading: false,
+        error: false
+      }
       break
     default:
       break

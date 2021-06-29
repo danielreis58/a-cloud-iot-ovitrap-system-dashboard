@@ -17,7 +17,7 @@ import CircularProgress from '../../components/atoms/feedback/circularProgress'
 import Snackbar from '../../components/atoms/feedback/snackbar'
 import SwitchLanguage from '../../components/molecules/switchs/language'
 import SwitchTheme from '../../components/molecules/switchs/theme'
-import { apiResetLogin, loginUser } from '../../store/auth/login/actions'
+import { loginUser, resetErrorLogin } from '../../store/auth/login/actions'
 
 const Login = ({ t }) => {
   const dispatch = useDispatch()
@@ -49,11 +49,13 @@ const Login = ({ t }) => {
     if (error) {
       setSnackbar(true)
       setSnackbarMessage(error)
+      dispatch(resetErrorLogin())
     }
   }, [error])
 
   useEffect(() => {
     if (success) {
+      dispatch(resetErrorLogin())
       history.push('/dashboard')
     }
   }, [success])
@@ -190,7 +192,6 @@ const Login = ({ t }) => {
         open={snackbar}
         onClose={() => {
           setSnackbar(false)
-          dispatch(apiResetLogin())
         }}
         autoHideDuration={3000}
         message={t(`toasts.login.${snackbarMessage}`)}

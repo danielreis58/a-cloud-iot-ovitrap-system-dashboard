@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 export const getErrorMessage = (error) => {
-  let message = error?.response?.data?.body?.message || 'Error'
+  let message = error?.response?.data?.data?.message || 'Error'
   if (error?.response?.status) {
     switch (error.response.status) {
       case 401:

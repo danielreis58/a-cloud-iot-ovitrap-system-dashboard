@@ -15,6 +15,7 @@ import store from './store'
 
 // actions
 import { loginSuccess, logoutUser } from './store/auth/login/actions'
+import { setDefaultAxiosHeader, setLocalStorage } from './utils/auth'
 
 const localAuthUser = localStorage.authUser
 
@@ -23,22 +24,6 @@ axios.defaults.baseURL = process.env.REACT_APP_API_URL
 
 let isExpired = false
 let authUser = {}
-
-const setDefaultAxiosHeader = (authorization) => {
-  if (authorization) {
-    axios.defaults.headers.common.Authorization = authorization
-  } else {
-    delete axios.defaults.headers.common.Authorization
-  }
-}
-
-const setLocalStorage = (data) => {
-  if (data) {
-    localStorage.setItem('authUser', JSON.stringify(data))
-  } else {
-    localStorage.removeItem('authUser')
-  }
-}
 
 if (localAuthUser) {
   authUser = JSON.parse(localAuthUser)
