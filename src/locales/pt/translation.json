@@ -119,7 +119,11 @@
     "selected": "selecionados",
     "notFound": "Nenhum registro encontrado",
     "rowsPerPage": "Linhas por página",
-    "densePadding": "Espaçamento denso"
+    "densePadding": "Espaçamento denso",
+    "action": "Ação",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "filter": "Filtrar"
   },
   "alerts": {
     "signout": "Você tem certeza que deseja sair da sua conta?"
