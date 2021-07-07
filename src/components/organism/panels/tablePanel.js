@@ -1,27 +1,31 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TablePagination from '@material-ui/core/TablePagination'
-import TableRow from '@material-ui/core/TableRow'
-import TableSortLabel from '@material-ui/core/TableSortLabel'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import Paper from '@material-ui/core/Paper'
-import Checkbox from '@material-ui/core/Checkbox'
-import IconButton from '@material-ui/core/IconButton'
-import Tooltip from '@material-ui/core/Tooltip'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  Checkbox,
+  IconButton,
+  Tooltip,
+  FormControlLabel,
+  Switch
+} from '@material-ui/core'
+
 import {
   Delete as DeleteIcon,
   FilterList as FilterListIcon,
   Edit as EditIcon
 } from '@material-ui/icons'
+
 import { useStyles, useToolbarStyles } from './tablePanelStyle'
 import { isFunction } from '../../../utils/customMethods'
 
@@ -175,7 +179,7 @@ const TablePanel = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name)
+      const newSelecteds = rows.map((n) => n.id)
       setSelected(newSelecteds)
       return
     }
