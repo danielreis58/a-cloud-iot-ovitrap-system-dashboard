@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -110,7 +110,7 @@ const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles()
   const { t } = useTranslation()
 
-  const { numSelected, selected } = props
+  const { numSelected, selected, title = '' } = props
 
   return (
     <Toolbar
@@ -132,7 +132,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          {props.title}
+          {title}
         </Typography>
       )}
 
@@ -159,9 +159,7 @@ const EnhancedTableToolbar = (props) => {
 }
 
 const TablePanel = (props) => {
-  const title = props.title ?? ''
-  const rows = props.rows ?? []
-  const columns = props.columns ?? []
+  const { title = '', rows = [], columns = [] } = props
   const classes = useStyles()
   const { t } = useTranslation()
   const [order, setOrder] = useState('asc')
@@ -179,19 +177,19 @@ const TablePanel = (props) => {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id)
-      setSelected(newSelecteds)
+      setSelected(rows)
       return
     }
     setSelected([])
   }
 
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id)
+  const handleClick = (event, row) => {
+    const { id } = row
+    const selectedIndex = selected.findIndex((e) => e.id === id)
     let newSelected = []
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id)
+      newSelected = newSelected.concat(selected, row)
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1))
     } else if (selectedIndex === selected.length - 1) {
@@ -219,7 +217,7 @@ const TablePanel = (props) => {
     setDense(event.target.checked)
   }
 
-  const isSelected = (element) => selected.indexOf(element) !== -1
+  const isSelected = (id) => selected.findIndex((e) => e.id === id) !== -1
 
   return (
     <div className={classes.root}>
@@ -228,7 +226,7 @@ const TablePanel = (props) => {
           selected={selected}
           numSelected={selected.length}
           title={title}
-          handleDelete={props.handleDelete}
+          handleDelete={props.openDelete}
         />
         <TableContainer>
           <Table
@@ -264,7 +262,7 @@ const TablePanel = (props) => {
                       <TableCell padding="checkbox">
                         <Checkbox
                           checked={isItemSelected}
-                          onClick={(event) => handleClick(event, row.id)}
+                          onClick={(event) => handleClick(event, row)}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
@@ -281,8 +279,7 @@ const TablePanel = (props) => {
                             aria-label="edit"
                             size={dense ? 'small' : 'medium'}
                             onClick={() =>
-                              isFunction(props.handleEdit) &&
-                              props.handleEdit(row)
+                              isFunction(props.openEdit) && props.openEdit(row)
                             }
                           >
                             <EditIcon

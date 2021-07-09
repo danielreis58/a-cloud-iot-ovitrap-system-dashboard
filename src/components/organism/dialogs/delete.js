@@ -1,26 +1,41 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, DialogTitle, Dialog } from '@material-ui/core/'
+import {
+  Button,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography
+} from '@material-ui/core/'
+import { CloseRounded as CloseIcon } from '@material-ui/icons'
+
+import { isArray, isFunction } from '../../../utils/customMethods'
 
 const Delete = (props) => {
   const { t } = useTranslation()
-  const [open, setOpen] = useState(props.isOpen)
+  const { isOpen } = props
 
   const handleClose = (e) => {
     e.stopPropagation()
-    setOpen(false)
+    if (isFunction(props.handleCancel)) {
+      props.handleCancel()
+    }
   }
 
   const handleConfirm = (e) => {
     e.stopPropagation()
-    setOpen(false)
+    if (isFunction(props.handleConfirm)) {
+      props.handleConfirm(props.data)
+    }
   }
 
   return (
     <Dialog
       onClose={handleClose}
       aria-labelledby="simple-dialog-title"
-      open={open}
+      open={isOpen}
     >
       <DialogTitle id="form-dialog-title">
         <div
@@ -31,18 +46,20 @@ const Delete = (props) => {
             alignItems: 'center'
           }}
         >
-          <div>{t('commons.editName')}</div>
+          <div>{t('commons.delete')}</div>
           <div>
-            <IconButton
-              onClick={handleClose}
-              style={{ color: theme.palette.primary.main }}
-            >
+            <IconButton onClick={handleClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
           </div>
         </div>
       </DialogTitle>
-      <DialogContent>CONTENT</DialogContent>
+      <DialogContent>
+        {isArray(props.data) &&
+          props.data.map((e) => (
+            <Typography variant="body1">{e.name}</Typography>
+          ))}
+      </DialogContent>
       <DialogActions>
         <div
           style={{
@@ -52,9 +69,10 @@ const Delete = (props) => {
           }}
         >
           <div>
-            <Button onClick={handleClose}>{t('commons.cancel')}</Button>
+            <Button variant="contained" onClick={handleClose}>
+              {t('commons.cancel')}
+            </Button>
             <Button
-              size="large"
               variant="contained"
               color="primary"
               onClick={handleConfirm}

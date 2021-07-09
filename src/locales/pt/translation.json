@@ -123,7 +123,9 @@
     "action": "Ação",
     "edit": "Editar",
     "delete": "Excluir",
-    "filter": "Filtrar"
+    "filter": "Filtrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
   },
   "alerts": {
     "signout": "Você tem certeza que deseja sair da sua conta?"

@@ -7,6 +7,7 @@ import TablePanel from '../../components/organism/panels/tablePanel'
 import { getData } from '../../store/company/actions'
 import useStyles from './indexStyle'
 import FooterButtons from '../../components/molecules/footer/buttons'
+import Delete from '../../components/organism/dialogs/delete'
 
 const Companies = () => {
   const classes = useStyles()
@@ -52,12 +53,13 @@ const Companies = () => {
   const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
 
-  const handleEdit = () => {
-    console.log(data)
-  }
-
   const toggleEdit = () => {
     setIsOpenEdit((prev) => !prev)
+  }
+
+  const handleEdit = () => {
+    toggleEdit()
+    console.log('EDIT', data)
   }
 
   const openEdit = (e) => {
@@ -68,9 +70,14 @@ const Companies = () => {
   const toggleDelete = () => {
     setIsOpenDelete((prev) => !prev)
   }
+  const handleDelete = () => {
+    toggleDelete()
+    console.log('DELETE', data)
+  }
 
   const openDelete = (e) => {
     toggleDelete()
+    setData(e)
   }
 
   useEffect(() => {
@@ -82,7 +89,7 @@ const Companies = () => {
       {isOpenEdit ? (
         <div className={classes.root}>
           <Paper className={classes.paper}>
-            <div className={classes.form}>EDIT FORM</div>
+            <div className={classes.form}>{JSON.stringify(data)}</div>
 
             <FooterButtons
               handleCancel={toggleEdit}
@@ -95,8 +102,16 @@ const Companies = () => {
           title={t('leftMenuList.companies')}
           columns={columns}
           rows={rows}
-          handleEdit={openEdit}
-          handleDelete={openDelete}
+          openEdit={openEdit}
+          openDelete={openDelete}
+        />
+      )}
+      {isOpenDelete && (
+        <Delete
+          data={data}
+          isOpen={isOpenDelete}
+          handleCancel={toggleDelete}
+          handleConfirm={handleDelete}
         />
       )}
     </>
