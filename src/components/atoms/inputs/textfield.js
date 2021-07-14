@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import React, { memo, forwardRef } from 'react'
 
 import { TextField as MaterialTextField } from '@material-ui/core'
 
-const TextField = (props) => (
+const TextField = forwardRef((props, ref) => (
   <>
     <MaterialTextField
       id={props.id}
@@ -15,12 +15,13 @@ const TextField = (props) => (
       color={props.color}
       variant={props.variant}
       name={props.name}
-      ref={props.ref}
+      ref={ref}
       inputRef={props.inputRef}
       inputProps={props.inputProps}
       onKeyPress={props.onKeyPress}
       onKeyDown={props.onKeyDown}
       onKeyUp={props.onKeyUp}
+      defaultValue={props.defaultValue}
       value={props.value}
       style={props.style}
       rowsMax={props.rowsMax}
@@ -31,6 +32,6 @@ const TextField = (props) => (
       fullWidth={props.fullWidth}
     />
   </>
-)
+))
 
 export default memo(TextField)

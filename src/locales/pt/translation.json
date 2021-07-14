@@ -53,65 +53,123 @@
     "wait": "Aguarde"
   },
   "fields": {
-    "type": {
-      "label": "Tipo",
-      "placeHolder": "Informe o tipo"
-    },
     "name": {
       "label": "Nome",
-      "placeHolder": "Escreva o nome"
-    },
-    "search": {
-      "label": "Busca",
-      "placeHolder": "Buscar"
+      "placeholder": "Escreva o nome",
+      "errors": {
+        "required": "Nome é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
     },
     "email": {
       "label": "E-mail",
-      "placeHolder": "Insira seu e-mail",
+      "placeholder": "Escreva o e-mail",
       "errors": {
-        "email is a required field": "E-mail é obrigatório",
-        "email must be a valid email": "E-mail inválido"
+        "required": "E-mail é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "document": {
+      "label": "Documento",
+      "placeholder": "Escreva o documento",
+      "errors": {
+        "required": "Documento é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "site": {
+      "label": "Site",
+      "placeholder": "Escreva o site",
+      "errors": {
+        "required": "Site é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "cep": {
+      "label": "Cep",
+      "placeholder": "Escreva o cep",
+      "errors": {
+        "required": "Cep é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "address": {
+      "label": "Endereço",
+      "placeholder": "Escreva o endereço",
+      "errors": {
+        "required": "Endereço é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "number": {
+      "label": "Número",
+      "placeholder": "Escreva o número",
+      "errors": {
+        "required": "Número é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "neighborhood": {
+      "label": "Bairro",
+      "placeholder": "Escreva o bairro",
+      "errors": {
+        "required": "Bairro é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "city": {
+      "label": "Cidade",
+      "placeholder": "Escreva a cidade",
+      "errors": {
+        "required": "Cidade é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "state": {
+      "label": "Estado",
+      "placeholder": "Escreva o estado",
+      "errors": {
+        "required": "Estado é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "telephone": {
+      "label": "Telefone",
+      "placeholder": "Escreva o telefone",
+      "errors": {
+        "required": "Telefone é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "note": {
+      "label": "Observação",
+      "placeholder": "Escreva a observação",
+      "errors": {
+        "required": "Observação é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
       }
     },
     "password": {
       "label": "Senha",
-      "placeHolder": "Insira sua senha",
+      "placeholder": "Insira sua senha",
       "errors": {
         "password is a required field": "Senha é obrigatório"
       }
     },
-    "currentPassword": {
-      "label": "Senha atual",
-      "placeHolder": "Insira sua senha atual",
-      "errors": {
-        "password is required": "Senha é obrigatório"
-      }
-    },
-    "newPassword": {
-      "label": "Nova senha",
-      "placeHolder": "Insira sua nova senha",
-      "errors": {
-        "password": "A senha deve ter de 8 a 30 caracteres com 1 número, 1 letra minúscula e 1 letra maiúscula.",
-        "password is required": "Senha é obrigatório",
-        "passwordsAreNotTheSame": "As senhas não são iguais"
-      }
-    },
-    "passwordRepeat": {
-      "label": "Confirmação de senha",
-      "placeHolder": "Repita sua nova senha",
-      "errors": {
-        "password is required": "Senha é obrigatório",
-        "passwordsAreNotTheSame": "As senhas não são iguais"
-      }
-    },
     "rememberMe": {
       "label": "Lembrar-me"
-    }
-  },
-  "toasts": {
-    "login": {
-      "User not found": "Usuário não encontrado",
-      "Invalid email/password": "Email/senha inválido"
     }
   },
   "commons": {

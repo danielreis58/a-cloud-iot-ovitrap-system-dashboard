@@ -55,19 +55,24 @@
   "fields": {
     "type": {
       "label": "Type",
-      "placeHolder": "Enter the type"
+      "placeholder": "Enter the type"
     },
     "name": {
       "label": "Name",
-      "placeHolder": "Enter name"
+      "placeholder": "Enter name",
+      "errors": {
+        "required": "Name is requires",
+        "minimum": "Minimum 3 characteres",
+        "maximum": "Maximum 255 characteres"
+      }
     },
     "search": {
       "label": "Search",
-      "placeHolder": "Search"
+      "placeholder": "Search"
     },
     "email": {
       "label": "Email",
-      "placeHolder": "Enter your e-mail",
+      "placeholder": "Enter e-mail",
       "errors": {
         "email is a required field": "E-mail is required",
         "email must be a valid email": "E-mail is invalid"
@@ -75,43 +80,13 @@
     },
     "password": {
       "label": "Password",
-      "placeHolder": "Enter your password",
+      "placeholder": "Enter your password",
       "errors": {
         "password is a required field": "Password is required"
       }
     },
-    "currentPassword": {
-      "label": "Current password",
-      "placeHolder": "Enter your current password",
-      "errors": {
-        "password is required": "Current password is required"
-      }
-    },
-    "newPassword": {
-      "label": "New password",
-      "placeHolder": "Enter your new password",
-      "errors": {
-        "password": "Password must have 8 to 30 characters with 1 number, 1 lowercase letter and 1 uppercase letter.",
-        "password is required": "Password is required",
-        "passwordsAreNotTheSame": "Passwords are not the same"
-      }
-    },
-    "passwordRepeat": {
-      "label": "Confirm your password",
-      "placeHolder": "Retype your password",
-      "errors": {
-        "password is required": "Password is required",
-        "passwordsAreNotTheSame": "Passwords are not the same"
-      }
-    },
     "rememberMe": {
       "label": "Remember me"
-    },
-    "toasts": {
-      "login": {
-        "User not found": "User not found",
-        "Invalid email/password": "Invalid email/password"
-      }
     }
   },
   "commons": {
@@ -125,7 +100,11 @@
     "delete": "Delete",
     "filter": "Filter",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "required": "required",
+    "minimum": "minimum",
+    "maximum": "maximum",
+    "characters": "characters"
   },
   "alerts": {
     "signout": "Are you sure you want to sign out of your account?"

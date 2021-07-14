@@ -84,7 +84,7 @@ const Login = ({ t }) => {
                       <TextField
                         {...register('email')}
                         label={t('fields.email.label')}
-                        placeholder={t('fields.email.placeHolder')}
+                        placeholder={t('fields.email.placeholder')}
                         color="primary"
                         variant="outlined"
                         shrink={true}
@@ -101,7 +101,7 @@ const Login = ({ t }) => {
                       <TextField
                         {...register('password')}
                         label={t('fields.password.label')}
-                        placeholder={t('fields.password.placeHolder')}
+                        placeholder={t('fields.password.placeholder')}
                         color="primary"
                         variant="outlined"
                         shrink={true}

@@ -12,6 +12,7 @@ const Buttons = (props) => {
     <div className={classes.root}>
       <Button
         className={classes.button}
+        type="reset"
         variant="contained"
         onClick={() => isFunction(props?.handleCancel) && props.handleCancel()}
       >
@@ -19,6 +20,7 @@ const Buttons = (props) => {
       </Button>
       <Button
         className={classes.button}
+        type="submit"
         variant="contained"
         color="primary"
         onClick={() =>
