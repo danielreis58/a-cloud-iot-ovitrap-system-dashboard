@@ -56,8 +56,10 @@ const Delete = (props) => {
       </DialogTitle>
       <DialogContent>
         {isArray(props.data) &&
-          props.data.map((e) => (
-            <Typography variant="body1">{e.name}</Typography>
+          props.data.map((e, key) => (
+            <Typography key={key} variant="body1">
+              {e.name}
+            </Typography>
           ))}
       </DialogContent>
       <DialogActions>

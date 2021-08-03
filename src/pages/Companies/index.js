@@ -22,6 +22,7 @@ const Companies = () => {
   const dispatch = useDispatch()
   const {
     register,
+    setValue,
     reset,
     handleSubmit,
     formState: { errors }
@@ -69,14 +70,12 @@ const Companies = () => {
   const [isOpenDelete, setIsOpenDelete] = useState(false)
 
   const toggleEdit = () => {
-    reset()
     setIsOpenEdit((prev) => !prev)
   }
 
   const handleEdit = (e) => {
-    console.log(e)
     toggleEdit()
-    console.log('EDIT', data)
+    console.log('EDIT', e)
   }
 
   const openEdit = (e) => {
@@ -101,6 +100,10 @@ const Companies = () => {
     dispatch(getData('companies'))
   }, [])
 
+  useEffect(() => {
+    reset(data)
+  }, [data])
+
   return (
     <>
       {isOpenEdit ? (
@@ -120,6 +123,11 @@ const Companies = () => {
                       }
                       error={!!errors?.name?.message}
                       defaultValue={data.name}
+                      onChange={(e) =>
+                        setValue('name', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -138,6 +146,11 @@ const Companies = () => {
                       }
                       error={!!errors?.email?.message}
                       defaultValue={data.email}
+                      onChange={(e) =>
+                        setValue('email', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -156,6 +169,11 @@ const Companies = () => {
                       }
                       error={!!errors?.document?.message}
                       defaultValue={data.document}
+                      onChange={(e) =>
+                        setValue('document', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -174,6 +192,11 @@ const Companies = () => {
                       }
                       error={!!errors?.site?.message}
                       defaultValue={data.site}
+                      onChange={(e) =>
+                        setValue('site', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -192,6 +215,11 @@ const Companies = () => {
                       }
                       error={!!errors?.cep?.message}
                       defaultValue={data.cep}
+                      onChange={(e) =>
+                        setValue('cep', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -210,6 +238,11 @@ const Companies = () => {
                       }
                       error={!!errors?.address?.message}
                       defaultValue={data.address}
+                      onChange={(e) =>
+                        setValue('address', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -228,6 +261,11 @@ const Companies = () => {
                       }
                       error={!!errors?.number?.message}
                       defaultValue={data.number}
+                      onChange={(e) =>
+                        setValue('number', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -248,6 +286,11 @@ const Companies = () => {
                       }
                       error={!!errors?.neighborhood?.message}
                       defaultValue={data.neighborhood}
+                      onChange={(e) =>
+                        setValue('neighborhood', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -266,6 +309,11 @@ const Companies = () => {
                       }
                       error={!!errors?.city?.message}
                       defaultValue={data.city}
+                      onChange={(e) =>
+                        setValue('city', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -284,6 +332,11 @@ const Companies = () => {
                       }
                       error={!!errors?.state?.message}
                       defaultValue={data.state}
+                      onChange={(e) =>
+                        setValue('state', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -302,6 +355,11 @@ const Companies = () => {
                       }
                       error={!!errors?.note?.message}
                       defaultValue={data.note}
+                      onChange={(e) =>
+                        setValue('note', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
@@ -323,6 +381,11 @@ const Companies = () => {
                       }
                       error={!!errors?.telephone?.message}
                       defaultValue={data.telephone}
+                      onChange={(e) =>
+                        setValue('telephone', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
                       variant="outlined"
                       fullWidth
                       shrink
