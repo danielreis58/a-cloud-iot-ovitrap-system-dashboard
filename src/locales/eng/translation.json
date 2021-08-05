@@ -53,31 +53,6 @@
     "wait": "Wait"
   },
   "fields": {
-    "type": {
-      "label": "Type",
-      "placeholder": "Enter the type"
-    },
-    "name": {
-      "label": "Name",
-      "placeholder": "Enter name",
-      "errors": {
-        "required": "Name is requires",
-        "minimum": "Minimum 3 characteres",
-        "maximum": "Maximum 255 characteres"
-      }
-    },
-    "search": {
-      "label": "Search",
-      "placeholder": "Search"
-    },
-    "email": {
-      "label": "Email",
-      "placeholder": "Enter e-mail",
-      "errors": {
-        "email is a required field": "E-mail is required",
-        "email must be a valid email": "E-mail is invalid"
-      }
-    },
     "password": {
       "label": "Password",
       "placeholder": "Enter your password",
@@ -104,18 +79,121 @@
     "required": "required",
     "minimum": "minimum",
     "maximum": "maximum",
-    "characters": "characters"
+    "characters": "characters",
+    "add": "Add"
   },
   "alerts": {
     "signout": "Are you sure you want to sign out of your account?"
   },
   "companies": {
-    "name": "Name",
-    "email": "Email",
-    "document": "Document",
-    "site": "Site",
-    "cep": "Zip Code",
-    "city": "City",
-    "state": "State"
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "errors": {
+        "required": "Name is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Enter e-mail",
+      "errors": {
+        "required": "E-mail is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "document": {
+      "label": "Document",
+      "placeholder": "Enter document",
+      "errors": {
+        "required": "Document is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "site": {
+      "label": "Site",
+      "placeholder": "Enter site",
+      "errors": {
+        "required": "Site is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "cep": {
+      "label": "Zip code",
+      "placeholder": "Enter zip code",
+      "errors": {
+        "required": "Zip code is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "Enter address",
+      "errors": {
+        "required": "Address is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "number": {
+      "label": "Number",
+      "placeholder": "Enter number",
+      "errors": {
+        "required": "Number is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters",
+        "type": "Must be a number"
+      }
+    },
+    "neighborhood": {
+      "label": "Neighborhood",
+      "placeholder": "Enter neighborhood",
+      "errors": {
+        "required": "Neighborhood is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "Enter a city",
+      "errors": {
+        "required": "City is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "state": {
+      "label": "State",
+      "placeholder": "Enter state",
+      "errors": {
+        "required": "State is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "telephone": {
+      "label": "Telephone",
+      "placeholder": "Enter telephone",
+      "errors": {
+        "required": "Telephone is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "note": {
+      "label": "Note",
+      "placeholder": "Enter a note",
+      "errors": {
+        "required": "Note is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    }
   }
 }

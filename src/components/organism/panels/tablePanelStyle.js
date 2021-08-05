@@ -41,5 +41,11 @@ export const useToolbarStyles = makeStyles((theme) => ({
         },
   title: {
     flex: '1 1 100%'
+  },
+  toobarLeftButtons: {
+    display: 'flex'
+  },
+  addButton: {
+    marginLeft: theme.spacing(2)
   }
 }))

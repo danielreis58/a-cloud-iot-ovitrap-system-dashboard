@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -17,7 +17,8 @@ import {
   IconButton,
   Tooltip,
   FormControlLabel,
-  Switch
+  Switch,
+  Button
 } from '@material-ui/core'
 
 import {
@@ -148,11 +149,26 @@ const EnhancedTableToolbar = (props) => {
           </IconButton>
         </Tooltip>
       ) : (
-        <Tooltip title={t('commons.filter')}>
-          <IconButton aria-label="filter list">
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+        <div className={classes.toobarLeftButtons}>
+          <Tooltip title={t('commons.filter')}>
+            <IconButton aria-label="filter list">
+              <FilterListIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title={t('commons.add')}>
+            <Button
+              className={classes.addButton}
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={() =>
+                isFunction(props.handleEdit) && props.handleEdit(null)
+              }
+            >
+              {t('commons.add')}
+            </Button>
+          </Tooltip>
+        </div>
       )}
     </Toolbar>
   )
@@ -227,6 +243,7 @@ const TablePanel = (props) => {
           numSelected={selected.length}
           title={title}
           handleDelete={props.openDelete}
+          handleEdit={props.openEdit}
         />
         <TableContainer>
           <Table

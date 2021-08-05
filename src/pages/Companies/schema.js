@@ -7,10 +7,10 @@ const schema = yup.object().shape({
   site: yup.string().max(255, 'maximum'),
   cep: yup.string().max(255, 'maximum'),
   address: yup.string().max(255, 'maximum'),
-  number: yup.number(),
+  number: yup.number().typeError('type').nullable(true),
   neighborhood: yup.string().max(255, 'maximum'),
   city: yup.string().max(255, 'maximum'),
-  state: yup.string().min(2, 'minimum').max(255, 'maximum'),
+  state: yup.string().max(255, 'maximum'),
   telephone: yup.string().max(255, 'maximum'),
   note: yup.string().max(255, 'maximum')
 })

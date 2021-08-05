@@ -53,6 +53,39 @@
     "wait": "Aguarde"
   },
   "fields": {
+    "password": {
+      "label": "Senha",
+      "placeholder": "Insira sua senha",
+      "errors": {
+        "password is a required field": "Senha é obrigatório"
+      }
+    },
+    "rememberMe": {
+      "label": "Lembrar-me"
+    }
+  },
+  "commons": {
+    "question": "Pergunta",
+    "selected": "selecionados",
+    "notFound": "Nenhum registro encontrado",
+    "rowsPerPage": "Linhas por página",
+    "densePadding": "Espaçamento denso",
+    "action": "Ação",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "filter": "Filtrar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "required": "obrigatório",
+    "minimum": "mínimo",
+    "maximum": "máximo",
+    "characters": "caracteres",
+    "add": "Adicionar"
+  },
+  "alerts": {
+    "signout": "Você tem certeza que deseja sair da sua conta?"
+  },
+  "companies": {
     "name": {
       "label": "Nome",
       "placeholder": "Escreva o nome",
@@ -113,7 +146,8 @@
       "errors": {
         "required": "Número é obrigatório",
         "minimum": "Mínimo 3 caracteres",
-        "maximum": "Máximo 255 caracteres"
+        "maximum": "Máximo 255 caracteres",
+        "type": "Deve ser um número"
       }
     },
     "neighborhood": {
@@ -160,41 +194,6 @@
         "minimum": "Mínimo 3 caracteres",
         "maximum": "Máximo 255 caracteres"
       }
-    },
-    "password": {
-      "label": "Senha",
-      "placeholder": "Insira sua senha",
-      "errors": {
-        "password is a required field": "Senha é obrigatório"
-      }
-    },
-    "rememberMe": {
-      "label": "Lembrar-me"
     }
-  },
-  "commons": {
-    "question": "Pergunta",
-    "selected": "selecionados",
-    "notFound": "Nenhum registro encontrado",
-    "rowsPerPage": "Linhas por página",
-    "densePadding": "Espaçamento denso",
-    "action": "Ação",
-    "edit": "Editar",
-    "delete": "Excluir",
-    "filter": "Filtrar",
-    "cancel": "Cancelar",
-    "confirm": "Confirmar"
-  },
-  "alerts": {
-    "signout": "Você tem certeza que deseja sair da sua conta?"
-  },
-  "companies": {
-    "name": "Nome",
-    "email": "Email",
-    "document": "Documento",
-    "site": "Site",
-    "cep": "Cep",
-    "city": "Cidade",
-    "state": "Estado"
   }
 }

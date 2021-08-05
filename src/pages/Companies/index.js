@@ -33,38 +33,53 @@ const Companies = () => {
   const columns = [
     {
       id: 'name',
-      label: t('companies.name')
+      label: t('companies.name.label')
     },
     {
       id: 'email',
-      label: t('companies.email')
+      label: t('companies.email.label')
     },
     {
       id: 'document',
-      label: t('companies.document')
+      label: t('companies.document.label')
     },
     {
       id: 'site',
-      label: t('companies.site')
+      label: t('companies.site.label')
     },
     {
       id: 'cep',
-      label: t('companies.cep')
+      label: t('companies.cep.label')
     },
     {
       id: 'city',
-      label: t('companies.city')
+      label: t('companies.city.label')
     },
     {
       id: 'state',
-      label: t('companies.state')
+      label: t('companies.state.label')
     },
     {
       id: 'action',
       label: t('commons.action')
     }
   ]
-  const [data, setData] = useState({})
+  const initialState = {
+    id: null,
+    name: '',
+    email: '',
+    document: '',
+    site: '',
+    cep: '',
+    address: '',
+    number: null,
+    neighborhood: '',
+    city: '',
+    state: '',
+    note: '',
+    telephone: ''
+  }
+  const [data, setData] = useState(initialState)
 
   const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
@@ -73,14 +88,22 @@ const Companies = () => {
     setIsOpenEdit((prev) => !prev)
   }
 
-  const handleEdit = (e) => {
+  const handleEditCreate = (e) => {
     toggleEdit()
-    console.log('EDIT', e)
+    if (e?.id) {
+      console.log('EDIT', e)
+    } else {
+      console.log('CREATE', e)
+    }
   }
 
   const openEdit = (e) => {
     toggleEdit()
-    setData(e)
+    if (e) {
+      setData(e)
+    } else {
+      setData(initialState)
+    }
   }
 
   const toggleDelete = () => {
@@ -109,17 +132,17 @@ const Companies = () => {
       {isOpenEdit ? (
         <div className={classes.root}>
           <Paper className={classes.paper}>
-            <form onSubmit={handleSubmit(handleEdit)}>
+            <form onSubmit={handleSubmit(handleEditCreate)}>
               <Grid container spacing={2}>
                 <Grid container item xs={12} sm={6}>
                   <div className={classes.field}>
                     <TextField
                       {...register('name')}
-                      label={t('fields.name.label')}
-                      placeholder={t('fields.name.placeholder')}
+                      label={t('companies.name.label')}
+                      placeholder={t('companies.name.placeholder')}
                       helperText={
                         !!errors?.name?.message &&
-                        t(`fields.name.errors.${errors?.name?.message}`)
+                        t(`companies.name.errors.${errors?.name?.message}`)
                       }
                       error={!!errors?.name?.message}
                       defaultValue={data.name}
@@ -138,11 +161,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('email')}
-                      label={t('fields.email.label')}
-                      placeholder={t('fields.email.placeholder')}
+                      label={t('companies.email.label')}
+                      placeholder={t('companies.email.placeholder')}
                       helperText={
                         !!errors?.email?.message &&
-                        t(`fields.email.errors.${errors?.email?.message}`)
+                        t(`companies.email.errors.${errors?.email?.message}`)
                       }
                       error={!!errors?.email?.message}
                       defaultValue={data.email}
@@ -161,11 +184,13 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('document')}
-                      label={t('fields.document.label')}
-                      placeholder={t('fields.document.placeholder')}
+                      label={t('companies.document.label')}
+                      placeholder={t('companies.document.placeholder')}
                       helperText={
                         !!errors?.document?.message &&
-                        t(`fields.document.errors.${errors?.document?.message}`)
+                        t(
+                          `companies.document.errors.${errors?.document?.message}`
+                        )
                       }
                       error={!!errors?.document?.message}
                       defaultValue={data.document}
@@ -184,11 +209,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('site')}
-                      label={t('fields.site.label')}
-                      placeholder={t('fields.site.placeholder')}
+                      label={t('companies.site.label')}
+                      placeholder={t('companies.site.placeholder')}
                       helperText={
                         !!errors?.site?.message &&
-                        t(`fields.site.errors.${errors?.site?.message}`)
+                        t(`companies.site.errors.${errors?.site?.message}`)
                       }
                       error={!!errors?.site?.message}
                       defaultValue={data.site}
@@ -207,11 +232,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('cep')}
-                      label={t('fields.cep.label')}
-                      placeholder={t('fields.cep.placeholder')}
+                      label={t('companies.cep.label')}
+                      placeholder={t('companies.cep.placeholder')}
                       helperText={
                         !!errors?.cep?.message &&
-                        t(`fields.cep.errors.${errors?.cep?.message}`)
+                        t(`companies.cep.errors.${errors?.cep?.message}`)
                       }
                       error={!!errors?.cep?.message}
                       defaultValue={data.cep}
@@ -230,11 +255,13 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('address')}
-                      label={t('fields.address.label')}
-                      placeholder={t('fields.address.placeholder')}
+                      label={t('companies.address.label')}
+                      placeholder={t('companies.address.placeholder')}
                       helperText={
                         !!errors?.address?.message &&
-                        t(`fields.address.errors.${errors?.address?.message}`)
+                        t(
+                          `companies.address.errors.${errors?.address?.message}`
+                        )
                       }
                       error={!!errors?.address?.message}
                       defaultValue={data.address}
@@ -253,11 +280,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('number')}
-                      label={t('fields.number.label')}
-                      placeholder={t('fields.number.placeholder')}
+                      label={t('companies.number.label')}
+                      placeholder={t('companies.number.placeholder')}
                       helperText={
                         !!errors?.number?.message &&
-                        t(`fields.number.errors.${errors?.number?.message}`)
+                        t(`companies.number.errors.${errors?.number?.message}`)
                       }
                       error={!!errors?.number?.message}
                       defaultValue={data.number}
@@ -276,12 +303,12 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('neighborhood')}
-                      label={t('fields.neighborhood.label')}
-                      placeholder={t('fields.neighborhood.placeholder')}
+                      label={t('companies.neighborhood.label')}
+                      placeholder={t('companies.neighborhood.placeholder')}
                       helperText={
                         !!errors?.neighborhood?.message &&
                         t(
-                          `fields.neighborhood.errors.${errors?.neighborhood?.message}`
+                          `companies.neighborhood.errors.${errors?.neighborhood?.message}`
                         )
                       }
                       error={!!errors?.neighborhood?.message}
@@ -301,11 +328,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('city')}
-                      label={t('fields.city.label')}
-                      placeholder={t('fields.city.placeholder')}
+                      label={t('companies.city.label')}
+                      placeholder={t('companies.city.placeholder')}
                       helperText={
                         !!errors?.city?.message &&
-                        t(`fields.city.errors.${errors?.city?.message}`)
+                        t(`companies.city.errors.${errors?.city?.message}`)
                       }
                       error={!!errors?.city?.message}
                       defaultValue={data.city}
@@ -324,11 +351,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('state')}
-                      label={t('fields.state.label')}
-                      placeholder={t('fields.state.placeholder')}
+                      label={t('companies.state.label')}
+                      placeholder={t('companies.state.placeholder')}
                       helperText={
                         !!errors?.state?.message &&
-                        t(`fields.state.errors.${errors?.state?.message}`)
+                        t(`companies.state.errors.${errors?.state?.message}`)
                       }
                       error={!!errors?.state?.message}
                       defaultValue={data.state}
@@ -347,11 +374,11 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('note')}
-                      label={t('fields.note.label')}
-                      placeholder={t('fields.note.placeholder')}
+                      label={t('companies.note.label')}
+                      placeholder={t('companies.note.placeholder')}
                       helperText={
                         !!errors?.note?.message &&
-                        t(`fields.note.errors.${errors?.note?.message}`)
+                        t(`companies.note.errors.${errors?.note?.message}`)
                       }
                       error={!!errors?.note?.message}
                       defaultValue={data.note}
@@ -371,12 +398,12 @@ const Companies = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('telephone')}
-                      label={t('fields.telephone.label')}
-                      placeholder={t('fields.telephone.placeholder')}
+                      label={t('companies.telephone.label')}
+                      placeholder={t('companies.telephone.placeholder')}
                       helperText={
                         !!errors?.telephone?.message &&
                         t(
-                          `fields.telephone.errors.${errors?.telephone?.message}`
+                          `companies.telephone.errors.${errors?.telephone?.message}`
                         )
                       }
                       error={!!errors?.telephone?.message}
