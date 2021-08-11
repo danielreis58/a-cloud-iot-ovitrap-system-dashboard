@@ -1,15 +1,11 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
-
-// Dashboards Redux States
-import axios from 'axios'
 import { GET_DASHBOARDS } from './actionTypes'
 import { setDashboards, apiErrorDashboard } from './actions'
-
-// Include Both Helper File with needed methods
+import api from '../../services/api'
 
 function* getDashboards({ payload: { target } }) {
   try {
-    const response = yield call(axios.get, `/${target}`)
+    const response = yield call(api.get, `/${target}`)
     if (
       (response.status >= 200 || response.status <= 299) &&
       response?.data?.data

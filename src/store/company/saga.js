@@ -1,16 +1,12 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
-
-// Companies Redux States
-import axios from 'axios'
 import { GET_DATA, UPDATE_DATA } from './actionTypes'
 import { setData } from './actions'
 import { getErrorMessage } from '../../utils/sagaUtils'
-
-// Include Both Helper File with needed methods
+import api from '../../services/api'
 
 function* getCompanies({ payload: { target } }) {
   try {
-    const response = yield call(axios.get, `/company`)
+    const response = yield call(api.get, `/company`)
     if (
       (response.status >= 200 || response.status <= 299) &&
       response?.data?.data?.data
@@ -28,7 +24,7 @@ function* setCompany({ payload: { target, data } }) {
     const urlParams = {}
     if (data?.id) urlParams.id = data.id
 
-    const response = yield call(axios.patch, `/company/:id`, data, {
+    const response = yield call(api.patch, `/company/:id`, data, {
       urlParams
     })
     if (

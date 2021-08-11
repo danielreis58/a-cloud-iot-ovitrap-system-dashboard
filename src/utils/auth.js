@@ -1,10 +1,11 @@
 import axios from 'axios'
+import api from '../services/api'
 
 export const setDefaultAxiosHeader = (authorization) => {
   if (authorization) {
-    axios.defaults.headers.common.Authorization = authorization
+    api.defaults.headers.common.Authorization = authorization
   } else {
-    delete axios.defaults.headers.common.Authorization
+    delete api.defaults.headers.common.Authorization
   }
 }
 

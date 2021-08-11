@@ -1,16 +1,15 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
-
-import axios from 'axios'
 import { LOGIN_USER, LOGOUT_USER } from './actionTypes'
 import { loginSuccess, apiErrorLogin, logoutUserSuccess } from './actions'
 
 import { getErrorMessage } from '../../../utils/sagaUtils'
 import { integerBetween } from '../../../utils/customMethods'
 import { setDefaultAxiosHeader, setLocalStorage } from '../../../utils/auth'
+import api from '../../../services/api'
 
 function* loginUser({ payload: user }) {
   try {
-    const response = yield call(axios.post, '/login', {
+    const response = yield call(api.post, '/login', {
       email: user.email,
       password: user.password
     })
@@ -29,7 +28,7 @@ function* loginUser({ payload: user }) {
 
 function* logoutUser() {
   try {
-    const response = yield call(axios.post, '/logout')
+    const response = yield call(api.post, '/logout')
     const status = response?.status
     const data = response?.data?.data
     if (integerBetween(status, 200, 299) && data) {
