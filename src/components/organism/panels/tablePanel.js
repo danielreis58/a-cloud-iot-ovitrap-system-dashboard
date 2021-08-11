@@ -312,7 +312,11 @@ const TablePanel = (props) => {
                 })}
               {rows.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={20}> {t('commons.notFound')}</TableCell>
+                  <TableCell colSpan={20}>
+                    <div className={classes.notFound}>
+                      {t('commons.notFound')}
+                    </div>
+                  </TableCell>
                 </TableRow>
               )}
             </TableBody>

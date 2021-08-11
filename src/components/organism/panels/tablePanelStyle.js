@@ -21,6 +21,11 @@ export const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 20,
     width: 1
+  },
+  notFound: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center'
   }
 }))
 

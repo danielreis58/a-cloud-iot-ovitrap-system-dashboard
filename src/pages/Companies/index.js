@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import useStyles from './indexStyle'
 
-import { getData } from '../../store/company/actions'
+import { getData, updateData } from '../../store/company/actions'
 
 import TextField from '../../components/atoms/inputs/textfield'
 import FooterButtons from '../../components/molecules/footer/buttons'
@@ -15,6 +15,7 @@ import Delete from '../../components/organism/dialogs/delete'
 import TablePanel from '../../components/organism/panels/tablePanel'
 
 import schema from './schema'
+import { objToArray } from '../../utils/customMethods'
 
 const Companies = () => {
   const classes = useStyles()
@@ -29,7 +30,17 @@ const Companies = () => {
   } = useForm({
     resolver: yupResolver(schema)
   })
-  const { companies: rows = [] } = useSelector((state) => state.Companies)
+
+  const [isOpenEdit, setIsOpenEdit] = useState(false)
+  const [isOpenDelete, setIsOpenDelete] = useState(false)
+
+  const toggleEdit = () => setIsOpenEdit((prev) => !prev)
+  const toggleDelete = () => setIsOpenDelete((prev) => !prev)
+
+  /* ------------------------------------- VARIABLES -------------------------------------  */
+  const { companies } = useSelector((state) => state.Companies)
+  const rows = objToArray(companies)
+
   const columns = [
     {
       id: 'name',
@@ -64,6 +75,7 @@ const Companies = () => {
       label: t('commons.action')
     }
   ]
+
   const initialState = {
     id: null,
     name: '',
@@ -79,53 +91,48 @@ const Companies = () => {
     note: '',
     telephone: ''
   }
-  const [data, setData] = useState(initialState)
-
-  const [isOpenEdit, setIsOpenEdit] = useState(false)
-  const [isOpenDelete, setIsOpenDelete] = useState(false)
-
-  const toggleEdit = () => {
-    setIsOpenEdit((prev) => !prev)
-  }
+  const [company, setCompany] = useState(initialState)
 
   const handleEditCreate = (e) => {
     toggleEdit()
     if (e?.id) {
+      dispatch(updateData('companies', e))
       console.log('EDIT', e)
     } else {
       console.log('CREATE', e)
     }
   }
+  const handleDelete = () => {
+    toggleDelete()
+    console.log('DELETE', company)
+  }
+
+  /* -------------------------------------------------------------------------------------  */
 
   const openEdit = (e) => {
     toggleEdit()
     if (e) {
-      setData(e)
+      setCompany(e)
     } else {
-      setData(initialState)
+      setCompany(initialState)
     }
   }
-
-  const toggleDelete = () => {
-    setIsOpenDelete((prev) => !prev)
-  }
-  const handleDelete = () => {
-    toggleDelete()
-    console.log('DELETE', data)
-  }
-
   const openDelete = (e) => {
     toggleDelete()
-    setData(e)
+    setCompany(e)
   }
+
+  /* ------------------------------------- VARIABLES -------------------------------------  */
+
+  useEffect(() => {
+    reset(company)
+  }, [company])
 
   useEffect(() => {
     dispatch(getData('companies'))
   }, [])
 
-  useEffect(() => {
-    reset(data)
-  }, [data])
+  /* -------------------------------------------------------------------------------------  */
 
   return (
     <>
@@ -133,6 +140,7 @@ const Companies = () => {
         <div className={classes.root}>
           <Paper className={classes.paper}>
             <form onSubmit={handleSubmit(handleEditCreate)}>
+              {/* ------------------------------------- VARIABLES -------------------------------------  */}
               <Grid container spacing={2}>
                 <Grid container item xs={12} sm={6}>
                   <div className={classes.field}>
@@ -145,7 +153,7 @@ const Companies = () => {
                         t(`companies.name.errors.${errors?.name?.message}`)
                       }
                       error={!!errors?.name?.message}
-                      defaultValue={data.name}
+                      defaultValue={company.name}
                       onChange={(e) =>
                         setValue('name', e.target.value, {
                           shouldValidate: true
@@ -168,7 +176,7 @@ const Companies = () => {
                         t(`companies.email.errors.${errors?.email?.message}`)
                       }
                       error={!!errors?.email?.message}
-                      defaultValue={data.email}
+                      defaultValue={company.email}
                       onChange={(e) =>
                         setValue('email', e.target.value, {
                           shouldValidate: true
@@ -193,7 +201,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.document?.message}
-                      defaultValue={data.document}
+                      defaultValue={company.document}
                       onChange={(e) =>
                         setValue('document', e.target.value, {
                           shouldValidate: true
@@ -216,7 +224,7 @@ const Companies = () => {
                         t(`companies.site.errors.${errors?.site?.message}`)
                       }
                       error={!!errors?.site?.message}
-                      defaultValue={data.site}
+                      defaultValue={company.site}
                       onChange={(e) =>
                         setValue('site', e.target.value, {
                           shouldValidate: true
@@ -239,7 +247,7 @@ const Companies = () => {
                         t(`companies.cep.errors.${errors?.cep?.message}`)
                       }
                       error={!!errors?.cep?.message}
-                      defaultValue={data.cep}
+                      defaultValue={company.cep}
                       onChange={(e) =>
                         setValue('cep', e.target.value, {
                           shouldValidate: true
@@ -264,7 +272,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.address?.message}
-                      defaultValue={data.address}
+                      defaultValue={company.address}
                       onChange={(e) =>
                         setValue('address', e.target.value, {
                           shouldValidate: true
@@ -287,7 +295,7 @@ const Companies = () => {
                         t(`companies.number.errors.${errors?.number?.message}`)
                       }
                       error={!!errors?.number?.message}
-                      defaultValue={data.number}
+                      defaultValue={company.number}
                       onChange={(e) =>
                         setValue('number', e.target.value, {
                           shouldValidate: true
@@ -312,7 +320,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.neighborhood?.message}
-                      defaultValue={data.neighborhood}
+                      defaultValue={company.neighborhood}
                       onChange={(e) =>
                         setValue('neighborhood', e.target.value, {
                           shouldValidate: true
@@ -335,7 +343,7 @@ const Companies = () => {
                         t(`companies.city.errors.${errors?.city?.message}`)
                       }
                       error={!!errors?.city?.message}
-                      defaultValue={data.city}
+                      defaultValue={company.city}
                       onChange={(e) =>
                         setValue('city', e.target.value, {
                           shouldValidate: true
@@ -358,7 +366,7 @@ const Companies = () => {
                         t(`companies.state.errors.${errors?.state?.message}`)
                       }
                       error={!!errors?.state?.message}
-                      defaultValue={data.state}
+                      defaultValue={company.state}
                       onChange={(e) =>
                         setValue('state', e.target.value, {
                           shouldValidate: true
@@ -381,7 +389,7 @@ const Companies = () => {
                         t(`companies.note.errors.${errors?.note?.message}`)
                       }
                       error={!!errors?.note?.message}
-                      defaultValue={data.note}
+                      defaultValue={company.note}
                       onChange={(e) =>
                         setValue('note', e.target.value, {
                           shouldValidate: true
@@ -407,7 +415,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.telephone?.message}
-                      defaultValue={data.telephone}
+                      defaultValue={company.telephone}
                       onChange={(e) =>
                         setValue('telephone', e.target.value, {
                           shouldValidate: true
@@ -420,6 +428,7 @@ const Companies = () => {
                   </div>
                 </Grid>
               </Grid>
+              {/* -------------------------------------------------------------------------------------  */}
               <FooterButtons handleCancel={toggleEdit} />
             </form>
           </Paper>
@@ -435,7 +444,7 @@ const Companies = () => {
       )}
       {isOpenDelete && (
         <Delete
-          data={data}
+          data={company}
           isOpen={isOpenDelete}
           handleCancel={toggleDelete}
           handleConfirm={handleDelete}

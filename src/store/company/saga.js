@@ -2,8 +2,9 @@ import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 
 // Companies Redux States
 import axios from 'axios'
-import { GET_DATA } from './actionTypes'
+import { GET_DATA, UPDATE_DATA } from './actionTypes'
 import { setData } from './actions'
+import { getErrorMessage } from '../../utils/sagaUtils'
 
 // Include Both Helper File with needed methods
 
@@ -17,36 +18,42 @@ function* getCompanies({ payload: { target } }) {
       yield put(setData(target, response.data.data.data))
     } else throw response.data
   } catch (error) {
-    let message
-    if (error.response && error.response.status) {
-      switch (error.response.status) {
-        case 401:
-          message = 'Invalid credentials'
-          break
-        case 404:
-          message = 'Sorry! the page you are looking for could not be found'
-          break
-        case 500:
-          message =
-            'Sorry! something went wrong, please contact our support team'
-          break
-        default:
-          if (error.response.data && error.response.data.message)
-            message = error.response.data.message
-          else message = error.message
-          break
-      }
-    }
+    const message = getErrorMessage(error)
     yield put(setData('error', message))
   }
 }
 
-export function* watchCompany() {
+function* setCompany({ payload: { target, data } }) {
+  try {
+    const urlParams = {}
+    if (data?.id) urlParams.id = data.id
+
+    const response = yield call(axios.patch, `/company/:id`, data, {
+      urlParams
+    })
+    if (
+      (response.status >= 200 || response.status <= 299) &&
+      response?.data?.data?.data
+    ) {
+      // TODO: IMPROVE
+      // yield put(setData(target, response.data.data.data))
+    } else throw response.data
+  } catch (error) {
+    const message = getErrorMessage(error)
+    yield put(setData('error', message))
+  }
+}
+
+export function* watchGetCompany() {
   yield takeEvery(GET_DATA, getCompanies)
 }
 
+export function* watchSetCompany() {
+  yield takeEvery(UPDATE_DATA, setCompany)
+}
+
 function* companySaga() {
-  yield all([fork(watchCompany)])
+  yield all([fork(watchGetCompany), fork(watchSetCompany)])
 }
 
 export default companySaga

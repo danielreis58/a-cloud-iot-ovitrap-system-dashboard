@@ -93,16 +93,30 @@ export const findBetween = (array, start, end, condition, isReverse) => {
 }
 
 export const arrayToObj = (array, key) => {
+  let response = {}
   if (isArray(array)) {
-    if (!key) {
-      return { ...array }
+    if (key) {
+      response = array.reduce(
+        (obj, item) => ({ ...obj, [item[key]]: item }),
+        {}
+      )
+    } else {
+      response = { ...array }
     }
-    return array.reduce((obj, cur) => {
-      obj[cur?.[key]] = cur
-      return obj
-    }, {})
   }
-  return {}
+  return response
+}
+
+export const objToArray = (obj, withKey) => {
+  let response = []
+  if (isObject(obj)) {
+    if (withKey) {
+      response = Object.entries(obj).map((e) => ({ [e[0]]: e[1] }))
+    } else {
+      response = Object.values(obj)
+    }
+  }
+  return response
 }
 
 /* ----------------------------------------

@@ -1,4 +1,5 @@
-import { RESET_DATA, GET_DATA, SET_DATA } from './actionTypes'
+import { arrayToObj } from '../../utils/customMethods'
+import { RESET_DATA, GET_DATA, SET_DATA, UPDATE_DATA } from './actionTypes'
 
 const initialState = {
   data: null,
@@ -23,11 +24,25 @@ const Companies = (state = initialState, action) => {
         error: false
       }
       break
-    case SET_DATA:
+    case SET_DATA: {
+      const object = arrayToObj(action?.payload?.data, 'id')
       state = {
         ...state,
-        [action.payload.target]: action.payload.data,
+        [action.payload.target]: object,
         loading: false
+      }
+      break
+    }
+    case UPDATE_DATA:
+      {
+        const id = action?.payload?.data?.id
+        const newData = action?.payload?.data
+        const newTarget = { ...state?.[action?.payload?.target], [id]: newData }
+        state = {
+          ...state,
+          [action.payload.target]: newTarget,
+          loading: false
+        }
       }
       break
     default:
