@@ -10,6 +10,9 @@ import {
 
 const initialState = {
   data: {},
+  page: 0,
+  rowsPerPage: 5,
+  dense: false,
   loading: false,
   success: false,
   error: false

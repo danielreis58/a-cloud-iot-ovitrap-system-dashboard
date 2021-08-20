@@ -23,7 +23,7 @@ export const deleteData = (id) => ({
   payload: { id }
 })
 
-export const setData = (action, data) => ({
+export const setData = (data, action) => ({
   type: SET_DATA,
-  payload: { action, data }
+  payload: { data, action }
 })

@@ -5,17 +5,25 @@ import { Paper, Grid } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import useStyles from './indexStyle'
-
-import { deleteData, readData, updateData } from '../../store/company/actions'
+import { isArray } from 'lodash'
+import { objToArray } from '../../utils/customMethods'
 
 import TextField from '../../components/atoms/inputs/textfield'
 import FooterButtons from '../../components/molecules/footer/buttons'
 import Delete from '../../components/organism/dialogs/delete'
 import TablePanel from '../../components/organism/panels/tablePanel'
+import useStyles from './indexStyle'
 
 import schema from './schema'
-import { objToArray } from '../../utils/customMethods'
+
+import {
+  createData,
+  readData,
+  updateData,
+  deleteData,
+  setData
+} from '../../store/company/actions'
+import Snackbar from '../../components/atoms/feedback/snackbar'
 
 const Companies = () => {
   const classes = useStyles()
@@ -38,7 +46,10 @@ const Companies = () => {
   const toggleDelete = () => setIsOpenDelete((prev) => !prev)
 
   /* ------------------------------------- VARIABLES -------------------------------------  */
-  const { data } = useSelector((state) => state.Companies)
+
+  const { data, page, rowsPerPage, dense, success, error } = useSelector(
+    (state) => state.Companies
+  )
   const rows = objToArray(data)
 
   const columns = [
@@ -91,7 +102,10 @@ const Companies = () => {
     note: '',
     telephone: ''
   }
-  const [company, setCompany] = useState(initialState)
+
+  /* -------------------------------------------------------------------------------------  */
+
+  const [select, setSelected] = useState(initialState)
 
   const handleEditCreate = (e) => {
     toggleEdit()
@@ -99,46 +113,45 @@ const Companies = () => {
       dispatch(updateData(e))
       console.log('EDIT', e)
     } else {
-      dispatch(updateData(e))
+      dispatch(createData(e))
       console.log('CREATE', e)
     }
   }
   const handleDelete = () => {
     toggleDelete()
     // TODO: IMPROVE
-    company.forEach((element) => {
+    select.forEach((element) => {
       dispatch(deleteData(element.id))
     })
-    console.log('DELETE', company)
+    console.log('DELETE', select)
+    setSelected(initialState)
   }
-
-  /* -------------------------------------------------------------------------------------  */
 
   const openEdit = (e) => {
     toggleEdit()
     if (e) {
-      setCompany(e)
+      setSelected(e)
     } else {
-      setCompany(initialState)
+      setSelected(initialState)
     }
   }
   const openDelete = (e) => {
+    console.log(e)
     toggleDelete()
-    setCompany(e)
+    setSelected(e)
   }
 
-  /* ------------------------------------- VARIABLES -------------------------------------  */
-
   useEffect(() => {
-    reset(company)
-    console.log(company)
-  }, [company])
+    reset(select)
+  }, [select])
 
   useEffect(() => {
     dispatch(readData())
   }, [])
 
-  /* -------------------------------------------------------------------------------------  */
+  const handleCloseSnackBar = () => {
+    dispatch(setData({ success: false, error: false }))
+  }
 
   return (
     <>
@@ -159,7 +172,7 @@ const Companies = () => {
                         t(`companies.name.errors.${errors?.name?.message}`)
                       }
                       error={!!errors?.name?.message}
-                      defaultValue={company.name}
+                      defaultValue={select.name}
                       onChange={(e) =>
                         setValue('name', e.target.value, {
                           shouldValidate: true
@@ -182,7 +195,7 @@ const Companies = () => {
                         t(`companies.email.errors.${errors?.email?.message}`)
                       }
                       error={!!errors?.email?.message}
-                      defaultValue={company.email}
+                      defaultValue={select.email}
                       onChange={(e) =>
                         setValue('email', e.target.value, {
                           shouldValidate: true
@@ -207,7 +220,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.document?.message}
-                      defaultValue={company.document}
+                      defaultValue={select.document}
                       onChange={(e) =>
                         setValue('document', e.target.value, {
                           shouldValidate: true
@@ -230,7 +243,7 @@ const Companies = () => {
                         t(`companies.site.errors.${errors?.site?.message}`)
                       }
                       error={!!errors?.site?.message}
-                      defaultValue={company.site}
+                      defaultValue={select.site}
                       onChange={(e) =>
                         setValue('site', e.target.value, {
                           shouldValidate: true
@@ -253,7 +266,7 @@ const Companies = () => {
                         t(`companies.cep.errors.${errors?.cep?.message}`)
                       }
                       error={!!errors?.cep?.message}
-                      defaultValue={company.cep}
+                      defaultValue={select.cep}
                       onChange={(e) =>
                         setValue('cep', e.target.value, {
                           shouldValidate: true
@@ -278,7 +291,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.address?.message}
-                      defaultValue={company.address}
+                      defaultValue={select.address}
                       onChange={(e) =>
                         setValue('address', e.target.value, {
                           shouldValidate: true
@@ -301,7 +314,7 @@ const Companies = () => {
                         t(`companies.number.errors.${errors?.number?.message}`)
                       }
                       error={!!errors?.number?.message}
-                      defaultValue={company.number}
+                      defaultValue={select.number}
                       onChange={(e) =>
                         setValue('number', e.target.value, {
                           shouldValidate: true
@@ -326,7 +339,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.neighborhood?.message}
-                      defaultValue={company.neighborhood}
+                      defaultValue={select.neighborhood}
                       onChange={(e) =>
                         setValue('neighborhood', e.target.value, {
                           shouldValidate: true
@@ -349,7 +362,7 @@ const Companies = () => {
                         t(`companies.city.errors.${errors?.city?.message}`)
                       }
                       error={!!errors?.city?.message}
-                      defaultValue={company.city}
+                      defaultValue={select.city}
                       onChange={(e) =>
                         setValue('city', e.target.value, {
                           shouldValidate: true
@@ -372,7 +385,7 @@ const Companies = () => {
                         t(`companies.state.errors.${errors?.state?.message}`)
                       }
                       error={!!errors?.state?.message}
-                      defaultValue={company.state}
+                      defaultValue={select.state}
                       onChange={(e) =>
                         setValue('state', e.target.value, {
                           shouldValidate: true
@@ -395,7 +408,7 @@ const Companies = () => {
                         t(`companies.note.errors.${errors?.note?.message}`)
                       }
                       error={!!errors?.note?.message}
-                      defaultValue={company.note}
+                      defaultValue={select.note}
                       onChange={(e) =>
                         setValue('note', e.target.value, {
                           shouldValidate: true
@@ -421,7 +434,7 @@ const Companies = () => {
                         )
                       }
                       error={!!errors?.telephone?.message}
-                      defaultValue={company.telephone}
+                      defaultValue={select.telephone}
                       onChange={(e) =>
                         setValue('telephone', e.target.value, {
                           shouldValidate: true
@@ -444,16 +457,38 @@ const Companies = () => {
           title={t('leftMenuList.companies')}
           columns={columns}
           rows={rows}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          dense={dense}
+          selected={isArray(select) ? select : []}
           openEdit={openEdit}
           openDelete={openDelete}
         />
       )}
       {isOpenDelete && (
         <Delete
-          data={company}
+          data={select}
           isOpen={isOpenDelete}
           handleCancel={toggleDelete}
           handleConfirm={handleDelete}
+        />
+      )}
+      {(success || error) && (
+        <Snackbar
+          open={success || error}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          variant="filled"
+          elevation={6}
+          severity={success ? 'success' : 'error'}
+          message={t(
+            `toast.companies.${success || error}.${
+              success ? 'success' : 'error'
+            }`
+          )}
+          onClose={handleCloseSnackBar}
         />
       )}
     </>

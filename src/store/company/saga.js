@@ -1,7 +1,6 @@
 import { takeEvery, fork, put, all, call } from 'redux-saga/effects'
 import { CREATE_DATA, READ_DATA, UPDATE_DATA, DELETE_DATA } from './actionTypes'
 import { setData } from './actions'
-import { getErrorMessage } from '../../utils/sagaUtils'
 import api from '../../services/api'
 
 function* createData({ payload: { data: newData } }) {
@@ -11,12 +10,11 @@ function* createData({ payload: { data: newData } }) {
     if ((response.status >= 200 || response.status <= 299) && data) {
       const object = { [data?.id]: newData }
       yield put(
-        setData('create', { data: object, loading: false, success: true })
+        setData({ data: object, loading: false, success: 'create' }, 'create')
       )
     } else throw response.data
   } catch (error) {
-    const message = getErrorMessage(error)
-    yield put(setData({ error: message, loading: false, success: false }))
+    yield put(setData({ error: 'create', loading: false, success: false }))
   }
 }
 
@@ -30,11 +28,10 @@ function* readData({ payload: { id } }) {
     })
     const data = response?.data?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data) {
-      yield put(setData('read', { data, loading: false, success: true }))
+      yield put(setData({ data, loading: false, success: 'read' }, 'read'))
     } else throw response.data
   } catch (error) {
-    const message = getErrorMessage(error)
-    yield put(setData({ error: message, loading: false, success: false }))
+    yield put(setData({ error: 'read', loading: false, success: false }))
   }
 }
 
@@ -50,12 +47,11 @@ function* updateData({ payload: { data: newData } }) {
     if ((response.status >= 200 || response.status <= 299) && data?.id) {
       const object = { [data?.id]: newData }
       yield put(
-        setData('update', { data: object, loading: false, success: true })
+        setData({ data: object, loading: false, success: 'update' }, 'update')
       )
     } else throw response.data
   } catch (error) {
-    const message = getErrorMessage(error)
-    yield put(setData({ error: message, loading: false, success: false }))
+    yield put(setData({ error: 'update', loading: false, success: false }))
   }
 }
 
@@ -69,11 +65,10 @@ function* deleteData({ payload: { id } }) {
     })
     const data = response?.data?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data?.id) {
-      yield put(setData('delete', { data, loading: false, success: true }))
+      yield put(setData({ data, loading: false, success: 'delete' }, 'delete'))
     } else throw response.data
   } catch (error) {
-    const message = getErrorMessage(error)
-    yield put(setData({ error: message, loading: false, success: false }))
+    yield put(setData({ error: 'delete', loading: false, success: false }))
   }
 }
 export function* watchCreateData() {

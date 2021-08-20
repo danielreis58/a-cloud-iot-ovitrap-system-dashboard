@@ -1,12 +1,12 @@
 import React, { memo } from 'react'
 import { Slider as MaterialSlider } from '@material-ui/core'
-import { withStyles, useTheme } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/core/styles'
 
 const Slider = (props) => {
   const CustomSlider = withStyles((theme) => ({
     root: {
       color: theme.palette.primary.main,
-      height: 3,
+      height: 3
     },
     thumb: {
       height: 18,
@@ -16,24 +16,22 @@ const Slider = (props) => {
       // marginLeft: -12,
       boxShadow: theme.shadows[2],
       '&:focus, &:hover, &$active': {
-        boxShadow: 'inherit',
-      },
+        boxShadow: 'inherit'
+      }
     },
     active: {},
     valueLabel: {
-      left: 'calc(-50% + 4px)',
+      left: 'calc(-50% + 4px)'
     },
     track: {
       height: 3,
-      borderRadius: 3,
+      borderRadius: 3
     },
     rail: {
       height: 3,
-      borderRadius: 3,
-    },
+      borderRadius: 3
+    }
   }))(MaterialSlider)
-
-  const theme = useTheme()
 
   return (
     <>

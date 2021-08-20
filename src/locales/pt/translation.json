@@ -85,6 +85,26 @@
   "alerts": {
     "signout": "Você tem certeza que deseja sair da sua conta?"
   },
+  "toast": {
+    "companies": {
+      "create": {
+        "success": "Empresa criada com sucesso",
+        "error": "Erro ao criar empresa"
+      },
+      "read": {
+        "success": "Empresa(s) encontrada(s) com sucesso",
+        "error": "Erro ao encontrar empresa"
+      },
+      "update": {
+        "success": "Empresa atualizada com sucesso",
+        "error": "Erro ao atualizar empresa"
+      },
+      "delete": {
+        "success": "Empresa(s) excluída(s) com sucesso",
+        "error": "Erro ao excluir empresa(s)"
+      }
+    }
+  },
   "companies": {
     "name": {
       "label": "Nome",

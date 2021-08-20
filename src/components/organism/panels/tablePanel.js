@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 
 import {
@@ -29,6 +30,7 @@ import {
 
 import { useStyles, useToolbarStyles } from './tablePanelStyle'
 import { isFunction } from '../../../utils/customMethods'
+import { setData } from '../../../store/company/actions'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -175,15 +177,20 @@ const EnhancedTableToolbar = (props) => {
 }
 
 const TablePanel = (props) => {
-  const { title = '', rows = [], columns = [] } = props
+  const dispatch = useDispatch()
+  const {
+    title = '',
+    rows = [],
+    columns = [],
+    page,
+    rowsPerPage,
+    dense
+  } = props
   const classes = useStyles()
   const { t } = useTranslation()
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('calories')
   const [selected, setSelected] = useState([])
-  const [page, setPage] = useState(0)
-  const [dense, setDense] = useState(false)
-  const [rowsPerPage, setRowsPerPage] = useState(5)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
@@ -221,19 +228,24 @@ const TablePanel = (props) => {
   }
 
   const handleChangePage = (event, newPage) => {
-    setPage(newPage)
+    dispatch(setData({ page: newPage }))
   }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
+    dispatch(
+      setData({ page: 0, rowsPerPage: parseInt(event.target.value, 10) })
+    )
   }
 
   const handleChangeDense = (event) => {
-    setDense(event.target.checked)
+    dispatch(setData({ dense: event.target.checked }))
   }
 
   const isSelected = (id) => selected.findIndex((e) => e.id === id) !== -1
+
+  useEffect(() => {
+    setSelected(props.selected)
+  }, [props.selected])
 
   return (
     <div className={classes.root}>
@@ -324,7 +336,7 @@ const TablePanel = (props) => {
         </TableContainer>
         <TablePagination
           labelRowsPerPage={t('commons.rowsPerPage')}
-          rowsPerPageOptions={[1, 5, 10, 25]}
+          rowsPerPageOptions={[1, 5, 10, 25, 50, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
