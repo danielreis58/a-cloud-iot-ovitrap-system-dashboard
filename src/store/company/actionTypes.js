@@ -1,6 +1,7 @@
-export const RESET_DATA = 'RESET_DATA'
-
-export const GET_DATA = 'GET_DATA'
-export const SET_DATA = 'SET_DATA'
-
+export const CREATE_DATA = 'CREATE_DATA'
+export const READ_DATA = 'READ_DATA'
 export const UPDATE_DATA = 'UPDATE_DATA'
+export const DELETE_DATA = 'DELETE_DATA'
+
+export const SET_DATA = 'SET_DATA'
+export const RESET_DATA = 'RESET_DATA'

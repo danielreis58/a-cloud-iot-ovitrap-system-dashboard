@@ -1,8 +1,15 @@
+import { isArray } from 'lodash'
 import { arrayToObj } from '../../utils/customMethods'
-import { RESET_DATA, GET_DATA, SET_DATA, UPDATE_DATA } from './actionTypes'
+import {
+  CREATE_DATA,
+  READ_DATA,
+  UPDATE_DATA,
+  DELETE_DATA,
+  SET_DATA
+} from './actionTypes'
 
 const initialState = {
-  data: null,
+  data: {},
   loading: false,
   success: false,
   error: false
@@ -10,13 +17,10 @@ const initialState = {
 
 const Companies = (state = initialState, action) => {
   switch (action.type) {
-    case RESET_DATA:
-      state = {
-        ...state,
-        [action.payload.target]: initialState[action.payload.target]
-      }
-      break
-    case GET_DATA:
+    case CREATE_DATA:
+    case READ_DATA:
+    case UPDATE_DATA:
+    case DELETE_DATA:
       state = {
         ...state,
         loading: true,
@@ -25,26 +29,33 @@ const Companies = (state = initialState, action) => {
       }
       break
     case SET_DATA: {
-      const object = arrayToObj(action?.payload?.data, 'id')
-      state = {
-        ...state,
-        [action.payload.target]: object,
-        loading: false
+      switch (action.payload.action) {
+        case 'create':
+        case 'update': {
+          const newData = { ...state.data, ...action.payload.data.data }
+          state = { ...state, ...action.payload.data, data: newData }
+          break
+        }
+        case 'read': {
+          const { data } = action.payload.data
+          const newData = isArray(data)
+            ? arrayToObj(data, 'id')
+            : { [data.id]: data }
+          state = { ...state, ...action.payload.data, data: newData }
+          break
+        }
+        case 'delete': {
+          const { [action.payload.data.data.id]: id, ...newData } = state.data
+          state = { ...state, ...action.payload.data, data: newData }
+          break
+        }
+        default:
+          state = { ...state, ...action.payload.data }
+          break
       }
+
       break
     }
-    case UPDATE_DATA:
-      {
-        const id = action?.payload?.data?.id
-        const newData = action?.payload?.data
-        const newTarget = { ...state?.[action?.payload?.target], [id]: newData }
-        state = {
-          ...state,
-          [action.payload.target]: newTarget,
-          loading: false
-        }
-      }
-      break
     default:
       break
   }

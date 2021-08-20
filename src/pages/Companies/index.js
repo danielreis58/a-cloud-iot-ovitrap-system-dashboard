@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import useStyles from './indexStyle'
 
-import { getData, updateData } from '../../store/company/actions'
+import { deleteData, readData, updateData } from '../../store/company/actions'
 
 import TextField from '../../components/atoms/inputs/textfield'
 import FooterButtons from '../../components/molecules/footer/buttons'
@@ -38,8 +38,8 @@ const Companies = () => {
   const toggleDelete = () => setIsOpenDelete((prev) => !prev)
 
   /* ------------------------------------- VARIABLES -------------------------------------  */
-  const { companies } = useSelector((state) => state.Companies)
-  const rows = objToArray(companies)
+  const { data } = useSelector((state) => state.Companies)
+  const rows = objToArray(data)
 
   const columns = [
     {
@@ -96,14 +96,19 @@ const Companies = () => {
   const handleEditCreate = (e) => {
     toggleEdit()
     if (e?.id) {
-      dispatch(updateData('companies', e))
+      dispatch(updateData(e))
       console.log('EDIT', e)
     } else {
+      dispatch(updateData(e))
       console.log('CREATE', e)
     }
   }
   const handleDelete = () => {
     toggleDelete()
+    // TODO: IMPROVE
+    company.forEach((element) => {
+      dispatch(deleteData(element.id))
+    })
     console.log('DELETE', company)
   }
 
@@ -126,10 +131,11 @@ const Companies = () => {
 
   useEffect(() => {
     reset(company)
+    console.log(company)
   }, [company])
 
   useEffect(() => {
-    dispatch(getData('companies'))
+    dispatch(readData())
   }, [])
 
   /* -------------------------------------------------------------------------------------  */

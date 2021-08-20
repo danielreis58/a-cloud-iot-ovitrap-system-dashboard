@@ -22,6 +22,10 @@ api.interceptors.request.use((config) => {
     )
   })
 
+  // remove not founded params
+  const patern = new RegExp('/:.+?(?=/|$)', 'igm')
+  currentUrl.pathname = currentUrl.pathname.replace(patern, '')
+
   const authPart =
     currentUrl.username && currentUrl.password
       ? `${currentUrl.username}:${currentUrl.password}`

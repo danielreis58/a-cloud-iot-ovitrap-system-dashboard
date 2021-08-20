@@ -1,21 +1,29 @@
-import { RESET_DATA, GET_DATA, SET_DATA, UPDATE_DATA } from './actionTypes'
+import {
+  CREATE_DATA,
+  READ_DATA,
+  UPDATE_DATA,
+  DELETE_DATA,
+  SET_DATA
+} from './actionTypes'
 
-export const resetData = (target) => ({
-  type: RESET_DATA,
-  payload: { target }
+export const createData = () => ({
+  type: CREATE_DATA,
+  payload: {}
 })
-
-export const getData = (target) => ({
-  type: GET_DATA,
-  payload: { target }
+export const readData = (id) => ({
+  type: READ_DATA,
+  payload: { id }
 })
-
-export const setData = (target, data) => ({
-  type: SET_DATA,
-  payload: { target, data }
-})
-
-export const updateData = (target, data) => ({
+export const updateData = (data) => ({
   type: UPDATE_DATA,
-  payload: { target, data }
+  payload: { data }
+})
+export const deleteData = (id) => ({
+  type: DELETE_DATA,
+  payload: { id }
+})
+
+export const setData = (action, data) => ({
+  type: SET_DATA,
+  payload: { action, data }
 })
