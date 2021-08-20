@@ -4,11 +4,12 @@ import { setData } from './actions'
 import api from '../../services/api'
 
 function* createData({ payload: { data: newData } }) {
+  delete newData.id
   try {
-    const response = yield call(api.post, `/company`)
+    const response = yield call(api.post, `/company`, newData)
     const data = response?.data?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data) {
-      const object = { [data?.id]: newData }
+      const object = { [data?.id]: { id: [data?.id], ...newData } }
       yield put(
         setData({ data: object, loading: false, success: 'create' }, 'create')
       )

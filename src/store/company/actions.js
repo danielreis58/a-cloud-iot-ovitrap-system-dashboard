@@ -6,9 +6,9 @@ import {
   SET_DATA
 } from './actionTypes'
 
-export const createData = () => ({
+export const createData = (data) => ({
   type: CREATE_DATA,
-  payload: {}
+  payload: { data }
 })
 export const readData = (id) => ({
   type: READ_DATA,
