@@ -56,17 +56,19 @@ function* updateData({ payload: { data: newData } }) {
   }
 }
 
-function* deleteData({ payload: { id } }) {
+function* deleteData({ payload: { ids } }) {
   try {
     const urlParams = {}
-    if (id) urlParams.id = id
+    if (ids) urlParams.id = ids.join()
 
     const response = yield call(api.delete, `/company/:id`, {
       urlParams
     })
     const data = response?.data?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data?.id) {
-      yield put(setData({ data, loading: false, success: 'delete' }, 'delete'))
+      yield put(
+        setData({ data: ids, loading: false, success: 'delete' }, 'delete')
+      )
     } else throw response.data
   } catch (error) {
     yield put(setData({ error: 'delete', loading: false, success: false }))

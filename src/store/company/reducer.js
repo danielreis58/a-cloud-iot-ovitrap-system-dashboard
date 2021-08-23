@@ -1,4 +1,4 @@
-import { isArray } from 'lodash'
+import { isArray, omit } from 'lodash'
 import { arrayToObj } from '../../utils/customMethods'
 import {
   CREATE_DATA,
@@ -48,7 +48,7 @@ const Companies = (state = initialState, action) => {
           break
         }
         case 'delete': {
-          const { [action.payload.data.data.id]: id, ...newData } = state.data
+          const newData = omit(state.data, action.payload.data.data)
           state = { ...state, ...action.payload.data, data: newData }
           break
         }

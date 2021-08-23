@@ -193,8 +193,9 @@ const Login = ({ t }) => {
         onClose={() => {
           setSnackbar(false)
         }}
+        severity="error"
         autoHideDuration={3000}
-        message={t(`toasts.login.${snackbarMessage}`)}
+        message={t(`toast.login.error`)}
       />
     </div>
   )

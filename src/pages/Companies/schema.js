@@ -2,7 +2,7 @@ import * as yup from 'yup'
 
 const schema = yup.object().shape({
   name: yup.string().max(255, 'maximum').required('required'),
-  email: yup.string().max(255, 'maximum').required('required'),
+  email: yup.string().email('email').required('required'),
   document: yup.string().max(255, 'maximum').required('required'),
   site: yup.string().max(255, 'maximum'),
   cep: yup.string().max(255, 'maximum'),

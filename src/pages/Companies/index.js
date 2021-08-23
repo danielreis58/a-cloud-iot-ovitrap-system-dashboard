@@ -111,19 +111,14 @@ const Companies = () => {
     toggleEdit()
     if (e?.id) {
       dispatch(updateData(e))
-      console.log('EDIT', e)
     } else {
       dispatch(createData(e))
-      console.log('CREATE', e)
     }
   }
   const handleDelete = () => {
     toggleDelete()
-    // TODO: IMPROVE
-    select.forEach((element) => {
-      dispatch(deleteData(element.id))
-    })
-    console.log('DELETE', select)
+    const ids = select.map((e) => e.id)
+    dispatch(deleteData(ids))
     setSelected(initialState)
   }
 
