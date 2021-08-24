@@ -3,10 +3,12 @@ import { CREATE_DATA, READ_DATA, UPDATE_DATA, DELETE_DATA } from './actionTypes'
 import { setData } from './actions'
 import api from '../../services/api'
 
+const endPoint = 'company'
+
 function* createData({ payload: { data: newData } }) {
   delete newData.id
   try {
-    const response = yield call(api.post, `/company`, newData)
+    const response = yield call(api.post, `/${endPoint}`, newData)
     const data = response?.data?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data) {
       const object = { [data?.id]: { id: [data?.id], ...newData } }
@@ -24,7 +26,7 @@ function* readData({ payload: { id } }) {
     const urlParams = {}
     if (id) urlParams.id = id
 
-    const response = yield call(api.get, `/company/:id`, {
+    const response = yield call(api.get, `/${endPoint}/:id`, {
       urlParams
     })
     const data = response?.data?.data?.data
@@ -41,7 +43,7 @@ function* updateData({ payload: { data: newData } }) {
     const urlParams = {}
     if (newData?.id) urlParams.id = newData.id
 
-    const response = yield call(api.patch, `/company/:id`, newData, {
+    const response = yield call(api.patch, `/${endPoint}/:id`, newData, {
       urlParams
     })
     const data = response?.data?.data?.data
@@ -61,7 +63,7 @@ function* deleteData({ payload: { ids } }) {
     const urlParams = {}
     if (ids) urlParams.id = ids.join()
 
-    const response = yield call(api.delete, `/company/:id`, {
+    const response = yield call(api.delete, `/${endPoint}/:id`, {
       urlParams
     })
     const data = response?.data?.data?.data
@@ -90,7 +92,7 @@ export function* watchDeleteData() {
   yield takeEvery(DELETE_DATA, deleteData)
 }
 
-function* companySaga() {
+function* dataSaga() {
   yield all([
     fork(watchCreateData),
     fork(watchReadData),
@@ -99,4 +101,4 @@ function* companySaga() {
   ])
 }
 
-export default companySaga
+export default dataSaga

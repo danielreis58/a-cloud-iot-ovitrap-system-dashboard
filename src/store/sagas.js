@@ -1,15 +1,16 @@
 import { all } from 'redux-saga/effects'
 
 // Auth
-import AuthSaga from './auth/login/saga'
-import ForgetSaga from './auth/forgetpwd/saga'
+import Login from './auth/login/saga'
+import ForgetPassword from './auth/forgetpwd/saga'
 
 // Dashboard
 import Dashboards from './dashboard/saga'
 
-// Companies
-import Companies from './company/saga'
+// Datas
+import Companies from './companies/saga'
+import Users from './users/saga'
 
 export default function* rootSaga() {
-  yield all([AuthSaga(), ForgetSaga(), Dashboards(), Companies()])
+  yield all([Login(), ForgetPassword(), Dashboards(), Companies(), Users()])
 }

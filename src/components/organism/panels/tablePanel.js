@@ -30,7 +30,7 @@ import {
 
 import { useStyles, useToolbarStyles } from './tablePanelStyle'
 import { isFunction } from '../../../utils/customMethods'
-import { setData } from '../../../store/company/actions'
+import { setData } from '../../../store/companies/actions'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {

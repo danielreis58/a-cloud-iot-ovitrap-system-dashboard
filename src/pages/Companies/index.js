@@ -12,6 +12,7 @@ import TextField from '../../components/atoms/inputs/textfield'
 import FooterButtons from '../../components/molecules/footer/buttons'
 import Delete from '../../components/organism/dialogs/delete'
 import TablePanel from '../../components/organism/panels/tablePanel'
+import Snackbar from '../../components/atoms/feedback/snackbar'
 import useStyles from './indexStyle'
 
 import schema from './schema'
@@ -22,8 +23,7 @@ import {
   updateData,
   deleteData,
   setData
-} from '../../store/company/actions'
-import Snackbar from '../../components/atoms/feedback/snackbar'
+} from '../../store/companies/actions'
 
 const Companies = () => {
   const classes = useStyles()

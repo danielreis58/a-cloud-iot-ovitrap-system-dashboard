@@ -18,7 +18,7 @@ const initialState = {
   error: false
 }
 
-const Companies = (state = initialState, action) => {
+const dataReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_DATA:
     case READ_DATA:
@@ -65,4 +65,4 @@ const Companies = (state = initialState, action) => {
   return state
 }
 
-export default Companies
+export default dataReducer

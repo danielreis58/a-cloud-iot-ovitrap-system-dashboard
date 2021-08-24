@@ -1,5 +1,11 @@
 import { combineReducers } from 'redux'
 
+// Theme
+import Themes from './theme/reducer'
+
+// Layout
+import Layout from './layout/reducer'
+
 // Auth
 import Login from './auth/login/reducer'
 import ForgetPassword from './auth/forgetpwd/reducer'
@@ -7,14 +13,9 @@ import ForgetPassword from './auth/forgetpwd/reducer'
 // Dashboard
 import Dashboards from './dashboard/reducer'
 
-// Theme
-import Themes from './theme/reducer'
-
-// Layout
-import Layout from './layout/reducer'
-
-// Dashboard
-import Companies from './company/reducer'
+// Data
+import Companies from './companies/reducer'
+import Users from './users/reducer'
 
 const rootReducer = combineReducers({
   Login,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
   Dashboards,
   Themes,
   Layout,
-  Companies
+  Companies,
+  Users
 })
 
 export default rootReducer
