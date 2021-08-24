@@ -131,7 +131,6 @@ const Companies = () => {
     }
   }
   const openDelete = (e) => {
-    console.log(e)
     toggleDelete()
     setSelected(e)
   }

@@ -10,12 +10,11 @@ import Layout from './layout/reducer'
 import Login from './auth/login/reducer'
 import ForgetPassword from './auth/forgetpwd/reducer'
 
-// Dashboard
-import Dashboards from './dashboard/reducer'
-
 // Data
+import Dashboards from './dashboard/reducer'
 import Companies from './companies/reducer'
 import Users from './users/reducer'
+import Ovitraps from './ovitraps/reducer'
 
 const rootReducer = combineReducers({
   Login,
@@ -24,7 +23,8 @@ const rootReducer = combineReducers({
   Themes,
   Layout,
   Companies,
-  Users
+  Users,
+  Ovitraps
 })
 
 export default rootReducer

@@ -11,13 +11,13 @@ import ResetPassword from '../pages/Authentication/ResetPassword'
 import Dashboard from '../pages/Dashboard/index'
 import Companies from '../pages/Companies/index'
 import Users from '../pages/Users/index'
-import Traps from '../pages/Traps/index'
+import Ovitraps from '../pages/Ovitraps/index'
 
 const authProtectedRoutes = [
   { path: '/dashboard', component: Dashboard },
   { path: '/companies', component: Companies },
   { path: '/users', component: Users },
-  { path: '/traps', component: Traps },
+  { path: '/traps', component: Ovitraps },
 
   // this route should be at the end of all other routes
   { path: '/', exact: true, component: () => <Redirect to="/dashboard" /> }

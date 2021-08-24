@@ -23,9 +23,9 @@ import {
   updateData,
   deleteData,
   setData
-} from '../../store/users/actions'
+} from '../../store/ovitraps/actions'
 
-const Users = () => {
+const Ovitraps = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -48,7 +48,7 @@ const Users = () => {
   /* ------------------------------------- VARIABLES -------------------------------------  */
 
   const { data, page, rowsPerPage, dense, success, error } = useSelector(
-    (state) => state.Users
+    (state) => state.Ovitraps
   )
   const rows = objToArray(data)
 
@@ -489,4 +489,4 @@ const Users = () => {
   )
 }
 
-export default Users
+export default Ovitraps
