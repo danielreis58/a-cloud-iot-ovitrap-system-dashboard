@@ -457,6 +457,7 @@ const Companies = () => {
           selected={isArray(select) ? select : []}
           openEdit={openEdit}
           openDelete={openDelete}
+          setData={setData}
         />
       )}
       {isOpenDelete && (

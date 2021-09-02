@@ -30,7 +30,6 @@ import {
 
 import { useStyles, useToolbarStyles } from './tablePanelStyle'
 import { isFunction } from '../../../utils/customMethods'
-import { setData } from '../../../store/companies/actions'
 
 const descendingComparator = (a, b, orderBy) => {
   if (b[orderBy] < a[orderBy]) {
@@ -184,7 +183,8 @@ const TablePanel = (props) => {
     columns = [],
     page,
     rowsPerPage,
-    dense
+    dense,
+    setData
   } = props
   const classes = useStyles()
   const { t } = useTranslation()
@@ -295,14 +295,13 @@ const TablePanel = (props) => {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell> {row.name} </TableCell>
-                      <TableCell>{row.email}</TableCell>
-                      <TableCell>{row.document}</TableCell>
-                      <TableCell>{row.site}</TableCell>
-                      <TableCell>{row.cep}</TableCell>
-                      <TableCell>{row.city}</TableCell>
-                      <TableCell>{row.state}</TableCell>
-                      <TableCell>
+                      {columns.map(
+                        (e) =>
+                          e.id !== 'action' && (
+                            <TableCell>{row?.[e.id]} </TableCell>
+                          )
+                      )}
+                      <TableCell style={{ width: 0 }}>
                         <Tooltip title={t('commons.edit')}>
                           <IconButton
                             aria-label="edit"

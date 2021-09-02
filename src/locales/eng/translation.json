@@ -86,8 +86,8 @@
     "signout": "Are you sure you want to sign out of your account?"
   },
   "toast": {
-    "login":{
-      "error":"E-mail/password invalid"
+    "login": {
+      "error": "E-mail/password invalid"
     },
     "companies": {
       "create": {
@@ -105,6 +105,24 @@
       "delete": {
         "success": "Successfully deleted company or companies",
         "error": "Error deleting company or companies"
+      }
+    },
+    "users": {
+      "create": {
+        "success": "Successfully created user",
+        "error": "Error creating user"
+      },
+      "read": {
+        "success": "Successfully found user or users",
+        "error": "Error finding user or users"
+      },
+      "update": {
+        "success": "Successfully updated user",
+        "error": "Error updating user"
+      },
+      "delete": {
+        "success": "Successfully deleted user or users",
+        "error": "Error deleting user or users"
       }
     }
   },
@@ -217,6 +235,42 @@
         "required": "Note is required",
         "minimum": "Minimum 3 characters",
         "maximum": "Maximum 255 characters"
+      }
+    }
+  },
+  "users": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "errors": {
+        "required": "Name is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Enter e-mail",
+      "errors": {
+        "email": "E-mail invalid",
+        "required": "E-mail is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "nickname": {
+      "label": "Nickname",
+      "placeholder": "Enter nickname",
+      "errors": {
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "profile": {
+      "label": "Profile",
+      "placeholder": "Choose profile",
+      "errors": {
+        "required": "Profile is required"
       }
     }
   }

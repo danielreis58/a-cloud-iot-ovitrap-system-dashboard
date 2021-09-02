@@ -55,31 +55,19 @@ const Users = () => {
   const columns = [
     {
       id: 'name',
-      label: t('companies.name.label')
+      label: t('users.name.label')
     },
     {
       id: 'email',
-      label: t('companies.email.label')
+      label: t('users.email.label')
     },
     {
-      id: 'document',
-      label: t('companies.document.label')
+      id: 'nickname',
+      label: t('users.nickname.label')
     },
     {
-      id: 'site',
-      label: t('companies.site.label')
-    },
-    {
-      id: 'cep',
-      label: t('companies.cep.label')
-    },
-    {
-      id: 'city',
-      label: t('companies.city.label')
-    },
-    {
-      id: 'state',
-      label: t('companies.state.label')
+      id: 'profile_id',
+      label: t('users.profile_id.label')
     },
     {
       id: 'action',
@@ -91,16 +79,8 @@ const Users = () => {
     id: null,
     name: '',
     email: '',
-    document: '',
-    site: '',
-    cep: '',
-    address: '',
-    number: null,
-    neighborhood: '',
-    city: '',
-    state: '',
-    note: '',
-    telephone: ''
+    nickname: '',
+    profile_id: null
   }
 
   /* -------------------------------------------------------------------------------------  */
@@ -159,11 +139,11 @@ const Users = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('name')}
-                      label={t('companies.name.label')}
-                      placeholder={t('companies.name.placeholder')}
+                      label={t('users.name.label')}
+                      placeholder={t('users.name.placeholder')}
                       helperText={
                         !!errors?.name?.message &&
-                        t(`companies.name.errors.${errors?.name?.message}`)
+                        t(`users.name.errors.${errors?.name?.message}`)
                       }
                       error={!!errors?.name?.message}
                       defaultValue={select.name}
@@ -182,11 +162,11 @@ const Users = () => {
                   <div className={classes.field}>
                     <TextField
                       {...register('email')}
-                      label={t('companies.email.label')}
-                      placeholder={t('companies.email.placeholder')}
+                      label={t('users.email.label')}
+                      placeholder={t('users.email.placeholder')}
                       helperText={
                         !!errors?.email?.message &&
-                        t(`companies.email.errors.${errors?.email?.message}`)
+                        t(`users.email.errors.${errors?.email?.message}`)
                       }
                       error={!!errors?.email?.message}
                       defaultValue={select.email}
@@ -204,233 +184,42 @@ const Users = () => {
                 <Grid container item xs={12} sm={6}>
                   <div className={classes.field}>
                     <TextField
-                      {...register('document')}
-                      label={t('companies.document.label')}
-                      placeholder={t('companies.document.placeholder')}
+                      {...register('nickname')}
+                      label={t('users.nickname.label')}
+                      placeholder={t('users.nickname.placeholder')}
                       helperText={
-                        !!errors?.document?.message &&
+                        !!errors?.nickname?.message &&
+                        t(`users.nickname.errors.${errors?.nickname?.message}`)
+                      }
+                      error={!!errors?.nickname?.message}
+                      defaultValue={select.nickname}
+                      onChange={(e) =>
+                        setValue('nickname', e.target.value, {
+                          shouldValidate: true
+                        })
+                      }
+                      variant="outlined"
+                      fullWidth
+                      shrink
+                    />
+                  </div>
+                </Grid>
+                <Grid container item xs={12} sm={6}>
+                  <div className={classes.field}>
+                    <TextField
+                      {...register('profile_id')}
+                      label={t('users.profile_id.label')}
+                      placeholder={t('users.profile_id.placeholder')}
+                      helperText={
+                        !!errors?.profile_id?.message &&
                         t(
-                          `companies.document.errors.${errors?.document?.message}`
+                          `users.profile_id.errors.${errors?.profile_id?.message}`
                         )
                       }
-                      error={!!errors?.document?.message}
-                      defaultValue={select.document}
+                      error={!!errors?.profile_id?.message}
+                      defaultValue={select.profile_id}
                       onChange={(e) =>
-                        setValue('document', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('site')}
-                      label={t('companies.site.label')}
-                      placeholder={t('companies.site.placeholder')}
-                      helperText={
-                        !!errors?.site?.message &&
-                        t(`companies.site.errors.${errors?.site?.message}`)
-                      }
-                      error={!!errors?.site?.message}
-                      defaultValue={select.site}
-                      onChange={(e) =>
-                        setValue('site', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('cep')}
-                      label={t('companies.cep.label')}
-                      placeholder={t('companies.cep.placeholder')}
-                      helperText={
-                        !!errors?.cep?.message &&
-                        t(`companies.cep.errors.${errors?.cep?.message}`)
-                      }
-                      error={!!errors?.cep?.message}
-                      defaultValue={select.cep}
-                      onChange={(e) =>
-                        setValue('cep', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('address')}
-                      label={t('companies.address.label')}
-                      placeholder={t('companies.address.placeholder')}
-                      helperText={
-                        !!errors?.address?.message &&
-                        t(
-                          `companies.address.errors.${errors?.address?.message}`
-                        )
-                      }
-                      error={!!errors?.address?.message}
-                      defaultValue={select.address}
-                      onChange={(e) =>
-                        setValue('address', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('number')}
-                      label={t('companies.number.label')}
-                      placeholder={t('companies.number.placeholder')}
-                      helperText={
-                        !!errors?.number?.message &&
-                        t(`companies.number.errors.${errors?.number?.message}`)
-                      }
-                      error={!!errors?.number?.message}
-                      defaultValue={select.number}
-                      onChange={(e) =>
-                        setValue('number', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('neighborhood')}
-                      label={t('companies.neighborhood.label')}
-                      placeholder={t('companies.neighborhood.placeholder')}
-                      helperText={
-                        !!errors?.neighborhood?.message &&
-                        t(
-                          `companies.neighborhood.errors.${errors?.neighborhood?.message}`
-                        )
-                      }
-                      error={!!errors?.neighborhood?.message}
-                      defaultValue={select.neighborhood}
-                      onChange={(e) =>
-                        setValue('neighborhood', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('city')}
-                      label={t('companies.city.label')}
-                      placeholder={t('companies.city.placeholder')}
-                      helperText={
-                        !!errors?.city?.message &&
-                        t(`companies.city.errors.${errors?.city?.message}`)
-                      }
-                      error={!!errors?.city?.message}
-                      defaultValue={select.city}
-                      onChange={(e) =>
-                        setValue('city', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('state')}
-                      label={t('companies.state.label')}
-                      placeholder={t('companies.state.placeholder')}
-                      helperText={
-                        !!errors?.state?.message &&
-                        t(`companies.state.errors.${errors?.state?.message}`)
-                      }
-                      error={!!errors?.state?.message}
-                      defaultValue={select.state}
-                      onChange={(e) =>
-                        setValue('state', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('note')}
-                      label={t('companies.note.label')}
-                      placeholder={t('companies.note.placeholder')}
-                      helperText={
-                        !!errors?.note?.message &&
-                        t(`companies.note.errors.${errors?.note?.message}`)
-                      }
-                      error={!!errors?.note?.message}
-                      defaultValue={select.note}
-                      onChange={(e) =>
-                        setValue('note', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                      multiline
-                    />
-                  </div>
-                </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <TextField
-                      {...register('telephone')}
-                      label={t('companies.telephone.label')}
-                      placeholder={t('companies.telephone.placeholder')}
-                      helperText={
-                        !!errors?.telephone?.message &&
-                        t(
-                          `companies.telephone.errors.${errors?.telephone?.message}`
-                        )
-                      }
-                      error={!!errors?.telephone?.message}
-                      defaultValue={select.telephone}
-                      onChange={(e) =>
-                        setValue('telephone', e.target.value, {
+                        setValue('profile_id', e.target.value, {
                           shouldValidate: true
                         })
                       }
@@ -448,7 +237,7 @@ const Users = () => {
         </div>
       ) : (
         <TablePanel
-          title={t('leftMenuList.companies')}
+          title={t('leftMenuList.users')}
           columns={columns}
           rows={rows}
           page={page}
@@ -457,6 +246,7 @@ const Users = () => {
           selected={isArray(select) ? select : []}
           openEdit={openEdit}
           openDelete={openDelete}
+          setData={setData}
         />
       )}
       {isOpenDelete && (
@@ -478,9 +268,7 @@ const Users = () => {
           elevation={6}
           severity={success ? 'success' : 'error'}
           message={t(
-            `toast.companies.${success || error}.${
-              success ? 'success' : 'error'
-            }`
+            `toast.users.${success || error}.${success ? 'success' : 'error'}`
           )}
           onClose={handleCloseSnackBar}
         />

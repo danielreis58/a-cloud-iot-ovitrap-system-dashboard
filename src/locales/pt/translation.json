@@ -86,8 +86,8 @@
     "signout": "Você tem certeza que deseja sair da sua conta?"
   },
   "toast": {
-    "login":{
-      "error":"E-mail/senha inválidos"
+    "login": {
+      "error": "E-mail/senha inválidos"
     },
     "companies": {
       "create": {
@@ -105,6 +105,24 @@
       "delete": {
         "success": "Empresa(s) excluída(s) com sucesso",
         "error": "Erro ao excluir empresa(s)"
+      }
+    },
+    "users": {
+      "create": {
+        "success": "Usuário criado com sucesso",
+        "error": "Erro ao criar usuário"
+      },
+      "read": {
+        "success": "Usuário(s) encontrado(s) com sucesso",
+        "error": "Erro ao encontrar usuário"
+      },
+      "update": {
+        "success": "Usuário atualizado com sucesso",
+        "error": "Erro ao atualizar usuário"
+      },
+      "delete": {
+        "success": "Usuário(s) excluído(s) com sucesso",
+        "error": "Erro ao excluir usuário(s)"
       }
     }
   },
@@ -217,6 +235,42 @@
         "required": "Observação é obrigatório",
         "minimum": "Mínimo 3 caracteres",
         "maximum": "Máximo 255 caracteres"
+      }
+    }
+  },
+  "users": {
+    "name": {
+      "label": "Nome",
+      "placeholder": "Escreva o nome",
+      "errors": {
+        "required": "Nome é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Escreva o e-mail",
+      "errors": {
+        "email": "E-mail inválido",
+        "required": "E-mail é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "nickname": {
+      "label": "Apelido",
+      "placeholder": "Escreva o apelido",
+      "errors": {
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },
+    "profile_id": {
+      "label": "Perfil",
+      "placeholder": "Escolha o perfil",
+      "errors": {
+        "required": "Perfil é obrigatório"
       }
     }
   }
