@@ -124,6 +124,24 @@
         "success": "Usuário(s) excluído(s) com sucesso",
         "error": "Erro ao excluir usuário(s)"
       }
+    },
+    "ovitraps": {
+      "create": {
+        "success": "Ovitrap criada com sucesso",
+        "error": "Erro ao criar ovitrap"
+      },
+      "read": {
+        "success": "Ovitrap(s) encontrada(s) com sucesso",
+        "error": "Erro ao encontrar ovitrap"
+      },
+      "update": {
+        "success": "Ovitrap atualizada com sucesso",
+        "error": "Erro ao atualizar ovitrap"
+      },
+      "delete": {
+        "success": "Ovitrap(s) excluída(s) com sucesso",
+        "error": "Erro ao excluir ovitrap(s)"
+      }
     }
   },
   "companies": {
@@ -271,6 +289,24 @@
       "placeholder": "Escolha o perfil",
       "errors": {
         "required": "Perfil é obrigatório"
+      }
+    }
+  },
+  "ovitraps": {
+    "name": {
+      "label": "Nome",
+      "placeholder": "Escreva o nome",
+      "errors": {
+        "required": "Nome é obrigatório",
+        "minimum": "Mínimo 3 caracteres",
+        "maximum": "Máximo 255 caracteres"
+      }
+    },    
+    "user_id": {
+      "label": "Usuário",
+      "placeholder": "Escolha o usuário",
+      "errors": {
+        "required": "Usuário é obrigatório"
       }
     }
   }

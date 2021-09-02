@@ -124,6 +124,24 @@
         "success": "Successfully deleted user or users",
         "error": "Error deleting user or users"
       }
+    },
+    "ovitraps": {
+      "create": {
+        "success": "Successfully created ovitrap",
+        "error": "Error creating ovitrap"
+      },
+      "read": {
+        "success": "Successfully found ovitrap or ovitraps",
+        "error": "Error finding ovitrap or ovitraps"
+      },
+      "update": {
+        "success": "Successfully updated ovitrap",
+        "error": "Error updating ovitrap"
+      },
+      "delete": {
+        "success": "Successfully deleted ovitrap or ovitraps",
+        "error": "Error deleting ovitrap or ovitraps"
+      }
     }
   },
   "companies": {
@@ -266,11 +284,29 @@
         "maximum": "Maximum 255 characters"
       }
     },
-    "profile": {
+    "profile_id": {
       "label": "Profile",
       "placeholder": "Choose profile",
       "errors": {
         "required": "Profile is required"
+      }
+    }
+  },
+  "ovitraps": {
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "errors": {
+        "required": "Name is required",
+        "minimum": "Minimum 3 characters",
+        "maximum": "Maximum 255 characters"
+      }
+    },
+    "user_id": {
+      "label": "User",
+      "placeholder": "Choose user",
+      "errors": {
+        "required": "User is required"
       }
     }
   }

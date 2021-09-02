@@ -39,7 +39,7 @@ const MainListItems = ({ t }) => {
         </ListItemIcon>
         <ListItemText primary={t('leftMenuList.users')} />
       </ListItem>
-      <ListItem button component={Link} to="/traps">
+      <ListItem button component={Link} to="/ovitraps">
         <ListItemIcon className={classes.leftSibarIcon}>
           <SvgIcon>
             <MosquitoIcon />
