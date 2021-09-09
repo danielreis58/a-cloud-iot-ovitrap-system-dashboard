@@ -89,6 +89,12 @@
     "login": {
       "error": "E-mail/password invalid"
     },
+    "dashboard":{
+      "read": {
+        "success": "Successfully found data",
+        "error": "Error finding data"
+      }
+    },
     "companies": {
       "create": {
         "success": "Successfully created company",

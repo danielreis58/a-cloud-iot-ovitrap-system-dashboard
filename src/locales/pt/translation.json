@@ -89,6 +89,12 @@
     "login": {
       "error": "E-mail/senha inválidos"
     },
+    "dashboard": {
+      "read": {
+        "success": "Dados encontrados com sucesso",
+        "error": "Erro ao encontrar dados"
+      }
+    },
     "companies": {
       "create": {
         "success": "Empresa criada com sucesso",
@@ -301,7 +307,7 @@
         "minimum": "Mínimo 3 caracteres",
         "maximum": "Máximo 255 caracteres"
       }
-    },    
+    },
     "user_id": {
       "label": "Usuário",
       "placeholder": "Escolha o usuário",

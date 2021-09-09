@@ -1,109 +1,45 @@
-import {
-  RESET_DASHBOARDS,
-  RESET_ERROR_DASHBOARDS,
-  GET_DASHBOARDS,
-  SET_DASHBOARDS,
-  API_ERROR_DASHBOARD
-} from './actionTypes'
+import { isArray } from 'lodash'
+import { arrayToObj } from '../../utils/customMethods'
+import { READ_DATA, SET_DATA } from './actionTypes'
 
 const initialState = {
-  errorDashboard: false,
-  loadingDashboard: false,
-  dataDashboard: null,
-  successDashboard: false
+  data: {},
+  loading: false,
+  success: false,
+  error: false
 }
 
-const Dashboards = (state = initialState, action) => {
+const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-    case RESET_DASHBOARDS:
+    case READ_DATA:
       state = {
         ...state,
-        dataDashboard: {
-          ...state.dataDashboard,
-          [action.payload.target]: null
-        }
+        loading: true,
+        success: false,
+        error: false
       }
       break
-    case RESET_ERROR_DASHBOARDS:
-      state = {
-        ...state,
-        errorDashboard: {
-          ...state.errorDashboard,
-          [action.payload.target]: false
-        },
-        loadingDashboard: {
-          ...state.loadingDashboard,
-          [action.payload.target]: false
-        },
-        successDashboard: {
-          ...state.successDashboard,
-          [action.payload.target]: false
+    case SET_DATA: {
+      switch (action.payload.action) {
+        case 'read': {
+          const { data } = action.payload.data
+          const newData = isArray(data)
+            ? arrayToObj(data, 'id')
+            : { [data.id]: data }
+          state = { ...state, ...action.payload.data, data: newData }
+          break
         }
+        default:
+          state = { ...state, ...action.payload.data }
+          break
       }
+
       break
-    case GET_DASHBOARDS:
-      state = {
-        ...state,
-        errorDashboard: {
-          ...state.errorDashboard,
-          [action.payload.target]: false
-        },
-        loadingDashboard: {
-          ...state.loadingDashboard,
-          [action.payload.target]: true
-        },
-        successDashboard: {
-          ...state.successDashboard,
-          [action.payload.target]: false
-        },
-        dataDashboard: {
-          ...state.dataDashboard,
-          [action.payload.target]: null
-        }
-      }
-      break
-    case SET_DASHBOARDS:
-      state = {
-        ...state,
-        errorDashboard: {
-          ...state.errorDashboard,
-          [action.payload.target]: false
-        },
-        loadingDashboard: {
-          ...state.loadingDashboard,
-          [action.payload.target]: false
-        },
-        successDashboard: {
-          ...state.successDashboard,
-          [action.payload.target]: true
-        },
-        dataDashboard: {
-          ...state.dataDashboard,
-          [action.payload.target]: action.payload.data
-        }
-      }
-      break
-    case API_ERROR_DASHBOARD:
-      state = {
-        ...state,
-        errorDashboard: {
-          ...state.errorDashboard,
-          [action.payload.target]: action.payload.error
-        },
-        loadingDashboard: {
-          ...state.loadingDashboard,
-          [action.payload.target]: false
-        },
-        successDashboard: {
-          ...state.successDashboard,
-          [action.payload.target]: false
-        }
-      }
-      break
+    }
     default:
       break
   }
   return state
 }
 
-export default Dashboards
+export default dataReducer
