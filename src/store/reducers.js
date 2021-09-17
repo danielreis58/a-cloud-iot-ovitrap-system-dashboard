@@ -3,6 +3,9 @@ import { combineReducers } from 'redux'
 // Theme
 import Themes from './theme/reducer'
 
+// Locale
+import Locales from './locale/reducer'
+
 // Layout
 import Layout from './layout/reducer'
 
@@ -21,6 +24,7 @@ const rootReducer = combineReducers({
   ForgetPassword,
   Dashboards,
   Themes,
+  Locales,
   Layout,
   Companies,
   Users,

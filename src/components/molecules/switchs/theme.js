@@ -1,6 +1,5 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { withTranslation } from 'react-i18next'
 
 import {
   Brightness4 as DarkModeIcon,
@@ -30,4 +29,4 @@ const SwitchTheme = () => {
   )
 }
 
-export default withTranslation()(SwitchTheme)
+export default SwitchTheme

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Grid, Paper } from '@material-ui/core'
-import { format, parseISO } from 'date-fns'
 import Charts from '../../components/atoms/display/chart'
 import useStyles from './indexStyle'
 
@@ -17,34 +16,26 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const { data, success, error } = useSelector((state) => state.Dashboards)
 
-  const arrayData = objToArray(data)
-  console.log('arrayData', arrayData)
+  const [series, setSeries] = useState([])
 
-  const series = arrayData.map((e) => ({
-    name: e.ovitrap_name,
-    data: e?.data?.map((e2) => [e2.created_at, e2.number]) ?? []
-  }))
-  console.log('series', series)
+  const setDataSeries = (objData) => {
+    const arrayData = objToArray(objData)
+    // console.log('arrayData', arrayData)
 
-  const options = {
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'smooth'
-    },
-    xaxis: {
-      type: 'datetime'
-    },
-    yaxis: {
-      min: 0
-    },
-    tooltip: {
-      x: {
-        format: 'hh:mm:ss dd/MM/yy'
-      }
-    }
+    const mapData = arrayData.map((e) => ({
+      name: e.ovitrap_name,
+      data: e?.data?.map((e2) => [e2.created_at, e2.number]) ?? []
+    }))
+    setSeries(mapData)
+    // console.log('series', series)]
   }
+
+  useEffect(() => {
+    if (data) {
+      setDataSeries(data)
+    }
+  }, [data])
+
   useEffect(() => {
     dispatch(readData())
   }, [])
@@ -56,9 +47,9 @@ const Dashboard = () => {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Paper>
-            <Charts options={options} series={series} type="line" />
+            {series.length > 0 && <Charts series={series} type="line" />}
           </Paper>
         </Grid>
         <Grid item xs={12}>

@@ -89,7 +89,7 @@
     "login": {
       "error": "E-mail/password invalid"
     },
-    "dashboard":{
+    "dashboard": {
       "read": {
         "success": "Successfully found data",
         "error": "Error finding data"

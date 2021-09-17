@@ -1,12 +1,17 @@
 import React from 'react'
-import { withTranslation } from 'react-i18next'
+import { useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Menu, MenuItem } from '@material-ui/core'
 import { LanguageRounded as LanguageIcon } from '@material-ui/icons'
 
 import i18n from '../../../i18n'
 import IconButton from '../../atoms/inputs/iconButton'
 
-const Language = ({ t }) => {
+import setLocale from '../../../store/locale/actions'
+
+const Language = () => {
+  const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [menuLanguage, setMenuLanguage] = React.useState(false)
 
@@ -32,6 +37,7 @@ const Language = ({ t }) => {
       >
         <MenuItem
           onClick={() => {
+            dispatch(setLocale('en-US'))
             i18n.changeLanguage('en-US', () => setMenuLanguage(false))
           }}
         >
@@ -39,6 +45,7 @@ const Language = ({ t }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
+            dispatch(setLocale('pt-BR'))
             i18n.changeLanguage('pt-BR', () => setMenuLanguage(false))
           }}
         >
@@ -49,4 +56,4 @@ const Language = ({ t }) => {
   )
 }
 
-export default withTranslation()(Language)
+export default Language
