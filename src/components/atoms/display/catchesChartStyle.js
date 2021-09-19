@@ -2,13 +2,16 @@ import pt from '../../../locales/pt/apex.json'
 import en from '../../../locales/eng/apex.json'
 
 const useOptions = (options) => ({
-  chart: {
-    locales: [options.defaultLocale === 'pt-br' ? pt : en],
-    defaultLocale: options.defaultLocale
-  },
+  chart: { id: 'catches-chart', locales: [en, pt], defaultLocale: 'pt-BR' },
   theme: {
     mode: 'light',
-    palette: 'palette1'
+    palette: 'palette1',
+    monochrome: {
+      enabled: false,
+      color: '#255aee',
+      shadeTo: 'light',
+      shadeIntensity: 0.65
+    }
   },
   stroke: {
     curve: 'smooth'
@@ -19,7 +22,7 @@ const useOptions = (options) => ({
   yaxis: {},
   tooltip: {
     x: {
-      format: 'hh:mm:ss dd/MM/yy'
+      format: 'dd/MM/yy'
     }
   }
 })

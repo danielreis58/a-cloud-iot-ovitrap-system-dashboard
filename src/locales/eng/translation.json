@@ -53,6 +53,14 @@
     "wait": "Wait"
   },
   "fields": {
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Enter e-mail",
+      "errors": {
+        "email is a required field": "E-mail is required",
+        "email must be a valid email": "E-mail is invalid"
+      }
+    },
     "password": {
       "label": "Password",
       "placeholder": "Enter your password",

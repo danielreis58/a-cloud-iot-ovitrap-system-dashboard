@@ -53,6 +53,14 @@
     "wait": "Aguarde"
   },
   "fields": {
+    "email": {
+      "label": "E-mail",
+      "placeholder": "Insira seu e-mail",
+      "errors": {
+        "email is a required field": "E-mail é obrigatório",
+        "email must be a valid email": "E-mail inválido"
+      }
+    },
     "password": {
       "label": "Senha",
       "placeholder": "Insira sua senha",

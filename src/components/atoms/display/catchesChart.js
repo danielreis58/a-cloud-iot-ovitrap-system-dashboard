@@ -31,7 +31,7 @@ const Charts = (props) => {
     yaxis: {},
     tooltip: {
       x: {
-        format: 'hh:mm:ss dd/MM/yy'
+        format: 'dd/MM/yy'
       }
     }
   })

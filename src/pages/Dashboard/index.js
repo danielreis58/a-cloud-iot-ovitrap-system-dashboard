@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Grid, Paper } from '@material-ui/core'
-import Charts from '../../components/atoms/display/chart'
+import CatchesCharts from '../../components/atoms/display/catchesChart'
 import useStyles from './indexStyle'
 
 import Snackbar from '../../components/atoms/feedback/snackbar'
@@ -23,11 +23,11 @@ const Dashboard = () => {
     // console.log('arrayData', arrayData)
 
     const mapData = arrayData.map((e) => ({
-      name: e.ovitrap_name,
-      data: e?.data?.map((e2) => [e2.created_at, e2.number]) ?? []
+      name: e.name,
+      data: e?.data?.map((e2) => [new Date(e2.date), e2.total]) ?? []
     }))
+    // console.log('mapData', mapData)
     setSeries(mapData)
-    // console.log('series', series)]
   }
 
   useEffect(() => {
@@ -49,14 +49,14 @@ const Dashboard = () => {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Paper>
-            {series.length > 0 && <Charts series={series} type="line" />}
+            {series.length > 0 && <CatchesCharts series={series} />}
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper>BBBB</Paper>
+          <Paper>Mapa</Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper>CCCCC</Paper>
+          <Paper>Clima</Paper>
         </Grid>
       </Grid>
       {(success || error) && (
