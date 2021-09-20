@@ -29,32 +29,7 @@ import {
 } from '@material-ui/icons'
 
 import { useStyles, useToolbarStyles } from './tablePanelStyle'
-import { isFunction } from '../../../utils/customMethods'
-
-const descendingComparator = (a, b, orderBy) => {
-  if (b[orderBy] < a[orderBy]) {
-    return -1
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1
-  }
-  return 0
-}
-
-const getComparator = (order, orderBy) =>
-  order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy)
-
-const stableSort = (array, comparator) => {
-  const stabilizedThis = array.map((el, index) => [el, index])
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0])
-    if (order !== 0) return order
-    return a[1] - b[1]
-  })
-  return stabilizedThis.map((el) => el[0])
-}
+import { isFunction, stableSort } from '../../../utils/customMethods'
 
 const EnhancedTableHead = (props) => {
   const {
@@ -275,7 +250,7 @@ const TablePanel = (props) => {
               columns={columns}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(rows, order, orderBy)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.id)
@@ -296,9 +271,9 @@ const TablePanel = (props) => {
                         />
                       </TableCell>
                       {columns.map(
-                        (e) =>
+                        (e, key) =>
                           e.id !== 'action' && (
-                            <TableCell>{row?.[e.id]} </TableCell>
+                            <TableCell key={key}>{row?.[e.id]} </TableCell>
                           )
                       )}
                       <TableCell style={{ width: 0 }}>

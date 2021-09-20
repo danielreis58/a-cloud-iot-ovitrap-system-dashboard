@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Grid, Paper } from '@material-ui/core'
-import CatchesCharts from '../../components/atoms/display/catchesChart'
+import CatchesCharts from '../../components/organism/catches/catchesChart'
+import CatchesTable from '../../components/organism/catches/catchesTable'
 import useStyles from './indexStyle'
 
 import Snackbar from '../../components/atoms/feedback/snackbar'
@@ -24,9 +25,10 @@ const Dashboard = () => {
 
     const mapData = arrayData.map((e) => ({
       name: e.name,
+      total: e.total,
       data: e?.data?.map((e2) => [new Date(e2.date), e2.total]) ?? []
     }))
-    // console.log('mapData', mapData)
+    console.log('mapData', mapData)
     setSeries(mapData)
   }
 
@@ -47,9 +49,18 @@ const Dashboard = () => {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Paper>
-            {series.length > 0 && <CatchesCharts series={series} />}
+        <Grid item xs={8}>
+          <Paper className={classes.paper}>
+            {series.length > 0 ? (
+              <CatchesCharts series={series} />
+            ) : (
+              <div className={classes.notFound}>{t('commons.notFound')}</div>
+            )}
+          </Paper>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper className={classes.paper}>
+            <CatchesTable series={series} />
           </Paper>
         </Grid>
         <Grid item xs={12}>

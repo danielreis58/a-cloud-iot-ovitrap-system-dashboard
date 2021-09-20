@@ -323,5 +323,15 @@
         "required": "User is required"
       }
     }
+  },
+  "dashboard": {
+    "table": {
+      "name": {
+        "label": "Ovitrap"
+      },
+      "total": {
+        "label": "Total catches"
+      }
+    }
   }
 }

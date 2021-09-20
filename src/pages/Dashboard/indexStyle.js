@@ -6,8 +6,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: '100%',
-    padding: theme.spacing(3),
-    marginBottom: theme.spacing(2)
+    height: '100%',
+    marginBottom: theme.spacing(1)
   },
   field: {
     width: '100%',
@@ -18,6 +18,13 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  notFound: {
+    display: 'flex',
+    width: '100%',
+    height: '100%',
+    padding: 20,
+    justifyContent: 'center'
   }
 }))
 export default useStyles

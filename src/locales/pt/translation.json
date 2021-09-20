@@ -323,5 +323,15 @@
         "required": "Usuário é obrigatório"
       }
     }
+  },
+  "dashboard": {
+    "table": {
+      "name": {
+        "label": "Nome"
+      },
+      "total": {
+        "label": "Total de capturas"
+      }
+    }
   }
 }

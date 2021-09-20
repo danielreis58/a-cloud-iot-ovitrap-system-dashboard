@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import ReactApexCharts from 'react-apexcharts'
 import { useSelector } from 'react-redux'
 import pt from '../../../locales/pt/apex.json'
 import en from '../../../locales/eng/apex.json'
+import useStyles from './catchesChartStyle'
 
 const Charts = (props) => {
-  const chartRef = useRef({})
+  const { series = [] } = props
+  const classes = useStyles()
+  const { t } = useTranslation()
   const { theme } = useSelector((state) => state.Themes)
   const { locale } = useSelector((state) => state.Locales)
 
-  const [series, setSeries] = useState(props.series)
   const [options, setOptions] = useState({
     chart: { id: 'catches-chart', locales: [en, pt], defaultLocale: 'pt-BR' },
     theme: {
@@ -58,8 +61,8 @@ const Charts = (props) => {
 
   return (
     <ReactApexCharts
+      className={classes.chart}
       id="catches"
-      ref={chartRef}
       options={options}
       series={series}
       type="line"
