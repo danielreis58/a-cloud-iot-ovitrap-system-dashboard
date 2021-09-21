@@ -327,7 +327,7 @@
   "dashboard": {
     "table": {
       "name": {
-        "label": "Ovitrap"
+        "label": "Name"
       },
       "total": {
         "label": "Total catches"
