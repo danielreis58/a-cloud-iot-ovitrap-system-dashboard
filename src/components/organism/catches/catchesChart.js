@@ -66,6 +66,7 @@ const Charts = (props) => {
       options={options}
       series={series}
       type="line"
+      height={400}
     />
   )
 }

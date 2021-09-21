@@ -25,7 +25,9 @@ const Dashboard = () => {
     // console.log('arrayData', arrayData)
 
     const mapData = arrayData.map((e) => ({
+      id: e.id,
       name: e.name,
+      coordinates: e.coordinates,
       total: e.total,
       data: e?.data?.map((e2) => [new Date(e2.date), e2.total]) ?? []
     }))
