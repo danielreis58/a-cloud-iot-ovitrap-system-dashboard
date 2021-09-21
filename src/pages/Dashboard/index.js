@@ -10,6 +10,7 @@ import Snackbar from '../../components/atoms/feedback/snackbar'
 
 import { readData, setData } from '../../store/dashboard/actions'
 import { objToArray } from '../../utils/customMethods'
+import CatchesMap from '../../components/organism/catches/catchesMap'
 
 const Dashboard = () => {
   const classes = useStyles()
@@ -64,7 +65,9 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12}>
-          <Paper>Mapa</Paper>
+          <Paper>
+            <CatchesMap series={series} />
+          </Paper>
         </Grid>
         <Grid item xs={12}>
           <Paper>Clima</Paper>
