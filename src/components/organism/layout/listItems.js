@@ -18,7 +18,12 @@ const MainListItems = ({ t }) => {
   const isActiveOvitraps = window.location.pathname === '/ovitraps'
   return (
     <>
-      <ListItem button component={Link} to="/dashboard">
+      <ListItem
+        button
+        className={classes.leftSibarItem}
+        component={Link}
+        to="/dashboard"
+      >
         <ListItemIcon className={classes.leftSibarIcon}>
           <DashboardIcon className={isActiveDashboard && classes.isActive} />
         </ListItemIcon>
@@ -29,7 +34,12 @@ const MainListItems = ({ t }) => {
           {t('leftMenuList.dashboard')}
         </Typography>
       </ListItem>
-      <ListItem button component={Link} to="/companies">
+      <ListItem
+        button
+        className={classes.leftSibarItem}
+        component={Link}
+        to="/companies"
+      >
         <ListItemIcon className={classes.leftSibarIcon}>
           <Domain className={isActiveCompanies && classes.isActive} />
         </ListItemIcon>
@@ -40,7 +50,12 @@ const MainListItems = ({ t }) => {
           {t('leftMenuList.companies')}
         </Typography>
       </ListItem>
-      <ListItem button component={Link} to="/users">
+      <ListItem
+        button
+        className={classes.leftSibarItem}
+        component={Link}
+        to="/users"
+      >
         <ListItemIcon className={classes.leftSibarIcon}>
           <People className={isActiveUsers && classes.isActive} />
         </ListItemIcon>
@@ -51,7 +66,12 @@ const MainListItems = ({ t }) => {
           {t('leftMenuList.users')}
         </Typography>
       </ListItem>
-      <ListItem button component={Link} to="/ovitraps">
+      <ListItem
+        button
+        className={classes.leftSibarItem}
+        component={Link}
+        to="/ovitraps"
+      >
         <ListItemIcon className={classes.leftSibarIcon}>
           <SvgIcon>
             <MosquitoIcon

@@ -21,7 +21,7 @@ import SwitchTheme from '../../molecules/switchs/theme'
 import RightProfileMenu from '../panels/rightProfileMenu'
 import setLayout from '../../../store/layout/actions'
 
-const drawerWidth = 240
+const drawerWidth = 180
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9)
+      width: 73
     }
   },
   appBarSpacer: theme.mixins.toolbar,
@@ -155,7 +155,7 @@ const Main = ({ children }) => {
           </IconButton>
         </div>
         <Divider />
-        <List className={classes.leftSidebar}>
+        <List className={classes.leftSidebar} style={{ paddingLeft: 0 }}>
           <MainListItems />
         </List>
         <Divider />
