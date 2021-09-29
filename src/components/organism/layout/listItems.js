@@ -1,51 +1,70 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
 import { withTranslation } from 'react-i18next'
-import ListItem from '@material-ui/core/ListItem'
-import SvgIcon from '@material-ui/core/SvgIcon'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import { ListItem, ListItemIcon, SvgIcon, Typography } from '@material-ui/core'
 import DashboardIcon from '@material-ui/icons/Dashboard'
 import Domain from '@material-ui/icons/Domain'
 import People from '@material-ui/icons/People'
+import { useTheme } from '@material-ui/core/styles'
 import MosquitoIcon from '../../../assets/icons/mosquitoIcon'
-
-const useStyles = makeStyles(() => ({
-  leftSibarIcon: {
-    marginRight: 6
-  }
-}))
+import useStyles from './listItemStyle'
 
 const MainListItems = ({ t }) => {
   const classes = useStyles()
+  const theme = useTheme()
+  const isActiveDashboard = window.location.pathname === '/dashboard'
+  const isActiveCompanies = window.location.pathname === '/companies'
+  const isActiveUsers = window.location.pathname === '/users'
+  const isActiveOvitraps = window.location.pathname === '/ovitraps'
   return (
     <>
       <ListItem button component={Link} to="/dashboard">
         <ListItemIcon className={classes.leftSibarIcon}>
-          <DashboardIcon />
+          <DashboardIcon className={isActiveDashboard && classes.isActive} />
         </ListItemIcon>
-        <ListItemText primary={t('leftMenuList.dashboard')} />
+        <Typography
+          className={isActiveDashboard && classes.isActive}
+          variant="button"
+        >
+          {t('leftMenuList.dashboard')}
+        </Typography>
       </ListItem>
       <ListItem button component={Link} to="/companies">
         <ListItemIcon className={classes.leftSibarIcon}>
-          <Domain />
+          <Domain className={isActiveCompanies && classes.isActive} />
         </ListItemIcon>
-        <ListItemText primary={t('leftMenuList.companies')} />
+        <Typography
+          className={isActiveCompanies && classes.isActive}
+          variant="button"
+        >
+          {t('leftMenuList.companies')}
+        </Typography>
       </ListItem>
       <ListItem button component={Link} to="/users">
         <ListItemIcon className={classes.leftSibarIcon}>
-          <People />
+          <People className={isActiveUsers && classes.isActive} />
         </ListItemIcon>
-        <ListItemText primary={t('leftMenuList.users')} />
+        <Typography
+          className={isActiveUsers && classes.isActive}
+          variant="button"
+        >
+          {t('leftMenuList.users')}
+        </Typography>
       </ListItem>
       <ListItem button component={Link} to="/ovitraps">
         <ListItemIcon className={classes.leftSibarIcon}>
           <SvgIcon>
-            <MosquitoIcon />
+            <MosquitoIcon
+              fill={isActiveOvitraps && theme.palette.background.default}
+            />
           </SvgIcon>
         </ListItemIcon>
-        <ListItemText primary={t('leftMenuList.ovitraps')} />
+        <Typography
+          className={isActiveOvitraps && classes.isActive}
+          variant="button"
+        >
+          {t('leftMenuList.ovitraps')}
+        </Typography>
       </ListItem>
     </>
   )

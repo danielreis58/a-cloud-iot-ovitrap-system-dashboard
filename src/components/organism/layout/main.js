@@ -132,14 +132,8 @@ const Main = ({ children }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            Dashboard
+          <Typography variant="h6" color="inherit" className={classes.title}>
+            Smart Ovitraps
           </Typography>
           <SwitchLanguage />
           <SwitchTheme />
