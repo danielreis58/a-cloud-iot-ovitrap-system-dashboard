@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: 73
+      width: 72
     }
   },
   appBarSpacer: theme.mixins.toolbar,

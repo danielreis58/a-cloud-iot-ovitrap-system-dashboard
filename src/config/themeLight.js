@@ -21,7 +21,7 @@ const palette = {
     paper2: '#f9f9f9'
   },
   text: {
-    primary: 'rgba(28,48,89,1)',
+    primary: '#144944',
     secondary: 'rgba(28,48,89,.6)',
     tertiary: 'rgba(28,48,89,.3)'
   },

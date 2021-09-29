@@ -52,7 +52,7 @@ const Dashboard = () => {
   return (
     <div>
       <Grid container spacing={3}>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={8}>
           <Paper className={classes.paper}>
             {series.length > 0 ? (
               <CatchesCharts series={series} />
@@ -61,7 +61,7 @@ const Dashboard = () => {
             )}
           </Paper>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Paper className={classes.paper}>
             <CatchesTable series={series} />
           </Paper>
