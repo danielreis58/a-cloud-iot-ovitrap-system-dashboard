@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Paper, Grid } from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { v4 as uuidv4 } from 'uuid'
 
 import { isArray } from 'lodash'
 import { objToArray } from '../../utils/customMethods'
@@ -125,6 +126,20 @@ const Ovitraps = () => {
             <form onSubmit={handleSubmit(handleEditCreate)}>
               {/* ------------------------------------- VARIABLES -------------------------------------  */}
               <Grid container spacing={2}>
+                <Grid container item xs={12}>
+                  <div className={classes.field}>
+                    <TextField
+                      {...register('id')}
+                      label={t('ovitraps.id.label')}
+                      error={!!errors?.id?.message}
+                      defaultValue={select.id || uuidv4()}
+                      disabled
+                      variant="outlined"
+                      fullWidth
+                      shrink
+                    />
+                  </div>
+                </Grid>
                 <Grid container item xs={12} sm={6}>
                   <div className={classes.field}>
                     <TextField

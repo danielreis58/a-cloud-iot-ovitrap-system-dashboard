@@ -30,6 +30,7 @@ const TextField = forwardRef((props, ref) => (
       onBlur={props.onBlur}
       InputLabelProps={{ shrink: props.shrink }}
       fullWidth={props.fullWidth}
+      disabled={props.disabled}
     />
   </>
 ))

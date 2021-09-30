@@ -307,6 +307,9 @@
     }
   },
   "ovitraps": {
+    "id": {
+      "label": "Id"
+    },
     "name": {
       "label": "Name",
       "placeholder": "Enter name",
