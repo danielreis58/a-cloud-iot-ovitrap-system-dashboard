@@ -40,11 +40,11 @@ const dataReducer = (state = initialState, action) => {
           break
         }
         case 'read': {
-          const { data } = action.payload.data
+          const { data, form } = action.payload.data.data
           const newData = isArray(data)
             ? arrayToObj(data, 'id')
             : { [data.id]: data }
-          state = { ...state, ...action.payload.data, data: newData }
+          state = { ...state, ...action.payload.data, data: newData, form }
           break
         }
         case 'delete': {

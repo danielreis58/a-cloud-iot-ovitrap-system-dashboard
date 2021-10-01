@@ -29,7 +29,7 @@ function* readData({ payload: { id } }) {
     const response = yield call(api.get, `/${endPoint}/:id`, {
       urlParams
     })
-    const data = response?.data?.data?.data
+    const data = response?.data?.data
     if ((response.status >= 200 || response.status <= 299) && data) {
       yield put(setData({ data, loading: false, success: 'read' }, 'read'))
     } else throw response.data
