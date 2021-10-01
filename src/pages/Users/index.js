@@ -1,9 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Paper, Grid } from '@material-ui/core'
+import {
+  Paper,
+  Grid,
+  Select,
+  MenuItem,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
+  FormHelperText
+} from '@material-ui/core'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useTheme } from '@material-ui/core/styles'
 
 import { isArray } from 'lodash'
 import { objToArray } from '../../utils/customMethods'
@@ -26,6 +36,7 @@ import {
 } from '../../store/users/actions'
 
 const Users = () => {
+  const theme = useTheme()
   const classes = useStyles()
   const { t } = useTranslation()
   const dispatch = useDispatch()
@@ -47,7 +58,10 @@ const Users = () => {
 
   /* ------------------------------------- VARIABLES -------------------------------------  */
 
-  const { data, page, rowsPerPage, dense, success, error } = useSelector(
+  const profileLabel = useRef({})
+  const companyLabel = useRef({})
+
+  const { data, form, page, rowsPerPage, dense, success, error } = useSelector(
     (state) => state.Users
   )
   const rows = objToArray(data)
@@ -206,29 +220,96 @@ const Users = () => {
                 </Grid>
                 <Grid container item xs={12} sm={6}>
                   <div className={classes.field}>
-                    <TextField
-                      {...register('profile_id')}
-                      label={t('users.profile_id.label')}
-                      placeholder={t('users.profile_id.placeholder')}
-                      helperText={
-                        !!errors?.profile_id?.message &&
-                        t(
-                          `users.profile_id.errors.${errors?.profile_id?.message}`
-                        )
-                      }
+                    <FormControl
+                      fullWidth
+                      shrink
+                      variant="outlined"
                       error={!!errors?.profile_id?.message}
-                      defaultValue={select.profile_id}
+                    >
+                      <InputLabel ref={profileLabel}>
+                        {t('users.profile_id.label')}
+                      </InputLabel>
+                      <Select
+                        {...register('profile_id')}
+                        defaultValue={select?.profile_id ?? 'empty'}
+                        onChange={(e) =>
+                          setValue('profile_id', e.target.value, {
+                            shouldValidate: true
+                          })
+                        }
+                        input={
+                          <OutlinedInput
+                            notched
+                            labelWidth={profileLabel?.current?.offsetWidth ?? 0}
+                          />
+                        }
+                      >
+                        <MenuItem disabled value="empty">
+                          <div style={{ color: theme.palette.placeholder }}>
+                            {t('users.profile_id.placeholder')}
+                          </div>
+                        </MenuItem>
+                        {form?.profiles?.map((e) => (
+                          <MenuItem key={e.id} value={e.id}>
+                            {e.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <FormHelperText>
+                        {!!errors?.profile_id?.message &&
+                          t(
+                            `users.profile_id.errors.${errors?.profile_id?.message}`
+                          )}
+                      </FormHelperText>
+                    </FormControl>
+                  </div>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12} sm={6}>
+                <div className={classes.field}>
+                  <FormControl
+                    fullWidth
+                    shrink
+                    variant="outlined"
+                    error={!!errors?.company_id?.message}
+                  >
+                    <InputLabel ref={companyLabel}>
+                      {t('users.company_id.label')}
+                    </InputLabel>
+                    <Select
+                      {...register('company_id')}
+                      defaultValue={select?.company_id ?? 'empty'}
                       onChange={(e) =>
-                        setValue('profile_id', e.target.value, {
+                        setValue('company_id', e.target.value, {
                           shouldValidate: true
                         })
                       }
-                      variant="outlined"
-                      fullWidth
-                      shrink
-                    />
-                  </div>
-                </Grid>
+                      input={
+                        <OutlinedInput
+                          notched
+                          labelWidth={companyLabel?.current?.offsetWidth ?? 0}
+                        />
+                      }
+                    >
+                      <MenuItem disabled value="empty">
+                        <div style={{ color: theme.palette.placeholder }}>
+                          {t('users.company_id.placeholder')}
+                        </div>
+                      </MenuItem>
+                      {form?.companies?.map((e) => (
+                        <MenuItem key={e.id} value={e.id}>
+                          {e.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <FormHelperText>
+                      {!!errors?.company_id?.message &&
+                        t(
+                          `users.company_id.errors.${errors?.company_id?.message}`
+                        )}
+                    </FormHelperText>
+                  </FormControl>
+                </div>
               </Grid>
               {/* -------------------------------------------------------------------------------------  */}
               <FooterButtons handleCancel={toggleEdit} />

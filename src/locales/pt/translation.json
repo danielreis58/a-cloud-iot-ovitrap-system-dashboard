@@ -304,6 +304,13 @@
       "errors": {
         "required": "Perfil é obrigatório"
       }
+    },
+    "company_id": {
+      "label": "Empresa",
+      "placeholder": "Escolha a empresa",
+      "errors": {
+        "required": "Empresa é obrigatória"
+      }
     }
   },
   "ovitraps": {

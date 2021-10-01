@@ -55,7 +55,8 @@ const palette = {
   details2: 'rgba(0,158,226,.3)',
   highlightSearch: 'rgba(0,158,226,.3)',
   highlightSearchActive: 'rgba(0,158,226,.9)',
-  icon: '#1C3059'
+  icon: '#1C3059',
+  placeholder: '#9fb2b0'
 }
 
 const shape = {

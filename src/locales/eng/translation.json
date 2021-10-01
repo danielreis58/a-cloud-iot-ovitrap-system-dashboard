@@ -304,6 +304,13 @@
       "errors": {
         "required": "Profile is required"
       }
+    },
+    "company_id": {
+      "label": "Company",
+      "placeholder": "Choose company",
+      "errors": {
+        "required": "Company is required"
+      }
     }
   },
   "ovitraps": {
