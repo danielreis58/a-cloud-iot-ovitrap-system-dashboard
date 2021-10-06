@@ -332,6 +332,20 @@
       "errors": {
         "required": "Usuário é obrigatório"
       }
+    },
+    "company_id": {
+      "label": "Empresa",
+      "placeholder": "Escolha a empresa",
+      "errors": {
+        "required": "Empresa é obrigatória"
+      }
+    },
+    "location": {
+      "label": "Localização",
+      "placeholder": "Escolha a localização",
+      "errors": {
+        "required": "Localização é obrigatória"
+      }
     }
   },
   "dashboard": {

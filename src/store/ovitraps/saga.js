@@ -6,7 +6,6 @@ import api from '../../services/api'
 const endPoint = 'ovitrap'
 
 function* createData({ payload: { data: newData } }) {
-  delete newData.id
   try {
     const response = yield call(api.post, `/${endPoint}`, newData)
     const data = response?.data?.data?.data

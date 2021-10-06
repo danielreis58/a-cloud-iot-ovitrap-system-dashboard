@@ -332,6 +332,20 @@
       "errors": {
         "required": "User is required"
       }
+    },
+    "company_id": {
+      "label": "Company",
+      "placeholder": "Choose company",
+      "errors": {
+        "required": "Company is required"
+      }
+    },
+    "location": {
+      "label": "Location",
+      "placeholder": "Choose location",
+      "errors": {
+        "required": "Location is required"
+      }
     }
   },
   "dashboard": {
