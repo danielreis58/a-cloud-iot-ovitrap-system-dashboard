@@ -31,7 +31,6 @@ const Dashboard = () => {
       total: e.total,
       data: e?.data?.map((e2) => [new Date(e2.date), e2.total]) ?? []
     }))
-    console.log('mapData', mapData)
     setSeries(mapData)
   }
 
@@ -71,9 +70,9 @@ const Dashboard = () => {
             <CatchesMap series={series} />
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper>Clima</Paper>
-        </Grid>
+        </Grid> */}
       </Grid>
       {(success || error) && (
         <Snackbar

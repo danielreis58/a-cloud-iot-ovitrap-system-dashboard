@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import {
   GoogleMap,
   Marker,
@@ -26,11 +25,9 @@ const center = {
 const CatchesMap = (props) => {
   const { series = [] } = props
   const classes = useStyles()
-  const { t } = useTranslation()
-  const [zoom, setZoom] = useState(14)
   const [selected, setSelected] = useState(null)
 
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
     libraries
   })
@@ -46,7 +43,7 @@ const CatchesMap = (props) => {
         <GoogleMap
           id="map"
           mapContainerStyle={mapContainerStyle}
-          zoom={zoom}
+          zoom={14}
           options={options}
           center={center}
           onLoad={onMapLoad}

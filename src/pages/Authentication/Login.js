@@ -32,7 +32,6 @@ const Login = ({ t }) => {
     resolver: yupResolver(schema)
   })
   const [snackbar, setSnackbar] = useState(false)
-  const [snackbarMessage, setSnackbarMessage] = useState('')
 
   const handleSubmit = (e) => {
     dispatch(loginUser(e))
@@ -48,7 +47,6 @@ const Login = ({ t }) => {
   useEffect(() => {
     if (error) {
       setSnackbar(true)
-      setSnackbarMessage(error)
       dispatch(resetErrorLogin())
     }
   }, [error])

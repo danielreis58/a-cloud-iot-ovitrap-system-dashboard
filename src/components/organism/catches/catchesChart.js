@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import ReactApexCharts from 'react-apexcharts'
 import { useSelector } from 'react-redux'
 import pt from '../../../locales/pt/apex.json'
@@ -9,7 +8,6 @@ import useStyles from './catchesChartStyle'
 const Charts = (props) => {
   const { series = [] } = props
   const classes = useStyles()
-  const { t } = useTranslation()
   const { theme } = useSelector((state) => state.Themes)
   const { locale } = useSelector((state) => state.Locales)
 
@@ -40,7 +38,6 @@ const Charts = (props) => {
   })
 
   useEffect(() => {
-    console.log('locale', locale)
     setOptions((prev) => ({
       ...prev,
       chart: { ...prev.chart, defaultLocale: locale }
@@ -48,16 +45,11 @@ const Charts = (props) => {
   }, [locale])
 
   useEffect(() => {
-    console.log('theme', theme)
     setOptions((prev) => ({
       ...prev,
       theme: { ...prev.theme, mode: theme }
     }))
   }, [theme])
-
-  useEffect(() => {
-    console.log('options', options)
-  }, [options])
 
   return (
     <ReactApexCharts

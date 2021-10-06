@@ -283,26 +283,28 @@ const Ovitraps = () => {
                   fullWidth
                   shrink
                   variant="outlined"
-                  error={!!errors?.location?.lat?.message}
+                  error={!!errors?.latitude?.message}
                 >
                   <InputLabel>{t('ovitraps.location.label')}</InputLabel>
                   <Paper style={{ width: '100%' }}>
                     <LatLngMap
-                      {...register('location')}
                       defaultValue={{
-                        lat: select?.latitude,
-                        lng: select?.longitude
+                        latitude: select?.latitude,
+                        longitude: select?.longitude
                       }}
-                      onChange={(e) =>
-                        setValue('location', e, {
+                      onChange={(e) => {
+                        setValue('latitude', e.latitude, {
                           shouldValidate: true
                         })
-                      }
+                        setValue('longitude', e.longitude, {
+                          shouldValidate: true
+                        })
+                      }}
                     />
                     <FormHelperText>
-                      {!!errors?.location?.lat?.message &&
+                      {!!errors?.latitude?.message &&
                         t(
-                          `ovitraps.location.errors.${errors?.location?.lat?.message}`
+                          `ovitraps.location.errors.${errors?.latitude?.message}`
                         )}
                     </FormHelperText>
                   </Paper>

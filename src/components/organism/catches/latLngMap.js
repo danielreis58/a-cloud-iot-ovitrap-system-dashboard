@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import {
   GoogleMap,
   Marker,
@@ -30,7 +29,7 @@ const LatLngMap = (props) => {
   const [selected, setSelected] = useState(null)
   const [marker, setMarkers] = useState(defaultValue)
 
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
     libraries
   })
@@ -51,18 +50,21 @@ const LatLngMap = (props) => {
           center={center}
           onLoad={onMapLoad}
           onClick={(e) => {
-            const coordinates = { lat: e.latLng.lat(), lng: e.latLng.lng() }
+            const coordinates = {
+              latitude: e.latLng.lat(),
+              longitude: e.latLng.lng()
+            }
             setMarkers(coordinates)
             if (isFunction(props.onChange)) {
               props.onChange(coordinates)
             }
           }}
         >
-          {marker?.lat && marker?.lng && (
+          {marker?.latitude && marker?.longitude && (
             <Marker
               position={{
-                lat: marker?.lat,
-                lng: marker?.lng
+                lat: marker?.latitude,
+                lng: marker?.longitude
               }}
               icon={{
                 url: '/ovitrap.png',
