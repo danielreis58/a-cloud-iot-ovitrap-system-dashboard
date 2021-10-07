@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { withTranslation } from 'react-i18next'
-import { Container, Grid, Paper } from '@material-ui/core'
+import { Container, Grid, Paper, CircularProgress } from '@material-ui/core'
 import { LockRounded as LockIcon } from '@material-ui/icons'
 
 import { useForm } from 'react-hook-form'
@@ -12,8 +12,7 @@ import schema from './LoginSchema'
 import TextField from '../../components/atoms/inputs/textfield'
 import CheckBox from '../../components/atoms/inputs/checkbox'
 import Button from '../../components/atoms/inputs/button'
-import Typography from '../../components/atoms/display/typography'
-import CircularProgress from '../../components/atoms/feedback/circularProgress'
+import Copyright from '../../components/atoms/display/copyright'
 import Snackbar from '../../components/atoms/feedback/snackbar'
 import SwitchLanguage from '../../components/molecules/switchs/language'
 import SwitchTheme from '../../components/molecules/switchs/theme'
@@ -163,9 +162,7 @@ const Login = ({ t }) => {
                 paddingTop: 25
               }}
             >
-              <Typography variant="body1">
-                © {new Date().getFullYear()} {t('app.copyright')}
-              </Typography>
+              <Copyright />
             </div>
             <div
               style={{

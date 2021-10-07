@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
@@ -50,6 +50,8 @@ const Users = () => {
     resolver: yupResolver(schema)
   })
 
+  const { profile = {}, companyId } = useSelector((state) => state.Login.data)
+
   const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
 
@@ -57,9 +59,6 @@ const Users = () => {
   const toggleDelete = () => setIsOpenDelete((prev) => !prev)
 
   /* ------------------------------------- VARIABLES -------------------------------------  */
-
-  const profileLabel = useRef({})
-  const companyLabel = useRef({})
 
   const { data, form, page, rowsPerPage, dense, success, error } = useSelector(
     (state) => state.Users
@@ -89,12 +88,20 @@ const Users = () => {
     }
   ]
 
+  if (profile.isAdmin) {
+    columns.splice(4, 0, {
+      id: 'company_id',
+      label: t('ovitraps.company_id.label')
+    })
+  }
+
   const initialState = {
     id: null,
     name: '',
     email: '',
     nickname: '',
-    profile_id: null
+    profile_id: null,
+    company_id: !profile.isAdmin ? companyId : companyId
   }
 
   /* -------------------------------------------------------------------------------------  */
@@ -226,9 +233,7 @@ const Users = () => {
                       variant="outlined"
                       error={!!errors?.profile_id?.message}
                     >
-                      <InputLabel ref={profileLabel}>
-                        {t('users.profile_id.label')}
-                      </InputLabel>
+                      <InputLabel>{t('users.profile_id.label')}</InputLabel>
                       <Select
                         {...register('profile_id')}
                         defaultValue={select?.profile_id ?? 'empty'}
@@ -240,7 +245,7 @@ const Users = () => {
                         input={
                           <OutlinedInput
                             notched
-                            labelWidth={profileLabel?.current?.offsetWidth ?? 0}
+                            label={t('users.profile_id.label')}
                           />
                         }
                       >
@@ -265,52 +270,52 @@ const Users = () => {
                   </div>
                 </Grid>
               </Grid>
-              <Grid container item xs={12} sm={6}>
-                <div className={classes.field}>
-                  <FormControl
-                    fullWidth
-                    shrink
-                    variant="outlined"
-                    error={!!errors?.company_id?.message}
-                  >
-                    <InputLabel ref={companyLabel}>
-                      {t('users.company_id.label')}
-                    </InputLabel>
-                    <Select
-                      {...register('company_id')}
-                      defaultValue={select?.company_id ?? 'empty'}
-                      onChange={(e) =>
-                        setValue('company_id', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      input={
-                        <OutlinedInput
-                          notched
-                          labelWidth={companyLabel?.current?.offsetWidth ?? 0}
-                        />
-                      }
+              {profile.isAdmin && (
+                <Grid container item xs={12} sm={6}>
+                  <div className={classes.field}>
+                    <FormControl
+                      fullWidth
+                      shrink
+                      variant="outlined"
+                      error={!!errors?.company_id?.message}
                     >
-                      <MenuItem disabled value="empty">
-                        <div style={{ color: theme.palette.placeholder }}>
-                          {t('users.company_id.placeholder')}
-                        </div>
-                      </MenuItem>
-                      {form?.companies?.map((e) => (
-                        <MenuItem key={e.id} value={e.id}>
-                          {e.name}
+                      <InputLabel>{t('users.company_id.label')}</InputLabel>
+                      <Select
+                        {...register('company_id')}
+                        defaultValue={select?.company_id ?? 'empty'}
+                        onChange={(e) =>
+                          setValue('company_id', e.target.value, {
+                            shouldValidate: true
+                          })
+                        }
+                        input={
+                          <OutlinedInput
+                            notched
+                            label={t('users.company_id.label')}
+                          />
+                        }
+                      >
+                        <MenuItem disabled value="empty">
+                          <div style={{ color: theme.palette.placeholder }}>
+                            {t('users.company_id.placeholder')}
+                          </div>
                         </MenuItem>
-                      ))}
-                    </Select>
-                    <FormHelperText>
-                      {!!errors?.company_id?.message &&
-                        t(
-                          `users.company_id.errors.${errors?.company_id?.message}`
-                        )}
-                    </FormHelperText>
-                  </FormControl>
-                </div>
-              </Grid>
+                        {form?.companies?.map((e) => (
+                          <MenuItem key={e.id} value={e.id}>
+                            {e.name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      <FormHelperText>
+                        {!!errors?.company_id?.message &&
+                          t(
+                            `users.company_id.errors.${errors?.company_id?.message}`
+                          )}
+                      </FormHelperText>
+                    </FormControl>
+                  </div>
+                </Grid>
+              )}
               {/* -------------------------------------------------------------------------------------  */}
               <FooterButtons handleCancel={toggleEdit} />
             </form>
@@ -324,6 +329,7 @@ const Users = () => {
           page={page}
           rowsPerPage={rowsPerPage}
           dense={dense}
+          form={form}
           selected={isArray(select) ? select : []}
           openEdit={openEdit}
           openDelete={openDelete}

@@ -8,14 +8,13 @@ import {
   DialogTitle,
   IconButton,
   Button,
-  CircularProgress
+  CircularProgress,
+  Typography
 } from '@material-ui/core'
 
 import { CloseRounded as CloseIcon } from '@material-ui/icons'
 
 import { useTheme } from '@material-ui/core/styles'
-
-import Typography from '../../atoms/display/typography'
 
 const Alert = (props) => {
   const { t } = useTranslation()

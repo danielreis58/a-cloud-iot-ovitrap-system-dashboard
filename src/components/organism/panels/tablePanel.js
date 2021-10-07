@@ -159,7 +159,8 @@ const TablePanel = (props) => {
     page,
     rowsPerPage,
     dense,
-    setData
+    setData,
+    form
   } = props
   const classes = useStyles()
   const { t } = useTranslation()
@@ -218,6 +219,31 @@ const TablePanel = (props) => {
 
   const isSelected = (id) => selected.findIndex((e) => e.id === id) !== -1
 
+  const renderTableCell = (key, column, value) => {
+    switch (column) {
+      case 'user_id':
+        return (
+          <TableCell key={key}>
+            {form?.users?.find((el) => el.id === value)?.name}
+          </TableCell>
+        )
+      case 'company_id':
+        return (
+          <TableCell key={key}>
+            {form?.companies?.find((el) => el.id === value)?.name}
+          </TableCell>
+        )
+      case 'profile_id':
+        return (
+          <TableCell key={key}>
+            {form?.profiles?.find((el) => el.id === value)?.name}
+          </TableCell>
+        )
+      default:
+        return <TableCell key={key}>{value} </TableCell>
+    }
+  }
+
   useEffect(() => {
     setSelected(props.selected)
   }, [props.selected])
@@ -272,9 +298,8 @@ const TablePanel = (props) => {
                       </TableCell>
                       {columns.map(
                         (e, key) =>
-                          e.id !== 'action' && (
-                            <TableCell key={key}>{row?.[e.id]} </TableCell>
-                          )
+                          e.id !== 'action' &&
+                          renderTableCell(key, e.id, row?.[e.id])
                       )}
                       <TableCell style={{ width: 0 }}>
                         <Tooltip title={t('commons.edit')}>

@@ -53,6 +53,10 @@ const Ovitraps = () => {
     resolver: yupResolver(schema)
   })
 
+  const { profile = {}, companyId, userId } = useSelector(
+    (state) => state.Login.data
+  )
+
   const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
 
@@ -72,14 +76,24 @@ const Ovitraps = () => {
       label: t('ovitraps.name.label')
     },
     {
-      id: 'user_id',
-      label: t('ovitraps.user_id.label')
-    },
-    {
       id: 'action',
       label: t('commons.action')
     }
   ]
+
+  if (!profile.isAgent) {
+    columns.splice(1, 0, {
+      id: 'user_id',
+      label: t('ovitraps.user_id.label')
+    })
+  }
+
+  if (profile.isAdmin) {
+    columns.splice(2, 0, {
+      id: 'company_id',
+      label: t('ovitraps.company_id.label')
+    })
+  }
 
   const defaultId = useRef(uuidv4())
 
@@ -88,14 +102,11 @@ const Ovitraps = () => {
     name: '',
     latitude: null,
     longitude: null,
-    user_id: null,
-    company_id: null
+    user_id: profile.isAgent ? userId : null,
+    company_id: !profile.isAdmin ? companyId : null
   }
 
   /* -------------------------------------------------------------------------------------  */
-
-  const userLabel = useRef({})
-  const companyLabel = useRef({})
 
   const [select, setSelected] = useState(initialState)
 
@@ -162,7 +173,7 @@ const Ovitraps = () => {
                     />
                   </div>
                 </Grid>
-                <Grid container item xs={12} sm={6}>
+                <Grid container item xs={12} sm={!profile.isAgent ? 6 : 12}>
                   <div className={classes.field}>
                     <TextField
                       {...register('name')}
@@ -185,130 +196,132 @@ const Ovitraps = () => {
                     />
                   </div>
                 </Grid>
-                <Grid container item xs={12} sm={6}>
-                  <div className={classes.field}>
-                    <FormControl
-                      fullWidth
-                      shrink
-                      variant="outlined"
-                      error={!!errors?.user_id?.message}
-                    >
-                      <InputLabel ref={userLabel}>
-                        {t('ovitraps.user_id.label')}
-                      </InputLabel>
-                      <Select
-                        {...register('user_id')}
-                        defaultValue={select?.user_id ?? 'empty'}
-                        onChange={(e) =>
-                          setValue('user_id', e.target.value, {
-                            shouldValidate: true
-                          })
-                        }
-                        input={
-                          <OutlinedInput
-                            notched
-                            labelWidth={userLabel?.current?.offsetWidth ?? 0}
-                          />
-                        }
+                {!profile.isAgent && (
+                  <Grid container item xs={12} sm={6}>
+                    <div className={classes.field}>
+                      <FormControl
+                        fullWidth
+                        shrink
+                        variant="outlined"
+                        error={!!errors?.user_id?.message}
                       >
-                        <MenuItem disabled value="empty">
-                          <div style={{ color: theme.palette.placeholder }}>
-                            {t('ovitraps.user_id.placeholder')}
-                          </div>
-                        </MenuItem>
-                        {form?.users?.map((e) => (
-                          <MenuItem key={e.id} value={e.id}>
-                            {e.name}
+                        <InputLabel>{t('ovitraps.user_id.label')}</InputLabel>
+                        <Select
+                          {...register('user_id')}
+                          defaultValue={select?.user_id ?? 'empty'}
+                          onChange={(e) =>
+                            setValue('user_id', e.target.value, {
+                              shouldValidate: true
+                            })
+                          }
+                          input={
+                            <OutlinedInput
+                              notched
+                              label={t('ovitraps.user_id.label')}
+                            />
+                          }
+                        >
+                          <MenuItem disabled value="empty">
+                            <div style={{ color: theme.palette.placeholder }}>
+                              {t('ovitraps.user_id.placeholder')}
+                            </div>
                           </MenuItem>
-                        ))}
-                      </Select>
-                      <FormHelperText>
-                        {!!errors?.user_id?.message &&
-                          t(
-                            `ovitraps.user_id.errors.${errors?.user_id?.message}`
-                          )}
-                      </FormHelperText>
-                    </FormControl>
-                  </div>
-                </Grid>
-              </Grid>
-              <Grid container item xs={12} sm={6}>
-                <div className={classes.field}>
+                          {form?.users?.map((e) => (
+                            <MenuItem key={e.id} value={e.id}>
+                              {e.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        <FormHelperText>
+                          {!!errors?.user_id?.message &&
+                            t(
+                              `ovitraps.user_id.errors.${errors?.user_id?.message}`
+                            )}
+                        </FormHelperText>
+                      </FormControl>
+                    </div>
+                  </Grid>
+                )}
+                {profile.isAdmin && (
+                  <Grid container item xs={12} sm={6}>
+                    <div className={classes.field}>
+                      <FormControl
+                        fullWidth
+                        shrink
+                        variant="outlined"
+                        error={!!errors?.company_id?.message}
+                      >
+                        <InputLabel>
+                          {t('ovitraps.company_id.label')}
+                        </InputLabel>
+                        <Select
+                          {...register('company_id')}
+                          defaultValue={select?.company_id ?? 'empty'}
+                          onChange={(e) =>
+                            setValue('company_id', e.target.value, {
+                              shouldValidate: true
+                            })
+                          }
+                          input={
+                            <OutlinedInput
+                              notched
+                              label={t('ovitraps.company_id.label')}
+                            />
+                          }
+                        >
+                          <MenuItem disabled value="empty">
+                            <div style={{ color: theme.palette.placeholder }}>
+                              {t('ovitraps.company_id.placeholder')}
+                            </div>
+                          </MenuItem>
+                          {form?.companies?.map((e) => (
+                            <MenuItem key={e.id} value={e.id}>
+                              {e.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                        <FormHelperText>
+                          {!!errors?.company_id?.message &&
+                            t(
+                              `ovitraps.company_id.errors.${errors?.company_id?.message}`
+                            )}
+                        </FormHelperText>
+                      </FormControl>
+                    </div>
+                  </Grid>
+                )}
+                <Grid container item xs={12}>
                   <FormControl
                     fullWidth
                     shrink
                     variant="outlined"
-                    error={!!errors?.company_id?.message}
+                    error={!!errors?.latitude?.message}
                   >
-                    <InputLabel ref={companyLabel}>
-                      {t('ovitraps.company_id.label')}
-                    </InputLabel>
-                    <Select
-                      {...register('company_id')}
-                      defaultValue={select?.company_id ?? 'empty'}
-                      onChange={(e) =>
-                        setValue('company_id', e.target.value, {
-                          shouldValidate: true
-                        })
-                      }
-                      input={
-                        <OutlinedInput
-                          notched
-                          labelWidth={companyLabel?.current?.offsetWidth ?? 0}
-                        />
-                      }
-                    >
-                      <MenuItem disabled value="empty">
-                        <div style={{ color: theme.palette.placeholder }}>
-                          {t('ovitraps.company_id.placeholder')}
-                        </div>
-                      </MenuItem>
-                      {form?.companies?.map((e) => (
-                        <MenuItem key={e.id} value={e.id}>
-                          {e.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    <FormHelperText>
-                      {!!errors?.company_id?.message &&
-                        t(
-                          `ovitraps.company_id.errors.${errors?.company_id?.message}`
-                        )}
-                    </FormHelperText>
+                    <InputLabel>{t('ovitraps.location.label')}</InputLabel>
+                    <Paper style={{ width: '100%' }}>
+                      <LatLngMap
+                        defaultValue={{
+                          latitude: select?.latitude,
+                          longitude: select?.longitude
+                        }}
+                        onChange={(e) => {
+                          setValue('latitude', e.latitude, {
+                            shouldValidate: true
+                          })
+                          setValue('longitude', e.longitude, {
+                            shouldValidate: true
+                          })
+                        }}
+                      />
+                      <FormHelperText>
+                        {!!errors?.latitude?.message &&
+                          t(
+                            `ovitraps.location.errors.${errors?.latitude?.message}`
+                          )}
+                      </FormHelperText>
+                    </Paper>
                   </FormControl>
-                </div>
-              </Grid>
-              <Grid container item xs={12}>
-                <FormControl
-                  fullWidth
-                  shrink
-                  variant="outlined"
-                  error={!!errors?.latitude?.message}
-                >
-                  <InputLabel>{t('ovitraps.location.label')}</InputLabel>
-                  <Paper style={{ width: '100%' }}>
-                    <LatLngMap
-                      defaultValue={{
-                        latitude: select?.latitude,
-                        longitude: select?.longitude
-                      }}
-                      onChange={(e) => {
-                        setValue('latitude', e.latitude, {
-                          shouldValidate: true
-                        })
-                        setValue('longitude', e.longitude, {
-                          shouldValidate: true
-                        })
-                      }}
-                    />
-                    <FormHelperText>
-                      {!!errors?.latitude?.message &&
-                        t(
-                          `ovitraps.location.errors.${errors?.latitude?.message}`
-                        )}
-                    </FormHelperText>
-                  </Paper>
-                </FormControl>
+                </Grid>
               </Grid>
               {/* -------------------------------------------------------------------------------------  */}
               <FooterButtons handleCancel={toggleEdit} />
@@ -323,6 +336,7 @@ const Ovitraps = () => {
           page={page}
           rowsPerPage={rowsPerPage}
           dense={dense}
+          form={form}
           selected={isArray(select) ? select : []}
           openEdit={openEdit}
           openDelete={openDelete}
