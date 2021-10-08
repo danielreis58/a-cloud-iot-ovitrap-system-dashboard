@@ -43,11 +43,6 @@
     "signout": "Sair da conta",
     "back": "Voltar",
     "forgotYourPassword": "Esqueceu sua senha?",
-    "passwordRecover": "Recuperar senha",
-    "changePassword": "Alterar senha",
-    "changePicture": "Alterar foto",
-    "savePicture": "Salvar foto",
-    "saveEditions": "Salvar alterações",
     "text": "Texto",
     "data": "Dados",
     "wait": "Aguarde"
@@ -65,7 +60,15 @@
       "label": "Senha",
       "placeholder": "Insira sua senha",
       "errors": {
-        "password is a required field": "Senha é obrigatório"
+        "password is a required field": "Senha é obrigatória"
+      }
+    },
+    "confirm": {
+      "label": "Confirmação",
+      "placeholder": "Confirme a senha",
+      "errors": {
+        "confirm is a required field": "Confirmação é obrigatória",
+        "passwords must match": "As senhas devem ser iguais"
       }
     },
     "rememberMe": {
@@ -96,6 +99,10 @@
   "toast": {
     "login": {
       "error": "E-mail/senha inválidos"
+    },
+    "forgot": {
+      "error": "E-mail inválido",
+      "success": "E-mail de recuperação de senha enviado com sucesso"
     },
     "dashboard": {
       "read": {

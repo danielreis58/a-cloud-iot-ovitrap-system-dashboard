@@ -1,31 +1,30 @@
 import {
-  FORGET_PASSWORD,
-  FORGET_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_SUCCESS,
   SET_NEW_PASSWORD,
   SET_NEW_PASSWORD_SUCCESS,
-  API_ERROR_FORGET_PASSWORD
+  ERROR_PASSWORD,
+  RESET_ERROR_PASSWORD
 } from './actionTypes'
 
 const initialState = {
-  message: null,
-  error: null,
+  error: false,
   loading: false,
   success: false
 }
 
-const forgetPassword = (state = initialState, action) => {
+const forgotPassword = (state = initialState, action) => {
   switch (action.type) {
-    case FORGET_PASSWORD:
+    case FORGOT_PASSWORD:
       state = {
         loading: true,
         success: false
       }
       break
-    case FORGET_PASSWORD_SUCCESS:
+    case FORGOT_PASSWORD_SUCCESS:
       state = {
         loading: false,
-        success: true,
-        message: action.payload
+        success: action.payload.message
       }
       break
     case SET_NEW_PASSWORD:
@@ -37,15 +36,18 @@ const forgetPassword = (state = initialState, action) => {
     case SET_NEW_PASSWORD_SUCCESS:
       state = {
         loading: false,
-        success: true,
-        message: action.payload
+        success: action.payload.message
       }
       break
-    case API_ERROR_FORGET_PASSWORD:
+    case ERROR_PASSWORD:
       state = {
         loading: false,
+        success: false,
         error: action.payload
       }
+      break
+    case RESET_ERROR_PASSWORD:
+      state = initialState
       break
     default:
       break
@@ -53,4 +55,4 @@ const forgetPassword = (state = initialState, action) => {
   return state
 }
 
-export default forgetPassword
+export default forgotPassword

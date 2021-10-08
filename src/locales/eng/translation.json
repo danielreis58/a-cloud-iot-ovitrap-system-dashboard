@@ -43,11 +43,6 @@
     "signout": "Sign out",
     "back": "Back",
     "forgotYourPassword": "Forgot your password?",
-    "passwordRecover": "Password recover",
-    "changePassword": "Change password",
-    "changePicture": "Change picture",
-    "savePicture": "Save picture",
-    "saveEditions": "Save editions",
     "text": "Text",
     "data": "Data",
     "wait": "Wait"
@@ -66,6 +61,14 @@
       "placeholder": "Enter your password",
       "errors": {
         "password is a required field": "Password is required"
+      }
+    },
+    "confirm": {
+      "label": "Confirm",
+      "placeholder": "Enter confirm password",
+      "errors": {
+        "confirm is a required field": "Confirm is required",
+        "passwords must match": "Passwords must match"
       }
     },
     "rememberMe": {
@@ -95,7 +98,11 @@
   },
   "toast": {
     "login": {
-      "error": "E-mail/password invalid"
+      "error": "Invalid e-mail/password"
+    },
+    "forgot": {
+      "error": "Invalid e-mail",
+      "success": "Password request sent to email successfully"
     },
     "dashboard": {
       "read": {

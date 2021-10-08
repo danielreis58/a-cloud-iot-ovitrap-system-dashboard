@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects'
 
 // Auth
 import Login from './auth/login/saga'
-import ForgetPassword from './auth/forgetpwd/saga'
+import Password from './auth/password/saga'
 
 // Datas
 import Dashboards from './dashboard/saga'
@@ -13,7 +13,7 @@ import Ovitraps from './ovitraps/saga'
 export default function* rootSaga() {
   yield all([
     Login(),
-    ForgetPassword(),
+    Password(),
     Dashboards(),
     Companies(),
     Users(),
