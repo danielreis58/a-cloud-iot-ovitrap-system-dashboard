@@ -53,9 +53,11 @@ const Ovitraps = () => {
     resolver: yupResolver(schema)
   })
 
-  const { profile = {}, companyId, userId } = useSelector(
-    (state) => state.Login.data
-  )
+  const {
+    profile = {},
+    companyId,
+    userId
+  } = useSelector((state) => state.Login.data)
 
   const [isOpenEdit, setIsOpenEdit] = useState(false)
   const [isOpenDelete, setIsOpenDelete] = useState(false)
