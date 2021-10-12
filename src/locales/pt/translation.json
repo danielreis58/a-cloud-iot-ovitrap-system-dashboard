@@ -101,8 +101,12 @@
       "error": "E-mail/senha inválidos"
     },
     "forgot": {
-      "error": "E-mail inválido",
-      "success": "E-mail de recuperação de senha enviado com sucesso"
+      "success": "E-mail de recuperação de senha enviado com sucesso",
+      "error": "E-mail inválido"
+    },
+    "new": {
+      "success": "Senha atualizada com sucesso",
+      "error": "Erro ao atualizar senha"
     },
     "dashboard": {
       "read": {

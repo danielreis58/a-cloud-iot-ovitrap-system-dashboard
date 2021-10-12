@@ -39,7 +39,7 @@ function* setNewPassword({ payload: { password, token } }) {
       { headers: { Authorization: `Bearer ${token}` } }
     )
     const status = response?.status
-    const data = response?.data?.data?.data
+    const data = response?.data?.data
     if (integerBetween(status, 200, 299) && data) {
       yield put(setNewPasswordSuccess(data))
     } else {

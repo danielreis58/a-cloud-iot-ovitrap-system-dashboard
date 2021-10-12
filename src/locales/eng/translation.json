@@ -101,8 +101,12 @@
       "error": "Invalid e-mail/password"
     },
     "forgot": {
-      "error": "Invalid e-mail",
-      "success": "Password request sent to email successfully"
+      "success": "Password request sent to email successfully",
+      "error": "Invalid e-mail"
+    },
+    "new": {
+      "success": "Successfully updated password",
+      "error": "Error updating password"
     },
     "dashboard": {
       "read": {

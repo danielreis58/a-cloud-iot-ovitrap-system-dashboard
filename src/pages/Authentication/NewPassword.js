@@ -46,16 +46,16 @@ const NewPassword = ({ t }) => {
 
   useEffect(() => {
     if (error) {
-      setSnackbar(t(error))
+      setSnackbar({ message: t('toast.new.error'), severity: 'error' })
       dispatch(resetErrorPassword())
     }
   }, [error])
 
   useEffect(() => {
     if (success) {
-      setSnackbar(t(success))
+      setSnackbar({ message: t('toast.new.success'), severity: 'success' })
       dispatch(resetErrorPassword())
-      history.push('/login')
+      setTimeout(() => history.push('/login'), 3100)
     }
   }, [success])
 
@@ -180,9 +180,9 @@ const NewPassword = ({ t }) => {
         onClose={() => {
           setSnackbar(false)
         }}
-        severity="error"
+        severity={snackbar?.severity}
         autoHideDuration={3000}
-        message={snackbar}
+        message={snackbar?.message}
       />
     </div>
   )
