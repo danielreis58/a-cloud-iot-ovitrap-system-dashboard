@@ -1,4 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { SvgIcon } from '@material-ui/core'
 import {
   GoogleMap,
   Marker,
@@ -6,6 +8,7 @@ import {
   InfoWindow
 } from '@react-google-maps/api'
 import useStyles from './catchesMapStyle'
+import MosquitoIcon from '../../../assets/icons/mosquitoIcon'
 
 const libraries = ['places']
 const mapContainerStyle = {
@@ -25,7 +28,9 @@ const center = {
 const CatchesMap = (props) => {
   const { series = [] } = props
   const classes = useStyles()
+
   const [selected, setSelected] = useState(null)
+  const { catch: catchId } = useSelector((state) => state.Dashboards)
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_MAP_KEY,
@@ -48,22 +53,37 @@ const CatchesMap = (props) => {
           center={center}
           onLoad={onMapLoad}
         >
-          {series.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={{
-                lat: marker?.coordinates?.lat,
-                lng: marker?.coordinates?.lng
-              }}
-              icon={{
-                url: '/ovitrap.png',
-                scaledSize: new window.google.maps.Size(50, 58),
-                anchor: new window.google.maps.Point(24, 0)
-              }}
-              onClick={() => {
-                setSelected(marker)
-              }}
-            />
+          {series.map((marker, key) => (
+            <div key={key}>
+              <Marker
+                key={marker.id}
+                position={{
+                  lat: marker?.coordinates?.lat,
+                  lng: marker?.coordinates?.lng
+                }}
+                icon={{
+                  url: '/ovitrap.png',
+                  scaledSize: new window.google.maps.Size(50, 58),
+                  anchor: new window.google.maps.Point(24, 0)
+                }}
+                onClick={() => {
+                  setSelected(marker)
+                }}
+              />
+              {catchId === marker.id && (
+                <InfoWindow
+                  className={classes.catchTooltip}
+                  position={{
+                    lat: marker?.coordinates?.lat,
+                    lng: marker?.coordinates?.lng
+                  }}
+                >
+                  <SvgIcon>
+                    <MosquitoIcon fill="#303030" />
+                  </SvgIcon>
+                </InfoWindow>
+              )}
+            </div>
           ))}
           {selected && (
             <InfoWindow

@@ -4,7 +4,8 @@ import { CssBaseline } from '@material-ui/core'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import jwtDecode from 'jwt-decode'
-import CustomThemeProvider from './config/CutomThemeProvider'
+import CustomThemeProvider from './config/CustomThemeProvider'
+import SocketIo from './config/SocketIo'
 import App from './App'
 
 import * as serviceWorker from './serviceWorker'
@@ -43,6 +44,7 @@ if (localAuthUser) {
 
 const app = (
   <Provider store={store}>
+    <SocketIo />
     <CustomThemeProvider>
       <CssBaseline />
       <BrowserRouter>

@@ -31,10 +31,12 @@ const MainListItems = ({ t }) => {
         to="/dashboard"
       >
         <ListItemIcon className={classes.leftSibarIcon}>
-          <DashboardIcon className={isActiveDashboard && classes.isActive} />
+          <DashboardIcon
+            className={isActiveDashboard ? classes.isActive : ''}
+          />
         </ListItemIcon>
         <Typography
-          className={isActiveDashboard && classes.isActive}
+          className={isActiveDashboard ? classes.isActive : ''}
           variant="button"
         >
           {t('leftMenuList.dashboard')}
@@ -48,10 +50,10 @@ const MainListItems = ({ t }) => {
           to="/companies"
         >
           <ListItemIcon className={classes.leftSibarIcon}>
-            <Domain className={isActiveCompanies && classes.isActive} />
+            <Domain className={isActiveCompanies ? classes.isActive : ''} />
           </ListItemIcon>
           <Typography
-            className={isActiveCompanies && classes.isActive}
+            className={isActiveCompanies ? classes.isActive : ''}
             variant="button"
           >
             {t('leftMenuList.companies')}
@@ -66,10 +68,10 @@ const MainListItems = ({ t }) => {
           to="/users"
         >
           <ListItemIcon className={classes.leftSibarIcon}>
-            <People className={isActiveUsers && classes.isActive} />
+            <People className={isActiveUsers ? classes.isActive : ''} />
           </ListItemIcon>
           <Typography
-            className={isActiveUsers && classes.isActive}
+            className={isActiveUsers ? classes.isActive : ''}
             variant="button"
           >
             {t('leftMenuList.users')}
@@ -86,12 +88,14 @@ const MainListItems = ({ t }) => {
           <ListItemIcon className={classes.leftSibarIcon}>
             <SvgIcon>
               <MosquitoIcon
-                fill={isActiveOvitraps && theme.palette.background.default}
+                fill={
+                  isActiveOvitraps ? theme.palette.background.default : null
+                }
               />
             </SvgIcon>
           </ListItemIcon>
           <Typography
-            className={isActiveOvitraps && classes.isActive}
+            className={isActiveOvitraps ? classes.isActive : ''}
             variant="button"
           >
             {t('leftMenuList.ovitraps')}

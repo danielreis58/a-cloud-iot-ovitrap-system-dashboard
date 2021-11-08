@@ -470,7 +470,7 @@ const Companies = () => {
       )}
       {(success || error) && (
         <Snackbar
-          open={success || error}
+          open={!!success || !!error}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right'

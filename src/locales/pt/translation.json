@@ -112,6 +112,9 @@
       "read": {
         "success": "Dados encontrados com sucesso",
         "error": "Erro ao encontrar dados"
+      },
+      "catch": {
+        "success": "Nova captura!"
       }
     },
     "companies": {

@@ -22,7 +22,6 @@ const Dashboard = () => {
 
   const setDataSeries = (objData) => {
     const arrayData = objToArray(objData)
-    // console.log('arrayData', arrayData)
 
     const mapData = arrayData.map((e) => ({
       id: e.id,
@@ -45,7 +44,7 @@ const Dashboard = () => {
   }, [])
 
   const handleCloseSnackBar = () => {
-    dispatch(setData({ success: false, error: false }))
+    dispatch(setData({ success: false, error: false, catch: null }))
   }
 
   return (
@@ -76,7 +75,7 @@ const Dashboard = () => {
       </Grid>
       {(success || error) && (
         <Snackbar
-          open={success || error}
+          open={!!success || !!error}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right'

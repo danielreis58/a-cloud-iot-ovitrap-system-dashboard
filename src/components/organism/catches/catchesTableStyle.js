@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
+import Theme from '../../../store/theme/reducer'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'inline-table',
     width: '100%',
@@ -25,6 +26,17 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     width: '100%',
     justifyContent: 'center'
+  },
+  totalColumn: {
+    display: 'flex',
+    '& .total': {
+      alignSelf: 'center'
+    },
+    '& .catch': {
+      display: 'flex',
+      color: theme.palette.success.main,
+      fontSize: '1.5em'
+    }
   }
 }))
 

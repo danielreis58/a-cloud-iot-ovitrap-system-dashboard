@@ -1,8 +1,8 @@
 import { READ_DATA, SET_DATA } from './actionTypes'
 
-export const readData = (id) => ({
+export const readData = (range) => ({
   type: READ_DATA,
-  payload: { id }
+  payload: { range }
 })
 
 export const setData = (data, action) => ({

@@ -6,7 +6,8 @@ const initialState = {
   data: {},
   loading: false,
   success: false,
-  error: false
+  error: false,
+  catch: null
 }
 
 const dataReducer = (state = initialState, action) => {
@@ -27,6 +28,33 @@ const dataReducer = (state = initialState, action) => {
             ? arrayToObj(data, 'id')
             : { [data.id]: data }
           state = { ...state, ...action.payload.data, data: newData, form }
+          break
+        }
+        case 'catch': {
+          const { id, date, number } = action.payload.data.data
+
+          const newTotal = state.data[id].total + number
+          const newData = state.data[id].data.map((e) =>
+            e.date.split('T')[0] === date.split('T')[0]
+              ? { ...e, total: e.total + number }
+              : e
+          )
+
+          const newObj = {
+            ...state.data[id],
+            total: newTotal,
+            data: newData
+          }
+
+          state = {
+            ...state,
+            catch: id,
+            success: action.payload.data.success,
+            data: {
+              ...state.data,
+              [id]: newObj
+            }
+          }
           break
         }
         default:

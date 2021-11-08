@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import {
   Table,
@@ -9,11 +10,14 @@ import {
   TableContainer,
   TableSortLabel
 } from '@material-ui/core'
+import { ArrowDropUp } from '@material-ui/icons'
 import useStyles from './catchesTableStyle'
 import { stableSort } from '../../../utils/customMethods'
 
 const CatchesTable = (props) => {
   const { series = [] } = props
+  const { catch: catchId } = useSelector((state) => state.Dashboards)
+
   const classes = useStyles()
   const { t } = useTranslation()
 
@@ -47,7 +51,7 @@ const CatchesTable = (props) => {
                 <TableCell
                   key={element.id}
                   align={element.numeric ? 'right' : 'left'}
-                  padding={element.disablePadding ? 'none' : 'default'}
+                  padding={element.disablePadding ? 'none' : 'normal'}
                   sortDirection={orderBy === element.id ? order : false}
                 >
                   <TableSortLabel
@@ -71,9 +75,16 @@ const CatchesTable = (props) => {
           <TableBody>
             {stableSort(series, order, orderBy).map((row, index) => (
               <TableRow key={index} hover>
-                {columns.map((e, key) => (
-                  <TableCell key={key}>{row?.[e.id]} </TableCell>
-                ))}
+                {columns.map((e, key) =>
+                  e.id === 'total' ? (
+                    <TableCell key={key} className={classes.totalColumn}>
+                      <div className="total">{row?.[e.id]}</div>
+                      {row?.id === catchId && <ArrowDropUp className="catch" />}
+                    </TableCell>
+                  ) : (
+                    <TableCell key={key}>{row?.[e.id]}</TableCell>
+                  )
+                )}
               </TableRow>
             ))}
             {series.length === 0 && (

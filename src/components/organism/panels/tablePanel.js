@@ -61,7 +61,7 @@ const EnhancedTableHead = (props) => {
           <TableCell
             key={element.id}
             align={element.numeric ? 'right' : 'left'}
-            padding={element.disablePadding ? 'none' : 'default'}
+            padding={element.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === element.id ? order : false}
           >
             <TableSortLabel
@@ -340,8 +340,8 @@ const TablePanel = (props) => {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
       <FormControlLabel

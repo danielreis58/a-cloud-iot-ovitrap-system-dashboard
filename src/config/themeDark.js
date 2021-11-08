@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles'
+import { createTheme } from '@material-ui/core/styles'
 
 const palette = {
   type: 'dark',
@@ -207,7 +207,7 @@ const shadows = [
   '0 12px 19px 0 rgba(0,0,0,.1), 0 24px 38px 3px rgba(0,0,0,.1)'
 ]
 
-const dark = createMuiTheme({
+const dark = createTheme({
   shape,
   typography,
   palette,

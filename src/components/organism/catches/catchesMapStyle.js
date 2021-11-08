@@ -7,11 +7,16 @@ const useStyles = makeStyles((theme) => ({
   makerTooltip: {
     color: theme.palette.icon
   },
-  map: {
+  catchTooltip: {
     display: 'flex',
-    height: '100px',
-    flexDirection: 'column',
-    justifyContent: 'center'
+    '& .gm-ui-hover-effect': {
+      display: 'none !important'
+    },
+    '& .gm-style .gm-style-iw + div': {
+      display: 'none',
+      visibility: 'hidden',
+      opacity: 0
+    }
   }
 }))
 

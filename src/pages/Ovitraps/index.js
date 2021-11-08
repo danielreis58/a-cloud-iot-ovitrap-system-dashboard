@@ -203,7 +203,6 @@ const Ovitraps = () => {
                     <div className={classes.field}>
                       <FormControl
                         fullWidth
-                        shrink
                         variant="outlined"
                         error={!!errors?.user_id?.message}
                       >
@@ -249,7 +248,6 @@ const Ovitraps = () => {
                     <div className={classes.field}>
                       <FormControl
                         fullWidth
-                        shrink
                         variant="outlined"
                         error={!!errors?.company_id?.message}
                       >
@@ -295,7 +293,6 @@ const Ovitraps = () => {
                 <Grid container item xs={12}>
                   <FormControl
                     fullWidth
-                    shrink
                     variant="outlined"
                     error={!!errors?.latitude?.message}
                   >
@@ -355,7 +352,7 @@ const Ovitraps = () => {
       )}
       {(success || error) && (
         <Snackbar
-          open={success || error}
+          open={!!success || !!error}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right'

@@ -5,12 +5,14 @@ import api from '../../services/api'
 
 const endPoint = 'dashboard'
 
-function* readData({ payload: { id } }) {
+function* readData({ payload: { range } }) {
   try {
     const urlParams = {}
-    if (id) urlParams.id = id
+    const offset = new Date().getTimezoneOffset()
+    urlParams.offset = offset
+    if (range) urlParams.range = range
 
-    const response = yield call(api.get, `/${endPoint}/:id`, {
+    const response = yield call(api.get, `/${endPoint}/:offset`, {
       urlParams
     })
     const data = response?.data?.data

@@ -112,6 +112,9 @@
       "read": {
         "success": "Successfully found data",
         "error": "Error finding data"
+      },
+      "catch": {
+        "success": "New catch!"
       }
     },
     "companies": {

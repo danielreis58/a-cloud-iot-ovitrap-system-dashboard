@@ -229,7 +229,6 @@ const Users = () => {
                   <div className={classes.field}>
                     <FormControl
                       fullWidth
-                      shrink
                       variant="outlined"
                       error={!!errors?.profile_id?.message}
                     >
@@ -275,7 +274,6 @@ const Users = () => {
                   <div className={classes.field}>
                     <FormControl
                       fullWidth
-                      shrink
                       variant="outlined"
                       error={!!errors?.company_id?.message}
                     >
@@ -346,7 +344,7 @@ const Users = () => {
       )}
       {(success || error) && (
         <Snackbar
-          open={success || error}
+          open={!!success || !!error}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right'
