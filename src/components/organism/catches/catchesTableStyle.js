@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.success.main,
       fontSize: '1.5em'
     }
+  },
+  head: {
+    '& .MuiTableCell-stickyHeader': {
+      backgroundColor: theme.palette.background.paper
+    }
   }
 }))
 

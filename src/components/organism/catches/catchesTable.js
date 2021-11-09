@@ -44,8 +44,8 @@ const CatchesTable = (props) => {
   return (
     <div className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table aria-labelledby="tableTitle" aria-label="enhanced table">
-          <TableHead>
+        <Table stickyHeader aria-label="sticky table" className={classes.table}>
+          <TableHead className={classes.head}>
             <TableRow>
               {columns.map((element) => (
                 <TableCell

@@ -60,7 +60,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} md={4}>
-          <Paper className={classes.paper} style={{ minHeight: '200px' }}>
+          <Paper className={classes.paper} style={{ minHeight: '300px' }}>
             <CatchesTable series={series} />
           </Paper>
         </Grid>
