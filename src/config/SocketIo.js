@@ -22,6 +22,7 @@ const SocketIo = () => {
       const authUser = JSON.parse(localAuthUser)
       const { Authorization } = authUser
       const socketIo = io(ENDPOINT, {
+        withCredentials: true,
         extraHeaders: {
           Authorization
         }
