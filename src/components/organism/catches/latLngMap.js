@@ -35,9 +35,21 @@ const LatLngMap = (props) => {
   })
 
   const mapRef = useRef()
+
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
   }, [])
+
+  const handleChange = (e) => {
+    const coordinates = {
+      latitude: e.latLng.lat(),
+      longitude: e.latLng.lng()
+    }
+    setMarkers(coordinates)
+    if (isFunction(props.onChange)) {
+      props.onChange(coordinates)
+    }
+  }
 
   return (
     <div classes={classes.map}>
@@ -49,16 +61,7 @@ const LatLngMap = (props) => {
           options={options}
           center={center}
           onLoad={onMapLoad}
-          onClick={(e) => {
-            const coordinates = {
-              latitude: e.latLng.lat(),
-              longitude: e.latLng.lng()
-            }
-            setMarkers(coordinates)
-            if (isFunction(props.onChange)) {
-              props.onChange(coordinates)
-            }
-          }}
+          onClick={handleChange}
         >
           {marker?.latitude && marker?.longitude && (
             <Marker
@@ -71,24 +74,7 @@ const LatLngMap = (props) => {
                 scaledSize: new window.google.maps.Size(50, 58),
                 anchor: new window.google.maps.Point(24, 0)
               }}
-              onClick={() => {
-                setSelected(marker)
-              }}
             />
-          )}
-          {selected && (
-            <InfoWindow
-              position={{
-                lat: selected.lat,
-                lng: selected.lng
-              }}
-              onCloseClick={() => setSelected(null)}
-            >
-              <div className={classes.makerTooltip}>
-                <p>{`Lat: ${selected.lat.toFixed(6)}`}</p>
-                <p>{`Lng: ${selected.lng.toFixed(6)}`}</p>
-              </div>
-            </InfoWindow>
           )}
         </GoogleMap>
       )}
