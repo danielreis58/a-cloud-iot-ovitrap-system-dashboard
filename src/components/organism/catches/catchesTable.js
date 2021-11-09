@@ -78,8 +78,12 @@ const CatchesTable = (props) => {
                 {columns.map((e, key) =>
                   e.id === 'total' ? (
                     <TableCell key={key} className={classes.totalColumn}>
-                      <div className="total">{row?.[e.id]}</div>
-                      {row?.id === catchId && <ArrowDropUp className="catch" />}
+                      <div style={{ display: 'flex' }}>
+                        <div className="total">{row?.[e.id]}</div>
+                        {row?.id === catchId && (
+                          <ArrowDropUp className="catch" />
+                        )}
+                      </div>
                     </TableCell>
                   ) : (
                     <TableCell key={key}>{row?.[e.id]}</TableCell>

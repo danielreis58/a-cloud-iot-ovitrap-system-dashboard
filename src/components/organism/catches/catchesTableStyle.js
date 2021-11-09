@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   totalColumn: {
-    display: 'flex',
     '& .total': {
       alignSelf: 'center'
     },
