@@ -1,5 +1,5 @@
 import { isArray } from 'lodash'
-import { arrayToObj } from '../../utils/customMethods'
+import { arrayToObj, toIsoString } from '../../utils/customMethods'
 import { READ_DATA, SET_DATA } from './actionTypes'
 
 const initialState = {
@@ -35,7 +35,7 @@ const dataReducer = (state = initialState, action) => {
 
           const newTotal = state.data[id].total + number
           const newData = state.data[id].data.map((e) =>
-            e.date.split('T')[0] === date.split('T')[0]
+            e.date.split('T')[0] === toIsoString(new Date(date)).split('T')[0]
               ? { ...e, total: e.total + number }
               : e
           )
