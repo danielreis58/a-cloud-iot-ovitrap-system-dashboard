@@ -37,4 +37,18 @@ api.interceptors.request.use((config) => {
   }
 })
 
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error?.response?.status === 401) {
+      localStorage.removeItem('authUser')
+      delete api.defaults.headers.common.Authorization
+      window.location = '/login'
+      api.post('/logout')
+      return Promise.reject(error)
+    }
+    return Promise.reject(error)
+  }
+)
+
 export default api

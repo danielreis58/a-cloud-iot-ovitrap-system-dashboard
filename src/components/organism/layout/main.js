@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
 const Main = ({ children }) => {
   const dispatch = useDispatch()
   const classes = useStyles()
+  const { companyName = null } = useSelector((state) => state.Login.data)
   const open = useSelector((state) => state.Layout.layoutOpen)
   const toggleDrawer = () => {
     dispatch(setLayout(!open))
@@ -133,7 +134,7 @@ const Main = ({ children }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit" className={classes.title}>
-            Smart Ovitraps
+            {`${companyName} - Smart Ovitraps`}
           </Typography>
           <SwitchLanguage />
           <SwitchTheme />

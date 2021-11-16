@@ -23,6 +23,7 @@ const NewPassword = ({ t }) => {
   const { token } = useParams()
   const dispatch = useDispatch()
   const history = useHistory()
+  const theme = useSelector((state) => state.Themes.theme)
   const { error, success, loading } = useSelector((state) => state.Password)
   const {
     register,
@@ -71,10 +72,19 @@ const NewPassword = ({ t }) => {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  height: 120
+                  paddingTop: 50,
+                  paddingRight: 50,
+                  paddingLeft: 50,
+                  width: '100%',
+                  height: 190
                 }}
               >
-                <img src="/logo.svg" alt="Ovitrap" width="180" height="56" />
+                <img
+                  src={`/logo_${theme}.png`}
+                  alt="Ovitrap"
+                  width="437px"
+                  height="100%"
+                />
               </div>
               <div style={{ padding: 50 }}>
                 <form onSubmit={onSubmit(handleSubmit)}>
